@@ -1,7 +1,10 @@
 package dispositivo.gadgets.regla;
 
+import javax.persistence.Entity;
+
 import dispositivo.gadgets.sensor.Sensor;
 
+@Entity
 public class CondicionDeConsumoMayorOIgual extends CondicionSobreSensor {
 	
 	private double factorDeComparacion;

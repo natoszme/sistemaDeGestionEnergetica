@@ -11,14 +11,18 @@
     	<class>cliente.Cliente</class>
     	<class>categoria.Categoria</class>
     	<class>dispositivo.Dispositivo</class>
+    	<class>tipoDispositivo.TipoDispositivo</class>
     	<class>tipoDispositivo.DispositivoInteligente</class>
+    	<class>tipoDispositivo.DispositivoEstandar</class>
     	<class>dispositivo.gadgets.sensor.Sensor</class>
     	<class>dispositivo.gadgets.sensor.SensorHorasEncendido</class>
+    	<class>dispositivo.gadgets.regla.CondicionSobreSensor</class>
+    	<class>dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual</class>
+    	<class>dispositivo.gadgets.regla.Regla</class>
     	
         <properties> 
 	    	<property name="hibernate.archive.autodetection" value="class"/>
-
-           	<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 
+           	<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
             <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db" /> 
             <property name="hibernate.connection.username" value="sa" /> 
             <property name="hibernate.connection.password" value="" /> 
@@ -26,7 +30,7 @@
                             
             <property name="hibernate.show_sql" value="true" /> 
             <property name="hibernate.format_sql" value="true" /> 
-            <property name="use_sql_comments" value="true" /> 
+            <property name="use_sql_comments" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
         </properties>          
     </persistence-unit>  

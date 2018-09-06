@@ -1,3 +1,4 @@
+=======
 # Created by https://www.gitignore.io/api/java,eclipse
 
 ### Eclipse ###
@@ -86,6 +87,12 @@ local.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+#Saco los .classpath
+*.classpath
+
+#Saco la carpeta .settings
+.settings/
+=======
 
 # End of https://www.gitignore.io/api/java,eclipse
 /target/

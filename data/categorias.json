@@ -1,0 +1,23 @@
+[
+	{
+    	"nombre": "r1",
+    	"consumoMinimo" : 0,
+    	"consumoMaximo" : 150,
+    	"cargoFijo" : 18.76,
+    	"cargoVariable" : 0.644
+	},
+	{
+    	"nombre": "r2",
+    	"consumoMinimo" : 150,
+    	"consumoMaximo" : 325,
+    	"cargoFijo" : 35.32,
+    	"cargoVariable" : 0.644
+	},
+	{
+    	"nombre": "r3",
+    	"consumoMinimo" : 325,
+    	"consumoMaximo" : 400,
+    	"cargoFijo" : 60.71,
+    	"cargoVariable" : 0.681
+	}
+]

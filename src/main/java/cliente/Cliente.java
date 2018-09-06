@@ -55,9 +55,8 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Categoria categoria;
 	
-	//TODO revisar esto porque la lista que aca es de dispositivos, en la db son registros de Dispositivos_cliente
-	//eager porque el cliente no es + que un repo de dispositivos
-	@Transient
+	@OneToMany
+	@JoinColumn(name = "idCliente", nullable = false)
 	private List<Dispositivo> dispositivos = new ArrayList<>();
 	
 	private double puntos = 0;

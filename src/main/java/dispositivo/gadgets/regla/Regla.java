@@ -3,13 +3,36 @@ package dispositivo.gadgets.regla;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import db.DatosBasicos;
 import dispositivo.Dispositivo;
 import dispositivo.gadgets.Gadget;
 import dispositivo.gadgets.actuador.Actuador;
 
-public abstract class Regla {
-	protected Dispositivo dispositivo;	
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
+public abstract class Regla extends DatosBasicos{
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	protected Dispositivo dispositivo;
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "idRegla", nullable = false)
 	protected List<CondicionSobreSensor> condiciones = new ArrayList<>();
+	
+	//TODO
+	@Transient
 	protected List<Actuador> actuadores;
 	
 	public Regla(List<Actuador> actuadores, List<CondicionSobreSensor> condiciones, Dispositivo dispositivo) {

@@ -1,16 +1,43 @@
 package dispositivo;
 
-public abstract class DispositivoConcreto {
+public enum DispositivoConcreto implements InterfazDispositivoConcreto{
 	
-	public abstract void encender();	
-	public abstract void apagar();	
-	public abstract void ponerEnAhorroDeEnergia();
-	public abstract double consumoDuranteLasUltimas(int horas);
-	public abstract boolean estaEncendido();
-	public abstract boolean estaApagado();
-	public abstract boolean estaEnAhorroEnergia();
+	//revisar esto, quedo muy forzado
+	TVINTELIGENTE{
+		public void encender() {
+			
+		}
+		
+		public void apagar() {
+			
+		}
+		
+		public void ponerEnAhorroDeEnergia() {
+			
+		}
+		
+		public double consumoDuranteLasUltimas(int horas) {
+			return 0;
+		}
+		
+		public boolean estaEncendido() {
+			return false;
+		}
+		
+		public boolean estaApagado() {
+			return false;
+		}
+		
+		public boolean estaEnAhorroEnergia() {
+			return false;
+		}
+		
+		public double horasEncendidoEn(double horasDeMesActual) {
+			return 0;
+		}
 
-	public abstract double horasEncendidoEn(double horasDeMesActual);
-
-	public abstract double consumoActual();
+		public double consumoActual() {
+			return 0;
+		}
+	};
 }
