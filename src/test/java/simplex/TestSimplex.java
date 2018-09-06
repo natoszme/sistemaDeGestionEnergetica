@@ -2,8 +2,6 @@ package simplex;
 
 import static org.junit.Assert.*;
 
-import org.apache.commons.math3.linear.ArrayRealVector;
-import org.apache.commons.math3.linear.RealVector;
 import org.apache.commons.math3.optim.linear.LinearConstraint;
 import org.apache.commons.math3.optim.linear.NoFeasibleSolutionException;
 import org.apache.commons.math3.util.Pair;
@@ -15,7 +13,6 @@ import fixture.FixtureSimplex;
 import repositorio.RepoRestriccionesUsoDispositivo;
 import tipoDispositivo.DispositivoInteligente;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
