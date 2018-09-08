@@ -199,6 +199,10 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	public Point ubicacion() {
 		return ubicacion;
 	}
+	
+	public void setUbicacion(Point ubicacion) {
+		this.ubicacion = ubicacion;		
+	}
 
 	public void limpiarDispositivos() {
 		dispositivos.clear();		

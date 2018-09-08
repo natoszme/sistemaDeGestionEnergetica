@@ -27,7 +27,7 @@ import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 import transformador.Transformador;
 import zona.Zona;
-public class Fixture extends AbstractPersistenceTest implements WithGlobalEntityManager { 
+public class Fixture extends AbstractPersistenceTest implements WithGlobalEntityManager {
 	protected Categoria r1, r2, r3, r4, r5, r6, r7, r8, r9;
 	protected Dispositivo candelabro, televisor, microondas, equipoMusica, dvd, play4, televisorSmart, pc, aireAcondicionado;
 	protected List<Dispositivo> dispositivos = new ArrayList<>();
@@ -39,10 +39,10 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	protected List<CondicionSobreSensor> condicionesSobreSensorQueNoCumplen = new ArrayList<>(), condicionesSobreSensorQueCumplen = new ArrayList<>();
 	protected List<Actuador> actuadores = new ArrayList<>();
 	protected Transformador transformadorLaMatanza, transformadorPalermo, transformadorCaballito;
-	private Point ubicacionLaMatanza = new Point(-34.762985, -58.631242);
-	private Point ubicacionCaballito = new Point(-34.616286, -58.442747);
-	private Point ubicacionLaPlata = new Point(-34.919116, -57.952484);
-	private Point ubicacionPalermo = new Point(-34.574704, -58.423419);
+	protected Point ubicacionLaMatanza = new Point(-34.762985, -58.631242);
+	protected Point ubicacionCaballito = new Point(-34.616286, -58.442747);
+	protected Point ubicacionLaPlata = new Point(-34.919116, -57.952484);
+	protected Point ubicacionPalermo = new Point(-34.574704, -58.423419);
 	public Zona palermo, laMatanza, caballito;
 	
 	public Fixture() {
@@ -122,6 +122,8 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  transformadorLaMatanza = new Transformador(ubicacionLaMatanza);
 		  transformadorPalermo = new Transformador(ubicacionPalermo);
 		  transformadorCaballito = new Transformador(ubicacionCaballito);
+		  
+		  this.run();
 	}
 	
 	@After
@@ -141,8 +143,6 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 			em.persist(r7);
 			em.persist(r8);
 			em.persist(r9);
-			
-			em.persist(lio);
 		});
 	}
 }
