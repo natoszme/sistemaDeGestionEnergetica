@@ -21,7 +21,6 @@ import dispositivo.DispositivoConcreto;
 public class DispositivoInteligente extends TipoDispositivo{
 	
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
 	private DispositivoConcreto dispositivoConcreto;
 	
 	//TODO mapeo de Double?
