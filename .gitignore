@@ -1,4 +1,3 @@
-=======
 # Created by https://www.gitignore.io/api/java,eclipse
 
 ### Eclipse ###
@@ -92,7 +91,6 @@ hs_err_pid*
 
 #Saco la carpeta .settings
 .settings/
-=======
 
 # End of https://www.gitignore.io/api/java,eclipse
 /target/
