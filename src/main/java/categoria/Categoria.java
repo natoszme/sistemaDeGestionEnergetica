@@ -11,9 +11,16 @@ public class Categoria extends DatosBasicos {
 	@Column(nullable = false, unique = true)
 	private String nombre;
 	
+	@Column(nullable = false)	
 	private double consumoMinimo;
+	
+	@Column(nullable = false)
 	private double consumoMaximo;
+	
+	@Column(nullable = false)
 	private double cargoFijo;
+	
+	@Column(nullable = false)
 	private double cargoVariable;
 	
 	public Categoria() {}

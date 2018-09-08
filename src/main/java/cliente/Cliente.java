@@ -19,11 +19,11 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.uqbar.geodds.Point;
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 import categoria.Categoria;
 import consumoMasivo.ConsumidorMasivo;
 import db.DatosBasicos;
-import db.LocalDateAttributeConverter;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
 import repositorio.RepoCategorias;
@@ -49,7 +49,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	
 	private String domicilio;
 	
-	@Convert(converter = LocalDateAttributeConverter.class)
+	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fechaAlta;
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
