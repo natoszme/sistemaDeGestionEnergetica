@@ -27,7 +27,9 @@ import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 import transformador.Transformador;
 import zona.Zona;
+
 public class Fixture extends AbstractPersistenceTest implements WithGlobalEntityManager {
+	
 	protected Categoria r1, r2, r3, r4, r5, r6, r7, r8, r9;
 	protected Dispositivo candelabro, televisor, microondas, equipoMusica, dvd, play4, televisorSmart, pc, aireAcondicionado;
 	protected List<Dispositivo> dispositivos = new ArrayList<>();
@@ -122,8 +124,6 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  transformadorLaMatanza = new Transformador(ubicacionLaMatanza);
 		  transformadorPalermo = new Transformador(ubicacionPalermo);
 		  transformadorCaballito = new Transformador(ubicacionCaballito);
-		  
-		  this.run();
 	}
 	
 	@After
