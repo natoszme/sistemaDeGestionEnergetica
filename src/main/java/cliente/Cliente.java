@@ -53,6 +53,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	private LocalDate fechaAlta;
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	
 	@OneToMany
