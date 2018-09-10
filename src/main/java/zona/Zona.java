@@ -3,14 +3,25 @@ package zona;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.uqbar.geodds.Point;
 
 import consumoMasivo.ConsumoMasivoEnBaseA;
+import converter.PointConverter;
 import repositorio.RepoTransformadores;
 import transformador.Transformador;
 
-public class Zona extends ConsumoMasivoEnBaseA<Transformador>{
+@Entity
+public class Zona extends ConsumoMasivoEnBaseA<Transformador> {
 	
+	@Id @GeneratedValue
+	public long id;
+	
+	@Convert(converter = PointConverter.class)
 	private Point ubicacion;
 	private double radio;
 	
