@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import dispositivo.gadgets.Gadget;
@@ -21,6 +22,7 @@ public abstract class CondicionSobreSensor extends Gadget{
 	private long id;
 	
 	@ManyToOne(optional = false)
+	@JoinColumn(name = "idSensor")
 	private Sensor sensor;
 	public CondicionSobreSensor(Sensor sensor) {
 		this.sensor = sensor;		

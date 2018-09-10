@@ -2,11 +2,11 @@ package dispositivo;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import db.DatosBasicos;
 import tipoDispositivo.DispositivoInteligente;
@@ -18,8 +18,8 @@ public class Dispositivo extends DatosBasicos {
 	@Column(nullable = false)
 	private String nombre;
 
-	// @Enumerated(EnumType.STRING)
-	@Transient
+	@OneToOne(cascade = CascadeType.PERSIST, optional = false)
+	@JoinColumn(name = "tipoDispositivo")
 	private TipoDispositivo tipoDispositivo;
 
 	private double kwPorHora;
