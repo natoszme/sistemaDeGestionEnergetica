@@ -5,13 +5,16 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.MapKey;
-import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.OrderBy;
 import javax.persistence.Transient;
 
 import dispositivo.Dispositivo;
@@ -23,10 +26,15 @@ public class DispositivoInteligente extends TipoDispositivo{
 	@Enumerated(EnumType.STRING)
 	private DispositivoConcreto dispositivoConcreto;
 	
-	//TODO mapeo de Double?
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@MapKey(name = "fecha")
-	@Transient
+	@ElementCollection(fetch = FetchType.LAZY)
+	@JoinTable(name = "HistorialConsumos", joinColumns = @JoinColumn(name = "idDispositivo"))
+	@MapKeyColumn(name = "fecha")
+	@Column(name = "consumo")
+	
+	/*
+	 * TODO -> @Convert(converter = LocalDateTimeConverter.class) 
+	 * */
+	@OrderBy("fecha DESC")
 	private Map<LocalDateTime, Double> consumosHastaElMomento = new LinkedHashMap<>();
 	
 	//TODO deberia ser una variable de entorno?

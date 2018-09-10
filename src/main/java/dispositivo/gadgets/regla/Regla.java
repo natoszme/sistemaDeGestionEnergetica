@@ -25,7 +25,7 @@ import dispositivo.gadgets.actuador.Actuador;
 public abstract class Regla extends DatosBasicos{
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name="idDispositivo")
+	@JoinColumn(name = "idDispositivo")
 	protected Dispositivo dispositivo;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
