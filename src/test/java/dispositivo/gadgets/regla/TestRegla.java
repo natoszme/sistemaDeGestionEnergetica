@@ -8,9 +8,6 @@ import dispositivo.gadgets.regla.NoSePuedeUsarReglaSobreDispositivoNoInteligente
 
 import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TestRegla extends Fixture {
 	
 	@Before
