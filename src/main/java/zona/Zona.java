@@ -2,6 +2,8 @@ package zona;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import org.uqbar.geodds.Point;
@@ -13,6 +15,7 @@ import transformador.Transformador;
 @Entity
 public class Zona extends ConsumoMasivoEnBaseA<Transformador> {
 	
+	@Column(nullable = false)
 	private double radio;
 	
 	public Zona(Point ubicacion, double radio) {

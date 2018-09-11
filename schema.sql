@@ -78,8 +78,8 @@
 
     create table Zona (
         id bigint not null,
-        radio double not null,
         ubicacion varchar(255),
+        radio double not null,
         primary key (id)
     )
 
@@ -131,3 +131,8 @@
         add constraint FK_1cmni0r71s91jpq2bide40os4 
         foreign key (idDispositivo) 
         references Dispositivo
+
+    create table hibernate_sequences (
+         sequence_name varchar(255),
+         sequence_next_hi_value integer 
+    )
