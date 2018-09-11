@@ -74,12 +74,14 @@ public class TestCasoDePrueba extends Fixture {
 		em.clear();
 		
 		play4 = em.find(Dispositivo.class, play4.id);
-		play4.setNombre("PlayStation 4");
+		
+		final String nuevoNombre = "PlayStation 4"; 
+		play4.setNombre(nuevoNombre);
 		
 		// TODO falta mostrar los intervalos que estuvo encendido en el ultimo mes (eso se podria mostrar con los reportes?)
 		
 		Dispositivo play4Modificada = em.find(Dispositivo.class, play4.id);
-		Assert.assertEquals("PlayStation 4", play4Modificada.getNombre());
+		Assert.assertEquals(nuevoNombre, play4Modificada.getNombre());
 	}
 	
 	@Test
