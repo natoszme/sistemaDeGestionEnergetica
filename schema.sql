@@ -72,13 +72,13 @@
 
     create table Transformador (
         id bigint not null,
-        ubicacion varchar(255),
+        ubicacion varchar(255) not null,
         primary key (id)
     )
 
     create table Zona (
         id bigint not null,
-        ubicacion varchar(255),
+        ubicacion varchar(255) not null,
         radio double not null,
         primary key (id)
     )

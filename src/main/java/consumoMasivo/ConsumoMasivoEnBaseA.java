@@ -2,6 +2,7 @@ package consumoMasivo;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +22,7 @@ public abstract class ConsumoMasivoEnBaseA<TConsumidorMasivo extends ConsumidorM
 	@Id @GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 	
+	@Column(nullable = false)
 	@Convert(converter = PointConverter.class)
 	protected Point ubicacion;
 	
