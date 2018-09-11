@@ -2,7 +2,9 @@ package tipoDispositivo;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -14,8 +16,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Transient;
+
 
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
@@ -35,7 +39,8 @@ public class DispositivoInteligente extends TipoDispositivo{
 	 * TODO -> @Convert(converter = LocalDateTimeConverter.class) 
 	 * */
 	@OrderBy("fecha DESC")
-	private Map<LocalDateTime, Double> consumosHastaElMomento = new LinkedHashMap<>();
+	@OneToMany()
+	private List<ConsumoEnFecha> consumosHastaElMomento = new ArrayList<>();
 	
 	//TODO deberia ser una variable de entorno?
 	@Transient
@@ -64,9 +69,9 @@ public class DispositivoInteligente extends TipoDispositivo{
 	}
 
 	public double consumoAlmacenadoEn(int horas) {
-		return consumosHastaElMomento.entrySet().stream().
-				filter(consumoFechado -> correspondeAPlazo(consumoFechado.getKey(), horas - duracionPlazoCronConsumo)).
-				mapToDouble(consumoFechado -> consumoFechado.getValue()).
+		return consumosHastaElMomento.stream().
+				filter(consumoFechado -> correspondeAPlazo(consumoFechado.getFecha(), horas - duracionPlazoCronConsumo)).
+				mapToDouble(consumoFechado -> consumoFechado.getConsumo()).
 				sum();
 	}
 
@@ -76,7 +81,10 @@ public class DispositivoInteligente extends TipoDispositivo{
 	}
 
 	public void guardarConsumoDeFecha(LocalDateTime fecha, double consumo) {
-		consumosHastaElMomento.put(fecha, consumo);
+		ConsumoEnFecha nuevoConsumo = new ConsumoEnFecha();
+		nuevoConsumo.setFecha(fecha);
+		nuevoConsumo.setConsumo(consumo);
+		consumosHastaElMomento.add(nuevoConsumo);
 	}
 	
 	public void apagar() {
