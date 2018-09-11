@@ -19,6 +19,10 @@
     	<class>dispositivo.gadgets.regla.CondicionSobreSensor</class>
     	<class>dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual</class>
     	<class>dispositivo.gadgets.regla.Regla</class>
+    	<class>dispositivo.gadgets.regla.ReglaEstricta</class>
+    	<class>dispositivo.gadgets.regla.ReglaPermisiva</class>
+    	<class>dispositivo.gadgets.actuador.Actuador</class>
+    	<class>transformador.Transformador</class>	
     	
         <properties> 
 	    	<property name="hibernate.archive.autodetection" value="class"/>

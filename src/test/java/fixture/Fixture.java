@@ -2,8 +2,6 @@ package fixture;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.junit.After;
 import org.mockito.Mockito;
 import org.uqbar.geodds.Point;
@@ -129,20 +127,5 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	@After
 	public void after() {
 		RepoCategorias.getInstance().limpiarEntidades();
-	}
-
-	public void run() {
-		EntityManager em = entityManager();
-		withTransaction(() -> {
-			em.persist(r1);
-			em.persist(r2);
-			em.persist(r3);
-			em.persist(r4);
-			em.persist(r5);
-			em.persist(r6);
-			em.persist(r7);
-			em.persist(r8);
-			em.persist(r9);
-		});
 	}
 }

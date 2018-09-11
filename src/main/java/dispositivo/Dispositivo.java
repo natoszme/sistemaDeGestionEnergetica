@@ -35,6 +35,10 @@ public class Dispositivo extends DatosBasicos {
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 	public TipoDispositivo getTipoDispositivo() {
 		return tipoDispositivo;

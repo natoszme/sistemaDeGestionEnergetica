@@ -3,52 +3,106 @@ package db;
 import org.junit.Assert;
 import org.junit.Before;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.junit.Test;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import cliente.Cliente;
+import dispositivo.Dispositivo;
+import dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual;
+import dispositivo.gadgets.regla.CondicionSobreSensor;
+import dispositivo.gadgets.regla.Regla;
+import dispositivo.gadgets.regla.ReglaEstricta;
+import dispositivo.gadgets.sensor.SensorHorasEncendido;
 import fixture.Fixture;
+import importacion.ImportadorTransformadores;
+import repositorio.RepoTransformadores;
+import transformador.Transformador;
 
 public class TestCasoDePrueba extends Fixture {
 	EntityManager em = entityManager();
 	
+	private void persistirCategorias() {		
+		em.persist(r1);
+		em.persist(r2);
+		em.persist(r3);
+		em.persist(r4);
+		em.persist(r5);
+		em.persist(r6);
+		em.persist(r7);
+		em.persist(r8);
+		em.persist(r9);
+	}
+	
 	@Before
 	public void setUp() {
-		this.run();
+		this.persistirCategorias();
 	}
 	
 	@Test
-	public void sePersisteYSeModificaElCliente() {
-		
-		withTransaction(() -> {
-			em.persist(lio);
-		});
+	public void sePersisteYSeModificaElCliente() {		
+		em.persist(lio);
 		em.clear();
 		
 		lio = em.find(Cliente.class, lio.id);
-		withTransaction(() -> {
-			lio.setUbicacion(ubicacionPalermo);
-		});
+		lio.setUbicacion(ubicacionPalermo);
 		
 		Cliente lioModificado = em.find(Cliente.class, lio.id);
 		Assert.assertEquals(ubicacionPalermo, lioModificado.ubicacion());
 	}
 	
-	/*@Test
-	public void sePersisteYSeModificaElClienteV2() {
+	@Test
+	public void modificoUnDispositivoYSeGuardaSuModificacion() {
+		lio.agregarDispositivo(play4);
+		em.persist(lio);
 		
-		withTransaction(() -> {
-			em.persist(lio);
-		});
+		em.persist(play4);
 		em.clear();
 		
-		lio = em.find(Cliente.class, lio.id);
-		withTransaction(() -> {
-			lio.setUbicacion(ubicacionPalermo);
-		});
+		play4 = em.find(Dispositivo.class, play4.id);
+		play4.setNombre("PlayStation 4");
 		
-		Cliente lioModificado = em.find(Cliente.class, lio.id);
-		Assert.assertEquals(ubicacionPalermo, lioModificado.ubicacion());
+		// TODO falta mostrar los intervalos que estuvo encendido en el ultimo mes (eso se podria mostrar con los reportes?)
+		
+		Dispositivo play4Modificada = em.find(Dispositivo.class, play4.id);
+		Assert.assertEquals("PlayStation 4", play4Modificada.getNombre());
+	}
+	
+	/*@Test
+	public void persistirReglasYCondiciones() {
+		lio.agregarDispositivo(pc);
+		em.persist(lio);
+		em.persist(pc);
+		
+		List<CondicionSobreSensor> condiciones = new ArrayList<>();
+		condiciones.add(new CondicionDeConsumoMayorOIgual(20, new SensorHorasEncendido(pc)));
+		
+		// Como esta en cascade persist con los actuadores, deberia persistirlos al persistir la regla
+		Regla otraReglaEstricta = new ReglaEstricta(actuadores, condiciones, pc);
+		em.persist(otraReglaEstricta);
 	}*/
+	
+	@Test
+	public void importoYPersistoLosTransformadores() {
+		// Persisto los transformadores del fixture
+		em.persist(transformadorCaballito);
+		em.persist(transformadorLaMatanza);
+		em.persist(transformadorPalermo);
+		
+		// Se importan los transformadores del JSON y se persisten		
+		ImportadorTransformadores.getInstance().importarJSON();
+		
+		List<Transformador> transformadores = RepoTransformadores.getInstance().obtenerTodas();		
+		transformadores.forEach(transformador -> em.persist(transformador));
+		
+		long cantidadTransformadoresPersistidos = (long) em.createQuery("SELECT COUNT(*) FROM Transformador").getSingleResult();
+		
+		Assert.assertEquals(3 + transformadores.size(), cantidadTransformadoresPersistidos);
+	}
 }
