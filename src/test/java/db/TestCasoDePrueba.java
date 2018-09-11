@@ -3,15 +3,13 @@ package db;
 import org.junit.Assert;
 import org.junit.Before;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.junit.Test;
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
@@ -48,13 +46,23 @@ public class TestCasoDePrueba extends Fixture {
 	@Test
 	public void sePersisteYSeModificaElCliente() {		
 		em.persist(lio);
+		System.out.println(lio.ubicacion());
+		//em.flush();
 		em.clear();
 		
 		lio = em.find(Cliente.class, lio.id);
-		lio.setUbicacion(ubicacionPalermo);
+		lio.setUbicacion(ubicacionPalermo);	
 		
-		Cliente lioModificado = em.find(Cliente.class, lio.id);
-		Assert.assertEquals(ubicacionPalermo, lioModificado.ubicacion());
+		//hay que hacer flush porque, por algun motivo, no considera la modificacion como una query
+		em.flush();
+		
+		System.out.println(lio.ubicacion());
+		
+		em.clear();
+		lio = em.find(Cliente.class, lio.id);
+		System.out.println(lio.getApellido());
+		System.out.println(lio.ubicacion());
+		Assert.assertEquals(ubicacionPalermo.toString(), lio.ubicacion().toString());
 	}
 	
 	@Test
@@ -74,19 +82,19 @@ public class TestCasoDePrueba extends Fixture {
 		Assert.assertEquals("PlayStation 4", play4Modificada.getNombre());
 	}
 	
-	/*@Test
+	@Test
 	public void persistirReglasYCondiciones() {
 		lio.agregarDispositivo(pc);
 		em.persist(lio);
 		em.persist(pc);
 		
-		List<CondicionSobreSensor> condiciones = new ArrayList<>();
+		Set<CondicionSobreSensor> condiciones = new HashSet<>();
 		condiciones.add(new CondicionDeConsumoMayorOIgual(20, new SensorHorasEncendido(pc)));
 		
 		// Como esta en cascade persist con los actuadores, deberia persistirlos al persistir la regla
 		Regla otraReglaEstricta = new ReglaEstricta(actuadores, condiciones, pc);
 		em.persist(otraReglaEstricta);
-	}*/
+	}
 	
 	@Test
 	public void importoYPersistoLosTransformadores() {
