@@ -56,7 +56,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCliente", nullable = false)
 	private List<Dispositivo> dispositivos = new ArrayList<>();
 	
