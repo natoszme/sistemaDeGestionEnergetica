@@ -70,6 +70,19 @@
         primary key (id)
     )
 
+    create table Transformador (
+        id bigint not null,
+        ubicacion varchar(255),
+        primary key (id)
+    )
+
+    create table Zona (
+        id bigint not null,
+        radio double not null,
+        ubicacion varchar(255),
+        primary key (id)
+    )
+
     alter table Categoria 
         add constraint UK_g22h6awq25eaqohosg6icwj8b  unique (nombre)
 

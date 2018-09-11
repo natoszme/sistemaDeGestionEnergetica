@@ -2,33 +2,23 @@ package transformador;
 
 import java.util.List;
 
-import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 import org.uqbar.geodds.Point;
 
 import cliente.Cliente;
 import consumoMasivo.ConsumidorMasivo;
 import consumoMasivo.ConsumoMasivoEnBaseA;
-import converter.PointConverter;
 import repositorio.RepoTransformadores;
 
 @Entity
 public class Transformador extends ConsumoMasivoEnBaseA<Cliente> implements ConsumidorMasivo {
 	
-	@Id @GeneratedValue
-	public long id;
-	
-	@Convert(converter = PointConverter.class)
-	private Point ubicacion;
+	public Transformador(Point ubicacion) {
+		super(ubicacion);
+	}
 	
 	public Transformador() {}
-
-	public Transformador(Point ubicacion) {
-		this.ubicacion = ubicacion;
-	}
 
 	public double consumoActual(Cliente cliente) {
 		return cliente.consumoActual();
