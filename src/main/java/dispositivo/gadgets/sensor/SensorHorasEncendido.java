@@ -13,6 +13,8 @@ public class SensorHorasEncendido extends Sensor {
 	@JoinColumn(name = "idDispositivo")
 	protected Dispositivo dispositivo;
 	
+	public SensorHorasEncendido() {}
+	
 	public SensorHorasEncendido(Dispositivo dispositivo) {
 		this.dispositivo = dispositivo;		
 	}

@@ -41,6 +41,8 @@ public class DispositivoInteligente extends TipoDispositivo{
 	@Transient
 	private int duracionPlazoCronConsumo = 6;
 	
+	public DispositivoInteligente() {}
+	
 	public DispositivoInteligente(DispositivoConcreto dispositivoConcreto) {
 		this.dispositivoConcreto = dispositivoConcreto;
 	}

@@ -9,6 +9,10 @@ public class CondicionDeConsumoMayorOIgual extends CondicionSobreSensor {
 	
 	private double factorDeComparacion;
 	
+	public CondicionDeConsumoMayorOIgual() {
+		super(null);
+	}
+	
 	public CondicionDeConsumoMayorOIgual(double factorDeComparacion, Sensor sensor) {
 		super(sensor);
 		this.factorDeComparacion = factorDeComparacion;

@@ -24,6 +24,7 @@ public abstract class CondicionSobreSensor extends Gadget{
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "idSensor")
 	private Sensor sensor;
+	
 	public CondicionSobreSensor(Sensor sensor) {
 		this.sensor = sensor;		
 	}

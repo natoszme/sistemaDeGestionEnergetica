@@ -8,11 +8,23 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	 
+    	<class>cliente.Cliente</class>
+    	<class>categoria.Categoria</class>
+    	<class>dispositivo.Dispositivo</class>
+    	<class>tipoDispositivo.TipoDispositivo</class>
+    	<class>tipoDispositivo.DispositivoInteligente</class>
+    	<class>tipoDispositivo.DispositivoEstandar</class>
+    	<class>dispositivo.gadgets.sensor.Sensor</class>
+    	<class>dispositivo.gadgets.sensor.SensorHorasEncendido</class>
+    	<class>dispositivo.gadgets.regla.CondicionSobreSensor</class>
+    	<class>dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual</class>
+    	<class>dispositivo.gadgets.regla.Regla</class>
+    	 
         <properties> 
 	    	<property name="hibernate.archive.autodetection" value="class"/>
 
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/2018-jm-group-06?serverTimezone=UTC" /> 
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3308/2018-jm-group-06?serverTimezone=UTC" /> 
             <property name="hibernate.connection.username" value="root" /> 
             <property name="hibernate.connection.password" value="mysql" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
