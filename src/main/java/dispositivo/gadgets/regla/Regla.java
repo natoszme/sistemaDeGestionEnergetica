@@ -1,9 +1,10 @@
 package dispositivo.gadgets.regla;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -30,12 +31,13 @@ public abstract class Regla extends DatosBasicos{
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idRegla", nullable = false)
-	protected List<CondicionSobreSensor> condiciones = new ArrayList<>();
+	protected Set<CondicionSobreSensor> condiciones = new HashSet<>();
 	
 	@ElementCollection
-	protected List<Actuador> actuadores;
+	@Column(name = "actuador", nullable = false)
+	protected Set<Actuador> actuadores;
 	
-	public Regla(List<Actuador> actuadores, List<CondicionSobreSensor> condiciones, Dispositivo dispositivo) {
+	public Regla(Set<Actuador> actuadores, Set<CondicionSobreSensor> condiciones, Dispositivo dispositivo) {
 		validarDispositivoInteligente(dispositivo);
 		this.dispositivo = dispositivo;
 		this.actuadores = actuadores;
@@ -46,11 +48,11 @@ public abstract class Regla extends DatosBasicos{
 		return dispositivo;
 	}
 
-	public List<CondicionSobreSensor> getCondiciones() {
+	public Set<CondicionSobreSensor> getCondiciones() {
 		return condiciones;
 	}
 
-	public List<Actuador> getActuadores() {
+	public Set<Actuador> getActuadores() {
 		return actuadores;
 	}
 	
@@ -73,14 +75,14 @@ public abstract class Regla extends DatosBasicos{
 	
 	//TODO revisar desde aca. no es tan trivial hacer esto porque las listas que se pasan como parametro son de un tipo mas restrictivo que Gadget
 	//y Java no permite eso. Por eso hay que hacerlo asi:
-	private boolean sonIgualesA(List<? extends Gadget> gadgets, List<? extends Gadget> otrosGadgets) {
+	private boolean sonIgualesA(Set<? extends Gadget> gadgets, Set<? extends Gadget> otrosGadgets) {
 		return todosLosDeUnaListaEstanEnLaOtra(gadgets, otrosGadgets) && todosLosDeUnaListaEstanEnLaOtra(otrosGadgets, gadgets);
 	}
 	
 	//ademas aca hay algo raro: en el casteo se esta pasando de una lista mas restrictiva a una menos, que es eso que Java no puede resolver...
 	@SuppressWarnings("unchecked")
-	private boolean todosLosDeUnaListaEstanEnLaOtra(List<? extends Gadget> gadgets, List<? extends Gadget> otrosGadgets) {
-		return gadgets.stream().allMatch(gadget -> gadget.estaEn((List<Gadget>) otrosGadgets));
+	private boolean todosLosDeUnaListaEstanEnLaOtra(Set<? extends Gadget> gadgets, Set<? extends Gadget> otrosGadgets) {
+		return gadgets.stream().allMatch(gadget -> gadget.estaEn((Set<Gadget>) otrosGadgets));
 	}
 
 	public boolean esDe(Dispositivo dispositivo) {

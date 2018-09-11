@@ -1,10 +1,10 @@
 package dispositivo.gadgets;
 
-import java.util.List;
+import java.util.Set;
 
 public interface Gadget{
-	public default boolean estaEn(List<Gadget> gadgets) {
-		return gadgets.stream().anyMatch(unGadget -> esIgualA(unGadget));
+	public default boolean estaEn(Set<Gadget> otrosGadgets) {
+		return otrosGadgets.stream().anyMatch(unGadget -> esIgualA(unGadget));
 	}
 	
 	public default boolean esIgualA(Gadget otroGadget) {

@@ -1,6 +1,8 @@
 package fixture;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.mockito.Mockito;
@@ -34,8 +36,8 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	protected Regla unaReglaEstricta, unaReglaPermisiva;
 	protected Actuador actuadorQueApaga, actuadorQueEnciende;
 	protected CondicionSobreSensor mockCondicionSobreSensorQueCumple, mockCondicionSobreSensorQueNoCumple;
-	protected List<CondicionSobreSensor> condicionesSobreSensorQueNoCumplen = new ArrayList<>(), condicionesSobreSensorQueCumplen = new ArrayList<>();
-	protected List<Actuador> actuadores = new ArrayList<>();
+	protected Set<CondicionSobreSensor> condicionesSobreSensorQueNoCumplen = new HashSet<>(), condicionesSobreSensorQueCumplen = new HashSet<>();
+	protected Set<Actuador> actuadores = new HashSet<>();
 	protected Transformador transformadorLaMatanza, transformadorPalermo, transformadorCaballito;
 	protected Point ubicacionLaMatanza = new Point(-34.762985, -58.631242);
 	protected Point ubicacionCaballito = new Point(-34.616286, -58.442747);
@@ -88,8 +90,8 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  actuadores.add(actuadorQueApaga);
 		  actuadores.add(actuadorQueEnciende);
 		  
-		  unaReglaEstricta = new ReglaEstricta(actuadores, new ArrayList<>(), pc);
-		  unaReglaPermisiva = new ReglaPermisiva(actuadores, new ArrayList<>(), aireAcondicionado);
+		  unaReglaEstricta = new ReglaEstricta(actuadores, new HashSet<>(), pc);
+		  unaReglaPermisiva = new ReglaPermisiva(actuadores, new HashSet<>(), aireAcondicionado);
 		  
 		  mockCondicionSobreSensorQueCumple = Mockito.mock(CondicionSobreSensor.class);
 		  mockCondicionSobreSensorQueNoCumple = Mockito.mock(CondicionSobreSensor.class);

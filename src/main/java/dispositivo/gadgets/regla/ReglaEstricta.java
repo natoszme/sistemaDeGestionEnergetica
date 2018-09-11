@@ -1,6 +1,6 @@
 package dispositivo.gadgets.regla;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 
@@ -9,7 +9,7 @@ import dispositivo.gadgets.actuador.Actuador;
 
 @Entity
 public class ReglaEstricta extends Regla {
-	public ReglaEstricta(List<Actuador> actuadores, List<CondicionSobreSensor> condiciones, Dispositivo dispositivo) {
+	public ReglaEstricta(Set<Actuador> actuadores, Set<CondicionSobreSensor> condiciones, Dispositivo dispositivo) {
 		super(actuadores, condiciones, dispositivo);
 		// TODO Auto-generated constructor stub
 	}

@@ -1,6 +1,7 @@
 package repositorio;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,6 +13,7 @@ import dispositivo.DispositivoConcreto;
 import dispositivo.DispositivosBaseFactory;
 import dispositivo.gadgets.actuador.Actuador;
 import dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual;
+import dispositivo.gadgets.regla.CondicionSobreSensor;
 import dispositivo.gadgets.regla.ReglaPermisiva;
 import dispositivo.gadgets.sensor.SensorHorasEncendido;
 import fixture.Fixture;
@@ -25,7 +27,7 @@ public class TestRepoReglas extends Fixture{
 	public void before() {
 		RepoReglas.getInstance().limpiarEntidades();
 		
-		RepoReglas.getInstance().agregarEntidad(new ReglaPermisiva(Arrays.asList(Actuador.ActuadorQueApaga), Arrays.asList(new CondicionDeConsumoMayorOIgual(10, new SensorHorasEncendido(tele40DeNico))), tele40DeNico));
+		RepoReglas.getInstance().agregarEntidad(new ReglaPermisiva(new HashSet<Actuador>(Arrays.asList(Actuador.ActuadorQueApaga)), new HashSet<CondicionSobreSensor>(Arrays.asList(new CondicionDeConsumoMayorOIgual(10, new SensorHorasEncendido(tele40DeNico)))), tele40DeNico));
 	}
 	
 	@Test

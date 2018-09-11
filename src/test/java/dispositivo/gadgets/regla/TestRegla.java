@@ -13,8 +13,6 @@ import java.util.List;
 
 public class TestRegla extends Fixture {
 	
-	List<Actuador> actuadores = new ArrayList<>();
-	
 	@Before
 	public void initialize() {
     	actuadorQueApaga = Actuador.ActuadorQueApaga;
