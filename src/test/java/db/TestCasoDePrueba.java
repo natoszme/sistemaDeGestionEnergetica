@@ -74,6 +74,21 @@ public class TestCasoDePrueba extends Fixture {
 		Assert.assertEquals("PlayStation 4", play4Modificada.getNombre());
 	}
 	
+	@Test
+	public void modificoUnDispositivo2VecesYDejaGuardadaLaUltimaModificacion() {
+		lio.agregarDispositivo(play4);
+		em.persist(lio);
+		
+		em.persist(play4);
+		em.clear();
+		
+		play4 = em.find(Dispositivo.class, play4.id);
+		play4.setNombre("PlayStation 4");
+		play4.setNombre("PlayStation 4 Plus");
+		Dispositivo play4Modificada = em.find(Dispositivo.class, play4.id);
+		Assert.assertEquals("PlayStation 4 Plus", play4Modificada.getNombre());
+	}
+	
 	/*@Test
 	public void persistirReglasYCondiciones() {
 		lio.agregarDispositivo(pc);
