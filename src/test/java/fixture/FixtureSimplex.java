@@ -8,8 +8,7 @@ import org.mockito.Mockito;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
 import dispositivo.DispositivosBaseFactory;
-import dispositivo.gadgets.actuador.ActuadorQueApaga;
-import dispositivo.gadgets.actuador.ActuadorQuePoneEnAhorroDeEnergia;
+import dispositivo.gadgets.actuador.Actuador;
 import repositorio.RepoClientes;
 import repositorio.RepoReglas;
 import repositorio.RepoRestriccionesUsoDispositivo;
@@ -57,13 +56,13 @@ public class FixtureSimplex extends Fixture{
 		
 		microondas.guardarConsumoDeFecha(LocalDateTime.now(), 100);
 		
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(aire2200Frigorias, 90, 360, new ActuadorQueApaga()));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(compu, 90, 360, new ActuadorQueApaga()));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(aire3500Frigorias, 90, 360, new ActuadorQueApaga()));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(lavarropas, 6, 30, new ActuadorQuePoneEnAhorroDeEnergia()));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(microondas, 6, 15, new ActuadorQueApaga()));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(televisorSmart, 50, 400, new ActuadorQueApaga()));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(tv40, 50, 400, new ActuadorQueApaga()));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(aire2200Frigorias, 90, 360, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(compu, 90, 360, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(aire3500Frigorias, 90, 360, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(lavarropas, 6, 30, Actuador.ActuadorQuePoneEnAhorroDeEnergia));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(microondas, 6, 15, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(televisorSmart, 50, 400, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(tv40, 50, 400, Actuador.ActuadorQueApaga));
 		
 		RepoReglas.getInstance().limpiarEntidades();		
 	}

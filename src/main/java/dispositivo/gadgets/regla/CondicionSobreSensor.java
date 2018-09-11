@@ -15,7 +15,7 @@ import dispositivo.gadgets.sensor.Sensor;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-public abstract class CondicionSobreSensor extends Gadget{
+public abstract class CondicionSobreSensor implements Gadget{
 	
 	@Id
 	@GeneratedValue
@@ -41,6 +41,6 @@ public abstract class CondicionSobreSensor extends Gadget{
 	
 	@Override
 	public boolean esIgualA(Gadget gadget) {
-		return super.esIgualA(gadget) && sensor == ((CondicionSobreSensor)gadget).getSensor();
+		return Gadget.super.esIgualA(gadget) && sensor == ((CondicionSobreSensor)gadget).getSensor();
 	}
 }

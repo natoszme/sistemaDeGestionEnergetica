@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import fixture.Fixture;
 import dispositivo.gadgets.actuador.Actuador;
-import dispositivo.gadgets.actuador.ActuadorQueApaga;
-import dispositivo.gadgets.actuador.ActuadorQueEnciende;
 import dispositivo.gadgets.regla.NoSePuedeUsarReglaSobreDispositivoNoInteligenteException;
 
 import static org.mockito.Mockito.*;
@@ -19,8 +17,8 @@ public class TestRegla extends Fixture {
 	
 	@Before
 	public void initialize() {
-    	actuadorQueApaga = new ActuadorQueApaga();
-    	actuadorQueEnciende = new ActuadorQueEnciende();
+    	actuadorQueApaga = Actuador.ActuadorQueApaga;
+    	actuadorQueEnciende = Actuador.ActuadorQueEnciende;
     	
     	when(mockCondicionSobreSensorQueCumple.seCumpleCondicion()).thenReturn(true);
     	when(mockCondicionSobreSensorQueNoCumple.seCumpleCondicion()).thenReturn(false);

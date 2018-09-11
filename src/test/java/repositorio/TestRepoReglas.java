@@ -10,7 +10,7 @@ import org.mockito.Mockito;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
 import dispositivo.DispositivosBaseFactory;
-import dispositivo.gadgets.actuador.ActuadorQueApaga;
+import dispositivo.gadgets.actuador.Actuador;
 import dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual;
 import dispositivo.gadgets.regla.ReglaPermisiva;
 import dispositivo.gadgets.sensor.SensorHorasEncendido;
@@ -25,7 +25,7 @@ public class TestRepoReglas extends Fixture{
 	public void before() {
 		RepoReglas.getInstance().limpiarEntidades();
 		
-		RepoReglas.getInstance().agregarEntidad(new ReglaPermisiva(Arrays.asList(new ActuadorQueApaga()), Arrays.asList(new CondicionDeConsumoMayorOIgual(10, new SensorHorasEncendido(tele40DeNico))), tele40DeNico));
+		RepoReglas.getInstance().agregarEntidad(new ReglaPermisiva(Arrays.asList(Actuador.ActuadorQueApaga), Arrays.asList(new CondicionDeConsumoMayorOIgual(10, new SensorHorasEncendido(tele40DeNico))), tele40DeNico));
 	}
 	
 	@Test

@@ -14,8 +14,6 @@ import cliente.TipoDocumento;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
 import dispositivo.gadgets.actuador.Actuador;
-import dispositivo.gadgets.actuador.ActuadorQueApaga;
-import dispositivo.gadgets.actuador.ActuadorQueEnciende;
 import dispositivo.gadgets.regla.CondicionSobreSensor;
 import dispositivo.gadgets.regla.Regla;
 import dispositivo.gadgets.regla.ReglaEstricta;
@@ -85,8 +83,8 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  dispositivos = new ArrayList<Dispositivo>();	
 		  dispositivos.add(candelabro);
 		  
-		  actuadorQueApaga = new ActuadorQueApaga();
-		  actuadorQueEnciende = new ActuadorQueEnciende();
+		  actuadorQueApaga = Actuador.ActuadorQueApaga;
+		  actuadorQueEnciende = Actuador.ActuadorQueEnciende;
 		  actuadores.add(actuadorQueApaga);
 		  actuadores.add(actuadorQueEnciende);
 		  
