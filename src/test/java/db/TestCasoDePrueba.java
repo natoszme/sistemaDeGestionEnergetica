@@ -18,6 +18,7 @@ import dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual;
 import dispositivo.gadgets.regla.CondicionSobreSensor;
 import dispositivo.gadgets.regla.Regla;
 import dispositivo.gadgets.regla.ReglaEstricta;
+import dispositivo.gadgets.sensor.Sensor;
 import dispositivo.gadgets.sensor.SensorHorasEncendido;
 import fixture.Fixture;
 import importacion.ImportadorTransformadores;
@@ -95,13 +96,15 @@ public class TestCasoDePrueba extends Fixture {
 	}
 	
 	@Test
-	public void persistirReglasYCondiciones() {
+	public void sePersistenLasReglasYSusCondiciones() {
 		lio.agregarDispositivo(pc);
 		em.persist(lio);
-		em.persist(pc);
 		
 		Set<CondicionSobreSensor> condiciones = new HashSet<>();
-		condiciones.add(new CondicionDeConsumoMayorOIgual(20, new SensorHorasEncendido(pc)));
+		Sensor sensorHorasPcEncendida = new SensorHorasEncendido(pc);
+		
+		em.persist(sensorHorasPcEncendida);
+		condiciones.add(new CondicionDeConsumoMayorOIgual(20, sensorHorasPcEncendida));
 		
 		// Como esta en cascade persist con los actuadores, deberia persistirlos al persistir la regla
 		Regla otraReglaEstricta = new ReglaEstricta(actuadores, condiciones, pc);
