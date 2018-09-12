@@ -46,8 +46,7 @@
     create table HistorialConsumos (
         idDispositivo bigint not null,
         consumo double,
-        fecha varbinary(255) not null,
-        primary key (idDispositivo, fecha)
+        fecha varbinary(255)
     )
 
     create table Regla (

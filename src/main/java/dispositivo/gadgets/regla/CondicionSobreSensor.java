@@ -2,24 +2,19 @@ package dispositivo.gadgets.regla;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import db.DatosBasicos;
 import dispositivo.gadgets.Gadget;
 import dispositivo.gadgets.sensor.Sensor;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-public abstract class CondicionSobreSensor implements Gadget{
-	
-	@Id
-	@GeneratedValue
-	private long id;
+public abstract class CondicionSobreSensor extends DatosBasicos implements Gadget{
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "idSensor")
