@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.uqbar.geodds.Point;
@@ -23,6 +22,7 @@ import org.uqbarproject.jpa.java8.extras.convert.LocalDateConverter;
 
 import categoria.Categoria;
 import consumoMasivo.ConsumidorMasivo;
+import converter.PointConverter;
 import db.DatosBasicos;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
@@ -65,8 +65,8 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	@Column(nullable = false)
 	private boolean ahorroAutomatico = true;  
 	
-	@Transient
-	//tendra que ser optional = false, porque se usa para calcular consumos de transformadores/zonas
+	@Convert(converter = PointConverter.class)
+	@Column(nullable = false)
 	private Point ubicacion;
 	
 	public Cliente() {}
