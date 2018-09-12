@@ -24,7 +24,7 @@ public class DispositivoInteligente extends TipoDispositivo{
 	@Enumerated(EnumType.STRING)
 	private DispositivoConcreto dispositivoConcreto;
 	
-	@JoinTable(name = "HistorialConsumos", joinColumns = @JoinColumn(name = "idDispositivo"))
+	@JoinTable(name = "HistorialConsumos", joinColumns = @JoinColumn(name = "idDispositivoInteligente"))
 	@ElementCollection(fetch = FetchType.LAZY)
 	private List<ConsumoEnFecha> consumosHastaElMomento = new ArrayList<>();
 	

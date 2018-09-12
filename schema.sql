@@ -44,9 +44,9 @@
     )
 
     create table HistorialConsumos (
-        idDispositivo bigint not null,
+        idDispositivoInteligente bigint not null,
         consumo double not null,
-        fecha varbinary(255)
+        fecha varbinary(255) not null
     )
 
     create table Regla (
@@ -124,8 +124,8 @@
         references Cliente
 
     alter table HistorialConsumos 
-        add constraint FK_4ufsx5572wqwkfy1p93sqqtnv 
-        foreign key (idDispositivo) 
+        add constraint FK_atfxo9v0pl5iubfj7cmu1cif 
+        foreign key (idDispositivoInteligente) 
         references TipoDispositivo
 
     alter table Regla 
