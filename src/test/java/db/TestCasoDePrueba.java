@@ -66,13 +66,16 @@ public class TestCasoDePrueba extends Fixture {
 		lio.agregarDispositivo(play4);
 		em.persist(lio);
 		
-		em.persist(play4);
+		em.flush();
 		em.clear();
 		
 		play4 = em.find(Dispositivo.class, play4.id);
 		
 		final String nuevoNombre = "PlayStation 4"; 
 		play4.setNombre(nuevoNombre);
+		
+		em.flush();
+		em.clear();
 		
 		// TODO falta mostrar los intervalos que estuvo encendido en el ultimo mes (eso se podria mostrar con los reportes?)
 		

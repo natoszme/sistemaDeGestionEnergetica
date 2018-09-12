@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -56,7 +57,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idCliente", nullable = false)
 	private List<Dispositivo> dispositivos = new ArrayList<>();
 	
