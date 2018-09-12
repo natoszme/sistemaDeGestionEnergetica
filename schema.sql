@@ -20,6 +20,7 @@
         puntos double not null,
         telefono bigint not null,
         tipoDocumento varchar(255) not null,
+        ubicacion varchar(255) not null,
         idCategoria bigint not null,
         primary key (id)
     )

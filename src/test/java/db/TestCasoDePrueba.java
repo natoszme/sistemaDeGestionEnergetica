@@ -3,15 +3,14 @@ package db;
 import org.junit.Assert;
 import org.junit.Before;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.junit.Test;
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
@@ -19,6 +18,7 @@ import dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual;
 import dispositivo.gadgets.regla.CondicionSobreSensor;
 import dispositivo.gadgets.regla.Regla;
 import dispositivo.gadgets.regla.ReglaEstricta;
+import dispositivo.gadgets.sensor.Sensor;
 import dispositivo.gadgets.sensor.SensorHorasEncendido;
 import fixture.Fixture;
 import importacion.ImportadorTransformadores;
@@ -48,13 +48,19 @@ public class TestCasoDePrueba extends Fixture {
 	@Test
 	public void sePersisteYSeModificaElCliente() {		
 		em.persist(lio);
+		
+		em.flush();
 		em.clear();
 		
 		lio = em.find(Cliente.class, lio.id);
-		lio.setUbicacion(ubicacionPalermo);
+		lio.setUbicacion(ubicacionPalermo);	
 		
-		Cliente lioModificado = em.find(Cliente.class, lio.id);
-		Assert.assertEquals(ubicacionPalermo, lioModificado.ubicacion());
+		em.flush();		
+		em.clear();
+		
+		lio = em.find(Cliente.class, lio.id);
+
+		Assert.assertEquals(ubicacionPalermo.toString(), lio.ubicacion().toString());
 	}
 	
 	@Test
@@ -62,16 +68,19 @@ public class TestCasoDePrueba extends Fixture {
 		lio.agregarDispositivo(play4);
 		em.persist(lio);
 		
-		em.persist(play4);
+		em.flush();
 		em.clear();
 		
 		play4 = em.find(Dispositivo.class, play4.id);
-		play4.setNombre("PlayStation 4");
 		
-		// TODO falta mostrar los intervalos que estuvo encendido en el ultimo mes (eso se podria mostrar con los reportes?)
+		final String nuevoNombre = "PlayStation 4"; 
+		play4.setNombre(nuevoNombre);
+		
+		em.flush();
+		em.clear();
 		
 		Dispositivo play4Modificada = em.find(Dispositivo.class, play4.id);
-		Assert.assertEquals("PlayStation 4", play4Modificada.getNombre());
+		Assert.assertEquals(nuevoNombre, play4Modificada.getNombre());
 	}
 	
 	@Test
@@ -91,17 +100,34 @@ public class TestCasoDePrueba extends Fixture {
 	
 	/*@Test
 	public void persistirReglasYCondiciones() {
+
+	public void laPcLioEstuvoPrendidaUnaVezEnElMes() {
+		pc.guardarConsumoDeFecha(LocalDateTime.now(), 20);
+
 		lio.agregarDispositivo(pc);
 		em.persist(lio);
-		em.persist(pc);
 		
-		List<CondicionSobreSensor> condiciones = new ArrayList<>();
-		condiciones.add(new CondicionDeConsumoMayorOIgual(20, new SensorHorasEncendido(pc)));
+		//TODO depende de la clase que tiene que crear Nico
+		/*int cantidadUsos = (int) em.createQuery("select count(*) from ConsumoDeFecha where Dispositivo.id = " + pc.id + " and ConsumoDeFecha.fecha between current_timestamp() and (current_timestamp() - 31)").getSingleResult();
+		
+		Assert.assertEquals(1, cantidadUsos);*/
+	
+	
+	@Test
+	public void sePersistenLasReglasYSusCondiciones() {
+		lio.agregarDispositivo(pc);
+		em.persist(lio);
+		
+		Set<CondicionSobreSensor> condiciones = new HashSet<>();
+		Sensor sensorHorasPcEncendida = new SensorHorasEncendido(pc);
+		
+		em.persist(sensorHorasPcEncendida);
+		condiciones.add(new CondicionDeConsumoMayorOIgual(20, sensorHorasPcEncendida));
 		
 		// Como esta en cascade persist con los actuadores, deberia persistirlos al persistir la regla
 		Regla otraReglaEstricta = new ReglaEstricta(actuadores, condiciones, pc);
 		em.persist(otraReglaEstricta);
-	}*/
+	}
 	
 	@Test
 	public void importoYPersistoLosTransformadores() {
