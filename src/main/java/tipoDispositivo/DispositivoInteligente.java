@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -39,7 +40,7 @@ public class DispositivoInteligente extends TipoDispositivo{
 	 * TODO -> @Convert(converter = LocalDateTimeConverter.class) 
 	 * */
 	@OrderBy("fecha DESC")
-	@OneToMany()
+	@Embedded
 	private List<ConsumoEnFecha> consumosHastaElMomento = new ArrayList<>();
 	
 	//TODO deberia ser una variable de entorno?

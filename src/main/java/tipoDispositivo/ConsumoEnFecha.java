@@ -2,9 +2,10 @@ package tipoDispositivo;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 
-@Entity
+
+@Embeddable
 public class ConsumoEnFecha {
 	public LocalDateTime getFecha() {
 		return fecha;
