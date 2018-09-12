@@ -3,6 +3,7 @@ package db;
 import org.junit.Assert;
 import org.junit.Before;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -77,10 +78,20 @@ public class TestCasoDePrueba extends Fixture {
 		em.flush();
 		em.clear();
 		
-		// TODO falta mostrar los intervalos que estuvo encendido en el ultimo mes (eso se podria mostrar con los reportes?)
-		
 		Dispositivo play4Modificada = em.find(Dispositivo.class, play4.id);
 		Assert.assertEquals(nuevoNombre, play4Modificada.getNombre());
+	}
+	
+	@Test
+	public void laPcLioEstuvoPrendidaUnaVezEnElMes() {
+		pc.guardarConsumoDeFecha(LocalDateTime.now(), 20);
+		lio.agregarDispositivo(pc);
+		em.persist(lio);
+		
+		//TODO depende de la clase que tiene que crear Nico
+		/*int cantidadUsos = (int) em.createQuery("select count(*) from ConsumoDeFecha where Dispositivo.id = " + pc.id + " and ConsumoDeFecha.fecha between current_timestamp() and (current_timestamp() - 31)").getSingleResult();
+		
+		Assert.assertEquals(1, cantidadUsos);*/
 	}
 	
 	@Test
