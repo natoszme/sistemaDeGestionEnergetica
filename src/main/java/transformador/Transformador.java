@@ -1,5 +1,6 @@
 package transformador;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -39,4 +40,10 @@ public class Transformador extends ConsumoMasivoEnBaseA<Cliente> implements Cons
 	public List<Cliente> obtenerFuentesDeConsumo() {
 		return RepoTransformadores.getInstance().obtenerClientesDe(this);
 	}
+
+	public double consumoEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		
+		return obtenerFuentesDeConsumo().stream().mapToDouble(cliente -> cliente.consumoRealizadoEntre(fechaInicial,fechaFinal)).sum();
+	}
+
 }
