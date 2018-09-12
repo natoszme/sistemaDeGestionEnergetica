@@ -24,6 +24,7 @@
     	<class>dispositivo.gadgets.actuador.Actuador</class>
     	<class>transformador.Transformador</class>	
     	<class>zona.Zona</class>
+    	<class>tipoDispositivo.ConsumoEnFecha</class>
     	
         <properties> 
 	    	<property name="hibernate.archive.autodetection" value="class"/>

@@ -3,22 +3,15 @@ package tipoDispositivo;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.persistence.Column;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 
 
@@ -31,16 +24,8 @@ public class DispositivoInteligente extends TipoDispositivo{
 	@Enumerated(EnumType.STRING)
 	private DispositivoConcreto dispositivoConcreto;
 	
+	@JoinTable(name = "HistorialConsumos", joinColumns = @JoinColumn(name = "idDispositivoInteligente"))
 	@ElementCollection(fetch = FetchType.LAZY)
-	@JoinTable(name = "HistorialConsumos", joinColumns = @JoinColumn(name = "idDispositivo"))
-	@MapKeyColumn(name = "fecha")
-	@Column(name = "consumo")
-	
-	/*
-	 * TODO -> @Convert(converter = LocalDateTimeConverter.class) 
-	 * */
-	@OrderBy("fecha DESC")
-	@Embedded
 	private List<ConsumoEnFecha> consumosHastaElMomento = new ArrayList<>();
 	
 	//TODO deberia ser una variable de entorno?
