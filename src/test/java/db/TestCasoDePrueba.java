@@ -46,22 +46,18 @@ public class TestCasoDePrueba extends Fixture {
 	@Test
 	public void sePersisteYSeModificaElCliente() {		
 		em.persist(lio);
-		System.out.println(lio.ubicacion());
-		//em.flush();
+		
+		em.flush();
 		em.clear();
 		
 		lio = em.find(Cliente.class, lio.id);
 		lio.setUbicacion(ubicacionPalermo);	
 		
-		//hay que hacer flush porque, por algun motivo, no considera la modificacion como una query
-		em.flush();
-		
-		System.out.println(lio.ubicacion());
-		
+		em.flush();		
 		em.clear();
+		
 		lio = em.find(Cliente.class, lio.id);
-		System.out.println(lio.getApellido());
-		System.out.println(lio.ubicacion());
+
 		Assert.assertEquals(ubicacionPalermo.toString(), lio.ubicacion().toString());
 	}
 	
