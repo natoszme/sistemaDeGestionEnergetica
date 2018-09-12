@@ -45,7 +45,7 @@
 
     create table HistorialConsumos (
         idDispositivo bigint not null,
-        consumo double,
+        consumo double not null,
         fecha varbinary(255)
     )
 
