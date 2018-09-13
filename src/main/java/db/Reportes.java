@@ -45,8 +45,7 @@ public class Reportes implements WithGlobalEntityManager{
 	
 	public Map<Transformador, Double> consumoPorTransformadorEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
 		Map<Transformador, Double> consumoPorTransformador  = new HashMap <Transformador, Double>();
-/*		return consumoPorTransformador.entrySet().stream().mapToDouble(transformador -> 
-		transformador.getKey().consumoEntre(fechaInicial, fechaFinal));*/
+
 		RepoTransformadores.getInstance().obtenerTodas().forEach(
 				transformador -> consumoPorTransformador.put(transformador, transformador.consumoEntre(fechaInicial, fechaFinal)));
 		return consumoPorTransformador;
