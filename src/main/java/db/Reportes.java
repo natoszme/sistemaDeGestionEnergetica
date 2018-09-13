@@ -41,12 +41,18 @@ public class Reportes extends AbstractPersistenceTest implements WithGlobalEntit
 	
 	public Map<Cliente, Double> consumoPorHogarEntre(LocalDateTime desde, LocalDateTime hasta) {
 		Map<Cliente, Double> consumoPorHogar  = new HashMap <Cliente, Double>();
-		em.createQuery("SELECT c.nombre, SUM(hc.consumo) FROM Cliente c "
+		/*List<Object []> resultados = */em.createQuery("SELECT c.nombre, SUM(hc.consumo) FROM Cliente c "
 			+ " INNER JOIN  c.dispositivos AS d"
-			+ " INNER JOIN  d.tipoDispositivo.consumosHastaElMomento AS td"
-			+ " INNER JOIN  td.consumoHastaElMomento AS hc"
+			+ " INNER JOIN  d.tipoDispositivo.consumosHastaElMomento AS hc"
 			+ " WHERE hc.fecha <= :desde AND hc.fecha >= :hasta"
-			+ " GROUP BY d.id, c.id_cliente").setParameter(0,desde).setParameter(1,hasta).getResultList();
+			+ " GROUP BY d.id, c.id").setParameter("desde", desde).setParameter("hasta", hasta).getResultList();
+		
+		/*for (Object[] resultado : resultados) {
+			for(int i = 0 ; i< 3; i++) {
+				System.out.println(resultado[i]);
+				
+			}
+		}*/
 		
 		return consumoPorHogar;
 	}
