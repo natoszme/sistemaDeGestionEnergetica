@@ -73,6 +73,16 @@ public class DispositivoInteligente extends TipoDispositivo{
 		consumosHastaElMomento.add(nuevoConsumo);
 	}
 	
+	public double consumoEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		return consumosHastaElMomento.stream().filter(consumoFechado -> consumoEntreLasFechas(consumoFechado.getFecha(),fechaInicial, fechaFinal))
+				.mapToDouble(consumoFechado -> consumoFechado.getConsumo()).sum();
+	}
+	
+	public boolean consumoEntreLasFechas(LocalDateTime dateTimeAEvaluar, LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		return dateTimeAEvaluar.isAfter(fechaInicial) && dateTimeAEvaluar.isBefore(fechaFinal);
+	}
+	
+	
 	public void apagar() {
 		dispositivoConcreto.apagar();
 	}

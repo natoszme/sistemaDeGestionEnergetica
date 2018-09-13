@@ -119,4 +119,8 @@ public class Dispositivo extends DatosBasicos {
 	public DispositivoConcreto dispositivoConcreto() {
 		return tipoDispositivo.getDispositivoConcreto();
 	}
+	
+	public double consumoEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		return tipoDispositivo.consumoEntre(fechaInicial, fechaFinal);
+	}
 }

@@ -1,7 +1,7 @@
 package cliente;
 
 import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,6 +140,11 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 		if (!dispositivos.stream().anyMatch(unDispositivo -> unDispositivo == dispositivo)) {
 			throw new NoPuedeAfectarAUnDispositivoQueNoLePerteneceException();
 		}
+	}
+	
+	public double consumoRealizadoEntre(LocalDateTime fechaInicial,LocalDateTime fechaFinal) {
+		
+		return dispositivos.stream().mapToDouble(dispositivo -> dispositivo.consumoEntre(fechaInicial, fechaFinal)).sum();
 	}
 	
 	public Categoria categoria() {

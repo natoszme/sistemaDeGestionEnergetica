@@ -70,4 +70,8 @@ public class DispositivoEstandar extends TipoDispositivo{
 	public DispositivoConcreto getDispositivoConcreto() {
 		throw new ElMensajeEnviadoNoPuedeSerRespondidoPorUnEstandarException();
 	}
+	
+	public double consumoEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
+		return 0;
+	}
 } 

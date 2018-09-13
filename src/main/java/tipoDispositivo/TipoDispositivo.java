@@ -43,4 +43,5 @@ public abstract class TipoDispositivo extends DatosBasicos{
 	public abstract double consumoActual();
 	public abstract boolean esElMismoConcretoQue(Dispositivo dispositivo);
 	public abstract DispositivoConcreto getDispositivoConcreto();
+	public abstract double consumoEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal);
 }
