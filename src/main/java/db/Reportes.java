@@ -54,20 +54,18 @@ public class Reportes extends AbstractPersistenceTest implements WithGlobalEntit
 				
 			}
 		}*/
-		
->>>>>>> 9fcf205498bd3e8d854f56ea4c962f84a86c45aa
 		return consumoPorHogar;
 	}
 
 	public Map<Dispositivo, Double> consumoPromedioPorDispositivoDe() {
 		Map<Dispositivo, Double> consumoPromedioPorDispositivo = new HashMap<Dispositivo, Double>();
-		List<Object[]> lista = withTransaction(() -> {
+		List<Object[]> lista =
 			em.createQuery("SELECT c.nombre, d.nombre, AVG(hc.consumo) promedio" + " FROM cliente c "
 					+ " INNER JOIN c.dispositivos AS d" 
 					+ " INNER JOIN d.tipoDispositivo AS td"
 					+ " INNER JOIN td.consumosHastaElMomento AS hc" 
 					+ " GROUP BY d.id, c.id").getResultList();
-		});
+		
 		for (Object[] object : lista) {
 			for (int i = 0; i < 3; i++) {
 				System.out.println(object[i]);
