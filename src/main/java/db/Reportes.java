@@ -9,28 +9,45 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
 import repositorio.RepoTransformadores;
 import transformador.Transformador;
 
-public class Reportes implements WithGlobalEntityManager{
+public class Reportes extends AbstractPersistenceTest implements WithGlobalEntityManager{
 
 	EntityManager em = entityManager();
-	/*TODO Hay que ver que tipo devolverían los métodos*/
+	
+	public static void main(String[] args) {
+			
+		EntityManager em = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = em.getTransaction();
+		
+		transaction.begin();
+		Reportes instancia = new Reportes();
+		
+		instancia.consumoPorHogarEntre(LocalDateTime.of(2018, 9, 10,0, 0), LocalDateTime.now());
+		
+		transaction.commit();
+			
+	}
+	
 	public Map<Cliente, Double> consumoPorHogarEntre(LocalDateTime desde, LocalDateTime hasta) {
 		Map<Cliente, Double> consumoPorHogar  = new HashMap <Cliente, Double>();
-		em.createQuery("SELECT c.nombre, SUM(hc.consumo) consumoPorHogar FROM cliente c "
-				+ " INNER JOIN  c.dispositivos AS d"
-				+ " INNER JOIN  d.consumoHastaElMomento AS td"
-				+ " INNER JOIN  td.consumoHastaElMomento AS hc"
-				+ " WHERE hc.fecha <= :desde AND hc.fecha >= :hasta"
-				+ " GROUP BY d.id, c.id_cliente").setParameter(0,desde).setParameter(1,hasta).getResultList();
-		  	 
+		em.createQuery("SELECT c.nombre, SUM(hc.consumo) FROM Cliente c "
+			+ " INNER JOIN  c.dispositivos AS d"
+			+ " INNER JOIN  d.tipoDispositivo.consumosHastaElMomento AS td"
+			+ " INNER JOIN  td.consumoHastaElMomento AS hc"
+			+ " WHERE hc.fecha <= :desde AND hc.fecha >= :hasta"
+			+ " GROUP BY d.id, c.id_cliente").setParameter(0,desde).setParameter(1,hasta).getResultList();
+		
 		return consumoPorHogar;
 	}
 	
