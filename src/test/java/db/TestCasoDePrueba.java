@@ -97,21 +97,23 @@ public class TestCasoDePrueba extends Fixture {
 		Dispositivo play4Modificada = em.find(Dispositivo.class, play4.id);
 		Assert.assertEquals("PlayStation 4 Plus", play4Modificada.getNombre());
 	}
-	
-	/*@Test
-	public void persistirReglasYCondiciones() {
 
+	@Test
 	public void laPcLioEstuvoPrendidaUnaVezEnElMes() {
 		pc.guardarConsumoDeFecha(LocalDateTime.now(), 20);
+		System.out.println(LocalDateTime.now());
 
 		lio.agregarDispositivo(pc);
 		em.persist(lio);
 		
-		//TODO depende de la clase que tiene que crear Nico
-		/*int cantidadUsos = (int) em.createQuery("select count(*) from ConsumoDeFecha where Dispositivo.id = " + pc.id + " and ConsumoDeFecha.fecha between current_timestamp() and (current_timestamp() - 31)").getSingleResult();
+		//por algun motivo no deja pasar el parametro directamente
+		//TODO falta el filtro
+		long cantidadUsos = (long) em.createQuery("select count(*) from DispositivoInteligente di inner join di.consumosHastaElMomento"
+				+ " where id = :id").setParameter("id", pc.id).getSingleResult();
+				/*+ " and TIMESTAMPDIFF(DAYS, TO_TIMESTAMP(fecha, 'YYYY-MM-DD HH24:MI:SS'), NOW()) < 31").setParameter("id", pc.id).getSingleResult();*/
 		
-		Assert.assertEquals(1, cantidadUsos);*/
-	
+		Assert.assertEquals(1, cantidadUsos);
+	}
 	
 	@Test
 	public void sePersistenLasReglasYSusCondiciones() {
