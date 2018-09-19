@@ -144,7 +144,7 @@ public class TestCasoDePrueba extends Fixture {
 		List<Transformador> transformadores = RepoTransformadores.getInstance().obtenerTodas();		
 		transformadores.forEach(transformador -> em.persist(transformador));
 		
-		long cantidadTransformadoresPersistidos = (long) em.createQuery("SELECT COUNT(*) FROM Transformador").getSingleResult();
+		long cantidadTransformadoresPersistidos = RepoTransformadores.getInstance().obtenerCantidadTransformadores();
 		
 		Assert.assertEquals(3 + transformadores.size(), cantidadTransformadoresPersistidos);
 	}
