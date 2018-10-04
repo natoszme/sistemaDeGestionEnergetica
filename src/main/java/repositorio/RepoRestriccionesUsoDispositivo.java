@@ -1,11 +1,11 @@
 package repositorio;
 import dispositivo.Dispositivo;
 import dispositivo.gadgets.actuador.Actuador;
-import repositorio.Repo;
+import repositorio.RepoEnMemoria;
 import simplex.NoExisteRestriccionPara;
 import simplex.RestriccionUsoDispositivo;
 
-public class RepoRestriccionesUsoDispositivo extends Repo<RestriccionUsoDispositivo> {
+public class RepoRestriccionesUsoDispositivo extends RepoEnMemoria<RestriccionUsoDispositivo> {
 	
 	private static RepoRestriccionesUsoDispositivo instancia;	
 	

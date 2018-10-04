@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import dispositivo.Dispositivo;
 import dispositivo.gadgets.regla.Regla;
 
-public class RepoReglas extends Repo<Regla>{
+public class RepoReglas extends RepoEnMemoria<Regla>{
 	
 	private static RepoReglas instancia;
 	

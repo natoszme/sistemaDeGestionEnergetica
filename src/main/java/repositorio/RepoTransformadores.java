@@ -13,7 +13,7 @@ import transformador.Transformador;
 
 import repositorio.RepoClientes;
 
-public class RepoTransformadores extends Repo<Transformador> implements WithGlobalEntityManager{
+public class RepoTransformadores extends RepoEnMemoria<Transformador> implements WithGlobalEntityManager{
 	
 	private static RepoTransformadores instancia;
 	

@@ -1,7 +1,7 @@
 package repositorio;
 import categoria.Categoria;
 
-public class RepoCategorias extends Repo<Categoria> {
+public class RepoCategorias extends RepoEnMemoria<Categoria> {
 	
 	private static RepoCategorias instancia;
 	
