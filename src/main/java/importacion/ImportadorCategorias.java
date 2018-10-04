@@ -1,7 +1,9 @@
 package importacion;
 
 import categoria.Categoria;
+import repositorio.Repo;
 import repositorio.RepoCategorias;
+import repositorio.RepoEnMemoria;
 
 public class ImportadorCategorias extends Importador<Categoria>{
 	
@@ -14,7 +16,7 @@ public class ImportadorCategorias extends Importador<Categoria>{
 		return instancia;
 	}
 	
-	private ImportadorCategorias(String rutaArchivo, RepoCategorias repo, Class<Categoria> entidad) {
+	private ImportadorCategorias(String rutaArchivo, Repo<Categoria> repo, Class<Categoria> entidad) {
 		super(rutaArchivo, repo, entidad);
 	}
 }
