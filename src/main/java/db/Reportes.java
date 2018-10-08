@@ -21,6 +21,7 @@ import dispositivo.Dispositivo;
 import repositorio.RepoTransformadores;
 import transformador.Transformador;
 
+
 public class Reportes extends AbstractPersistenceTest implements WithGlobalEntityManager{
 
 	EntityManager em = entityManager();
@@ -53,39 +54,34 @@ public class Reportes extends AbstractPersistenceTest implements WithGlobalEntit
 				
 			}
 		}*/
-		
 		return consumoPorHogar;
 	}
-	
+
 	public Map<Dispositivo, Double> consumoPromedioPorDispositivoDe() {
-		Map<Dispositivo, Double> consumoPromedioPorDispositivo  = new HashMap <Dispositivo, Double>();
-		List<Object[]> lista = em.createQuery("SELECT c.nombre, d.nombre, AVG(hc.consumo) promedio"
-				+ " FROM cliente c "
-				+ " INNER JOIN c.dispositivos AS d"
-				+ " INNER JOIN d.tipoDispositivo AS td"
-				+ " INNER JOIN td.consumosHastaElMomento AS hc"
-				+ " GROUP BY d.id, c.id").getResultList();
+		Map<Dispositivo, Double> consumoPromedioPorDispositivo = new HashMap<Dispositivo, Double>();
+		List<Object[]> lista =
+			em.createQuery("SELECT c.nombre, d.nombre, AVG(hc.consumo) promedio" + " FROM cliente c "
+					+ " INNER JOIN c.dispositivos AS d" 
+					+ " INNER JOIN d.tipoDispositivo AS td"
+					+ " INNER JOIN td.consumosHastaElMomento AS hc" 
+					+ " GROUP BY d.id, c.id").getResultList();
+		
 		for (Object[] object : lista) {
-			for(int i = 0 ; i< 3; i++) {
+			for (int i = 0; i < 3; i++) {
 				System.out.println(object[i]);
-				
+
 			}
 		}
 		return consumoPromedioPorDispositivo;
 	}
-	
-	public Map<Transformador, Double> consumoPorTransformadorEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
-		Map<Transformador, Double> consumoPorTransformador  = new HashMap <Transformador, Double>();
 
-		RepoTransformadores.getInstance().obtenerTodas().forEach(
-				transformador -> consumoPorTransformador.put(transformador, transformador.consumoEntre(fechaInicial, fechaFinal)));
+	public Map<Transformador, Double> consumoPorTransformadorEntre(LocalDateTime fechaInicial,
+			LocalDateTime fechaFinal) {
+		Map<Transformador, Double> consumoPorTransformador = new HashMap<Transformador, Double>();
+
+		RepoTransformadores.getInstance().obtenerTodas().forEach(transformador -> consumoPorTransformador
+				.put(transformador, transformador.consumoEntre(fechaInicial, fechaFinal)));
 		return consumoPorTransformador;
 	}
-	
 
 }
-
-
-
-
-

@@ -2,7 +2,7 @@ package repositorio;
 
 import dispositivo.Dispositivo;
 
-public class RepoDispositivosBase extends Repo<Dispositivo>{
+public class RepoDispositivosBase extends RepoEnMemoria<Dispositivo>{
 	private static RepoDispositivosBase instancia;
 	
 	

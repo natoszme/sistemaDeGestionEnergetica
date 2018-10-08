@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import cliente.Cliente;
 
-public class RepoClientes extends Repo<Cliente> {
+public class RepoClientes extends RepoEnMemoria<Cliente> {
 	private static RepoClientes instancia;
 	
 	public static RepoClientes getInstance(){

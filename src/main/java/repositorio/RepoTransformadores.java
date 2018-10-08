@@ -4,12 +4,16 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
 import cliente.Cliente;
 import transformador.Transformador;
 
 import repositorio.RepoClientes;
 
-public class RepoTransformadores extends Repo<Transformador>{
+public class RepoTransformadores extends RepoEnMemoria<Transformador> implements WithGlobalEntityManager{
 	
 	private static RepoTransformadores instancia;
 	
@@ -36,4 +40,10 @@ public class RepoTransformadores extends Repo<Transformador>{
 	private Transformador transformadorMasCercanoA(Cliente cliente) {	
 		return entidades.stream().min(Comparator.comparing(unTransformador -> unTransformador.distanciaA(cliente))).get();	
 	}
+	
+	public long obtenerCantidadTransformadores() {
+		EntityManager em = entityManager();
+		return (long) em.createQuery("SELECT COUNT(*) FROM Transformador").getSingleResult();
+	}
+	
 }
