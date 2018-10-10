@@ -13,6 +13,8 @@
 			    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 			      <a class="nav-link active" id="consumo-tab" data-toggle="pill" href="#consumo" role="tab" aria-controls="consumo" aria-selected="true">Consumo</a>
 			      <a class="nav-link" id="dispositivos-tab" data-toggle="pill" href="#dispositivos" role="tab" aria-controls="dispositivos" aria-selected="false">Dispositivos</a>
+			      <a class="nav-link" id="regla-tab" data-toggle="pill" href="#reglas" role="tab" aria-controls="reglas" aria-selected="false">Reglas</a>
+
 			    </div>
 			  </div>
 			  <div class="col-9">
@@ -81,6 +83,56 @@
 									</div>
 			      		</div>
 			      	</div>
+			      </div>
+			      
+			      <div class="tab-pane fade" id="reglas" role="tabpanel" aria-labelledby="reglas-tab">
+			      	<div class="row mb-2">
+			      		<div class="col">			      		
+					      	<div class="card bg-success">
+					      		<div class="card-header">
+									<h5 class="card-title">Regla 1</h5>
+								</div>
+								  <div class="card-body">
+								   
+								    <h6 class="card-subtitle mb-2 text-muted">Estricta</h6>
+								    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: Smart TV</h6>
+								    <h6 class="card-subtitle mb-2 text-muted">Condiciones</h6>
+								    <ul>
+								    	<li>Condicion 1</li>
+								    	<li>Condicion 2</li>
+								    	<li>Condicion 3</li>
+								    </ul>
+								     <h6 class="card-subtitle mb-2 text-muted">Actuadores</h6>
+								    <ul>
+										<li>Actuador que llama a servicio tecnico</li>
+								    	<li>Actuador que apaga</li>									
+								    </ul>
+								  </div>
+							</div>
+			      		</div>
+			      		<div class="col">			      		
+					      	<div class="card  bg-danger">
+				      			<div class="card-header">
+									<h5 class="card-title">Regla 2</h5>
+								</div>
+							    <div class="card-body">
+								    <h5 class="card-title"></h5>
+								    <h6 class="card-subtitle mb-2 text-muted">Permisiva</h6>
+								    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: xx</h6>
+								     <h6 class="card-subtitle mb-2 text-muted">Condiciones</h6>
+								    <ul>
+								    	<li>Consumo mayor o igual a 20</li>
+								    </ul>
+								     <h6 class="card-subtitle mb-2 text-muted">Actuadores</h6>
+								    <ul>
+									
+								    	<li>Actuador que prende</li>									
+								    </ul>
+							    </div>
+							</div>
+			      		</div>
+		      		</div>
+			   
 			      </div>
 			    </div>
 			  </div>
