@@ -6,11 +6,17 @@ public class RepoCategorias extends RepoEnDB<Categoria> {
 	
 	private static RepoCategorias instancia;
 	
-	public static RepoCategorias getInstance() {
-		tabla = "Categoria";
+	
+	public RepoCategorias(String tabla) {
+		this.tabla = tabla;
+	}
+	
+	public static  RepoCategorias getInstance() {
+		
 		if (instancia == null) {
-			instancia = new RepoCategorias();
+			instancia = new RepoCategorias("Categoria");
 		}
+		
 		return instancia;
 	}
 	

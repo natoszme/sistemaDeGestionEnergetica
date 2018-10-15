@@ -109,6 +109,9 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  lio = new Cliente("lio", "messi", TipoDocumento.DNI, 40216458, 10101010, "Av. Catalunia 10", r2, new ArrayList<Dispositivo>(), ubicacionCaballito);
 		  ricardo = new Cliente("ricardo", "ruben", TipoDocumento.DNI, 45178257, 41013591, "Av. Lugones 1001", r2, new ArrayList<Dispositivo>(), ubicacionPalermo);
 		  yanina = new Cliente("yanina","latorre", TipoDocumento.DNI, 7865432,46498374, "Av. Constituyentes 2012",r1 , new ArrayList<Dispositivo>(), ubicacionCaballito);
+		  
+		  
+		  
 		  RepoCategorias.getInstance().agregarEntidad(r1);
 		  RepoCategorias.getInstance().agregarEntidad(r2);
 		  RepoCategorias.getInstance().agregarEntidad(r3);

@@ -5,17 +5,22 @@ import java.util.stream.Collectors;
 
 import cliente.Cliente;
 
-public class RepoClientes extends RepoEnMemoria<Cliente> {
+public class RepoClientes extends RepoEnDB<Cliente> {
 	private static RepoClientes instancia;
+	
+	public RepoClientes(String tabla) {
+		this.tabla = tabla;
+	}
+	
 	
 	public static RepoClientes getInstance(){
 		if (instancia == null) {
-			instancia = new RepoClientes();
+			instancia = new RepoClientes("Cliente");
 		}
 		return instancia;
 	}
 	
 	public List<Cliente> obtenerAhorradores() {
-		return entidades.stream().filter(Cliente::permiteAhorroAutomatico).collect(Collectors.toList());
+		return this.obtenerTodas().stream().filter(Cliente::permiteAhorroAutomatico).collect(Collectors.toList());
 	}
 }

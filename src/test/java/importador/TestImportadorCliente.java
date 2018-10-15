@@ -76,6 +76,10 @@ public class TestImportadorCliente {
 
 	@Test
 	public void laCategoriaDeLioEsR2() {
+		System.out.print(".................");
+		System.out.print(clientes.get(0).getCategoria().getNombre());
+		System.out.print(".................");
+		
 		Assert.assertEquals("R2", clientes.get(0).getCategoria().getNombre());
 	}
 }

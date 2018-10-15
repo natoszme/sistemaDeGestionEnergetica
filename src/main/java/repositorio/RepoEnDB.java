@@ -10,7 +10,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 public abstract class RepoEnDB<Entidad> implements Repo<Entidad>,  WithGlobalEntityManager{
 	//protected List<Entidad> entidades = new ArrayList<>();
 	EntityManager em = entityManager();
-	static String tabla;
+	String tabla;
 	public void agregarEntidad(Entidad entidad) {
 		em.persist(entidad);
 	}
@@ -21,7 +21,7 @@ public abstract class RepoEnDB<Entidad> implements Repo<Entidad>,  WithGlobalEnt
 
 	@SuppressWarnings("unchecked")
 	public List<Entidad> obtenerTodas() {
-		return (List<Entidad>) em.createQuery("select * from " + tabla);
+		return (List<Entidad>) em.createQuery("FROM " + tabla).getResultList();
 	}
 	
 	public void limpiarEntidades() {
