@@ -19,7 +19,7 @@ public class Controller {
 		Optional<Usuario> usuario = RepoUsuarios.getInstance().dameUsuario(req.attribute("usuario"), req.attribute("password"));
 		
 		return usuario.map(user -> modelAndViewSegun(user))
-				.orElse(new ModelAndView(null, "usuario.hbs"));
+				.orElse(new ModelAndView(null, "index.hbs"));
 	}
 
 	private static ModelAndView modelAndViewSegun(Usuario user) {
