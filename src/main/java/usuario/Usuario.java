@@ -23,6 +23,8 @@ public class Usuario extends DatosBasicos{
 		this.cliente = cliente;
 	}
 	
+	public Usuario() {}
+	
 	public String getUsername() {
 		return username;
 	}
