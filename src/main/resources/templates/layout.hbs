@@ -13,29 +13,30 @@
 		{{/block}}
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		  <a class="navbar-brand" href="#">
-		    <img src="" class="d-inline-block align-top" alt="">
-		    Altos dispositivos
-		  </a>
-
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item active">
-		        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">Cerrar sesi&oacute;n</a>
-		      </li>
-		    </ul>
-		  </div>
-		</nav>
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			  <a class="navbar-brand" href="#">
+			    <img src="" class="d-inline-block align-top" alt="">
+			    Home
+			  </a>
+	
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			  	<ul class="navbar-nav mr-auto">
+			  	</ul>
+			    <ul class="navbar-nav ml-auto">
+			      <li class="nav-item text-right">
+			        <a class="nav-link" href="#">Cerrar sesi&oacute;n</a>
+			      </li>
+			    </ul>
+			  </div>
+			</nav>
+		</header>
 		
-		<div class="container">
+		<main role="main" class="container">
 			{{#block "contenido"}}
 			{{/block}}
-		</div>
-			
+		</main>
+					
 		{{#block "scripts"}}
 		{{/block}}		
 	</body>
