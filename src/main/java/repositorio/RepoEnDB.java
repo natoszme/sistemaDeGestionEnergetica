@@ -6,25 +6,32 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
-public abstract class RepoEnDB<Entidad> implements Repo<Entidad>,  WithGlobalEntityManager{
+public abstract class RepoEnDB<Entidad> extends AbstractPersistenceTest implements Repo<Entidad>,  WithGlobalEntityManager{
 	//protected List<Entidad> entidades = new ArrayList<>();
 	EntityManager em = entityManager();
 	String tabla;
+
 	public void agregarEntidad(Entidad entidad) {
-		em.persist(entidad);
+		withTransaction(() -> {em.persist(entidad);});
 	}
 
 	public void agregarEntidades(List<Entidad> entidades) {
-		entidades.forEach(entidad->em.persist(entidad));
+		entidades.forEach(entidad->this.agregarEntidad(entidad));
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Entidad> obtenerTodas() {
-		return (List<Entidad>) em.createQuery("FROM " + tabla).getResultList();
+		List<Entidad> entidades = null;
+		
+		entidades = (List<Entidad>) em.createQuery("FROM " + tabla).getResultList();
+		  
+		return entidades;
 	}
 	
 	public void limpiarEntidades() {
 		
 	}
 }
+
