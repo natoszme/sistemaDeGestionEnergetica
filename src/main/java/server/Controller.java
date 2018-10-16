@@ -3,6 +3,7 @@ package server;
 import java.util.HashMap;
 import java.util.Optional;
 
+import cliente.Cliente;
 import login.RepoUsuarios;
 import spark.ModelAndView;
 import spark.Request;
@@ -53,6 +54,10 @@ public class Controller {
 	
 	public static ModelAndView clienteHome(Request req, Response res) {
 		HashMap<String, Object> viewModel = new HashMap<>();
+		
+		Cliente cliente = RepoUsuarios.getInstance().dameClienteDe(Long.parseLong(req.cookie("id")));
+		
+		viewModel.put("cliente", cliente);
 		
 		return new ModelAndView(viewModel, "cliente/home.hbs");
 	}
