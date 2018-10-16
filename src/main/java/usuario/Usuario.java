@@ -1,8 +1,11 @@
 package usuario;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
 
 import cliente.Cliente;
 import db.DatosBasicos;
@@ -13,7 +16,7 @@ public class Usuario extends DatosBasicos{
 	private String password;
 	private boolean esAdmin;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Cliente cliente;
 	
 	public Usuario(String username, String password, boolean esAdmin, Cliente cliente) {
