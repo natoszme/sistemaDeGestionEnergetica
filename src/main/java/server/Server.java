@@ -3,7 +3,6 @@ package server;
 import login.DatosDePrueba;
 import spark.Spark;
 import spark.debug.DebugScreen;
-import usuario.Usuario;
 
 public class Server {
 	public static void main(String[] args) {
