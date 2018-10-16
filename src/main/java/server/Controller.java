@@ -15,7 +15,7 @@ public class Controller {
 		return new ModelAndView(null, "index.hbs");
 	}
 	
-	public static ModelAndView validarLogin(Request req, Response res) {
+	public static ModelAndView validarLogin(Request req, Response res) {		
 		Optional<Usuario> usuario = RepoUsuarios.getInstance().dameUsuario(req.attribute("usuario"), req.attribute("password"));
 		
 		return usuario.map(user -> modelAndViewSegun(user))
