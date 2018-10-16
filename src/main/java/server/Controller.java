@@ -15,8 +15,11 @@ public class Controller {
 		
 		//TODO ver si la cookie esta seteada (logueado) y en ese caso, redirect
 		
-		//TODO revisar el null
-		return new ModelAndView(null, "index.hbs");
+		//TODO como hacer para mostrar username en caso de login fallido? Entra a este metodo (get) despues de haber pasado por post
+		//pero ya sin los datos del form
+		HashMap<String, Object> viewModel = new HashMap<>();
+		viewModel.put("username", req.queryParams("username"));
+		return new ModelAndView(viewModel, "index.hbs");
 	}
 	
 	//TODO la pass tiene que llegar aca ya hasheada!
