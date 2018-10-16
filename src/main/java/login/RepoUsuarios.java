@@ -27,10 +27,10 @@ public class RepoUsuarios extends RepoEnDB<Usuario> implements WithGlobalEntityM
 		Session session = em.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Usuario.class);
 		
-		Usuario user = (Usuario) criteria.add(Restrictions.eq("usuario", usuario))
+		Usuario user = (Usuario) criteria.add(Restrictions.eq("username", usuario))
 				.add(Restrictions.eq("password", password))
 		        .uniqueResult();
 		
-		return Optional.of(user);
+		return Optional.ofNullable(user);
 	}
 }
