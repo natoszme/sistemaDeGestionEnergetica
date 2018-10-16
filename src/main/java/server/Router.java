@@ -9,7 +9,10 @@ public class Router {
 		HandlebarsTemplateEngine transformer = new HandlebarsTemplateEngine();
 		
 		Spark.get("/", Controller::login, transformer);		
-		Spark.post("/", Controller::validarLogin, transformer);
+		Spark.post("/", Controller::validarLogin);
+		
+		Spark.get("/admin", Controller::adminHome, transformer);
+		Spark.get("/cliente", Controller::clienteHome, transformer);
 	}
 
 }

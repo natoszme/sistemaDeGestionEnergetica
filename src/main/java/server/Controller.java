@@ -12,58 +12,53 @@ import usuario.Usuario;
 public class Controller {
 	
 	public static ModelAndView login(Request req, Response res) {
+		
+		//TODO ver si la cookie esta seteada (logueado) y en ese caso, redirect
+		
 		//TODO revisar el null
 		return new ModelAndView(null, "index.hbs");
 	}
 	
 	//TODO la pass tiene que llegar aca ya hasheada!
-	public static ModelAndView validarLogin(Request req, Response res) {
-		
+	public static String validarLogin(Request req, Response res) {		
 		String username = req.queryParams("username");
 		String password = req.queryParams("password");
 		
 		Optional<Usuario> usuario = RepoUsuarios.getInstance().dameUsuario(username, password);
 		
-		System.out.println(usuario.isPresent());
+		String recurso = usuario.map(user -> obtenerHomeDe(user))
+				.orElse("/");
 		
-		final HashMap<String, Object> viewModel = usuario.map(user -> viewModelSegun(user))
-				.orElse(viewModelConUsername(username));
+		//TODO estaria bueno setear si es admin o user para hacer el redirect mas facil?
+		usuario.ifPresent(user -> {
+				req.session(true);
+				res.cookie("id", String.valueOf(user.id));
+			});
 		
-		return usuario.map(user -> modelAndViewSegun(user, viewModel))
-				.orElse(new ModelAndView(viewModel, "index.hbs"));
+		res.redirect(recurso);
+		
+		return "200";
 	}
-
-	private static HashMap<String, Object> viewModelConUsername(String username) {
+	
+	public static ModelAndView adminHome(Request req, Response res) {
 		HashMap<String, Object> viewModel = new HashMap<>();
-		viewModel.put("username", username);
-		return viewModel;
+		
+		//viewModel.put("consumos", //lo que devuelva el reporte);
+		
+		return new ModelAndView(viewModel, "admin/home.hbs");
 	}
-
-	private static HashMap<String, Object> viewModelSegun(Usuario user) {
+	
+	public static ModelAndView clienteHome(Request req, Response res) {
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
-		if(user.esAdmin()) {
-			//TODO agregar las cosas del admin
-			//viewModel.put();
-		}
-		else {
-			viewModel.put("cliente", user.getCliente());
-		}
-		
-		return viewModel;
+		return new ModelAndView(viewModel, "cliente/home.hbs");
 	}
 
-	private static ModelAndView modelAndViewSegun(Usuario user, HashMap<String, Object> viewModel) {
-		//TODO llenar el viewModel con la data segun corresponda
-		return new ModelAndView(viewModel,
-				obtenerViewConPermisoDe(user));
-	}
-
-	private static String obtenerViewConPermisoDe(Usuario user) {
-		String recurso = "usuario";
+	private static String obtenerHomeDe(Usuario user) {
+		String recurso = "cliente";
 		if(user.esAdmin()) {
 			recurso = "admin";
 		}
-		return recurso + "/home.hbs";
+		return recurso;
 	}
 }
