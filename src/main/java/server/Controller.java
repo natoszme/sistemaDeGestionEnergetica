@@ -48,7 +48,6 @@ public class Controller {
 	}
 	
 	public static ModelAndView adminHome(Request req, Response res) {
-		siNoEstaLogueadoEchar(req, res);
 		
 		if(!tipoUsuario(req).equals("admin")) {
 			res.redirect("/cliente");
@@ -63,7 +62,6 @@ public class Controller {
 	}
 	
 	public static ModelAndView clienteHome(Request req, Response res) {		
-		siNoEstaLogueadoEchar(req, res);
 		
 		if(!tipoUsuario(req).equals("cliente")) {
 			res.redirect("/admin");
@@ -79,17 +77,17 @@ public class Controller {
 		return new ModelAndView(viewModel, "cliente/home.hbs");
 	}
 
-	private static void siNoEstaLogueadoEchar(Request req, Response res) {
+	public static void siNoEstaLogueadoEchar(Request req, Response res) {
 		if(!estaLogueado(req)) {
 			res.redirect("/");
 		}
 	}
 
-	private static boolean estaLogueado(Request req) {
+	public static boolean estaLogueado(Request req) {
 		return req.cookie("id") != null;
 	}
 	
-	private static String tipoUsuario(Request req) {
+	public static String tipoUsuario(Request req) {
 		return req.cookie("tipoUsuario");
 	}
 
