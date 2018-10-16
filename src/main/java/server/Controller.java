@@ -14,7 +14,10 @@ public class Controller {
 	
 	public static ModelAndView login(Request req, Response res) {
 		
-		//TODO ver si la cookie esta seteada (logueado) y en ese caso, redirect
+		if(estaLogueado(req)) {
+			res.redirect("/" + tipoUsuario(req));
+			return null;
+		}
 		
 		//TODO como hacer para mostrar username en caso de login fallido? Entra a este metodo (get) despues de haber pasado por post
 		//pero ya sin los datos del form
@@ -22,7 +25,7 @@ public class Controller {
 		viewModel.put("username", req.queryParams("username"));
 		return new ModelAndView(viewModel, "index.hbs");
 	}
-	
+
 	//TODO la pass tiene que llegar aca ya hasheada!
 	public static String validarLogin(Request req, Response res) {		
 		String username = req.queryParams("username");
@@ -30,13 +33,13 @@ public class Controller {
 		
 		Optional<Usuario> usuario = RepoUsuarios.getInstance().dameUsuario(username, password);
 		
-		String recurso = usuario.map(user -> obtenerHomeDe(user))
+		String recurso = usuario.map(user -> tipoUsuarioDe(user))
 				.orElse("/");
 		
-		//TODO estaria bueno setear si es admin o user para hacer el redirect mas facil?
 		usuario.ifPresent(user -> {
 				req.session(true);
 				res.cookie("id", String.valueOf(user.id));
+				res.cookie("tipoUsuario", tipoUsuarioDe(user));
 			});
 		
 		res.redirect(recurso);
@@ -45,6 +48,13 @@ public class Controller {
 	}
 	
 	public static ModelAndView adminHome(Request req, Response res) {
+		siNoEstaLogueadoEchar(req, res);
+		
+		if(!tipoUsuario(req).equals("admin")) {
+			res.redirect("/cliente");
+			return null;
+		}
+		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		//viewModel.put("consumos", //lo que devuelva el reporte);
@@ -52,7 +62,14 @@ public class Controller {
 		return new ModelAndView(viewModel, "admin/home.hbs");
 	}
 	
-	public static ModelAndView clienteHome(Request req, Response res) {
+	public static ModelAndView clienteHome(Request req, Response res) {		
+		siNoEstaLogueadoEchar(req, res);
+		
+		if(!tipoUsuario(req).equals("cliente")) {
+			res.redirect("/admin");
+			return null;
+		}
+		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		Cliente cliente = RepoUsuarios.getInstance().dameClienteDe(Long.parseLong(req.cookie("id")));
@@ -62,7 +79,21 @@ public class Controller {
 		return new ModelAndView(viewModel, "cliente/home.hbs");
 	}
 
-	private static String obtenerHomeDe(Usuario user) {
+	private static void siNoEstaLogueadoEchar(Request req, Response res) {
+		if(!estaLogueado(req)) {
+			res.redirect("/");
+		}
+	}
+
+	private static boolean estaLogueado(Request req) {
+		return req.cookie("id") != null;
+	}
+	
+	private static String tipoUsuario(Request req) {
+		return req.cookie("tipoUsuario");
+	}
+
+	private static String tipoUsuarioDe(Usuario user) {
 		String recurso = "cliente";
 		if(user.esAdmin()) {
 			recurso = "admin";
