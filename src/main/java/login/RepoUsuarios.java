@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import cliente.Cliente;
 import repositorio.RepoEnDB;
 import usuario.Usuario;
 
@@ -32,5 +33,9 @@ public class RepoUsuarios extends RepoEnDB<Usuario> implements WithGlobalEntityM
 		        .uniqueResult();
 		
 		return Optional.ofNullable(user);
+	}
+
+	public Cliente dameClienteDe(long id) {
+		return em.find(Usuario.class, id).getCliente();
 	}
 }
