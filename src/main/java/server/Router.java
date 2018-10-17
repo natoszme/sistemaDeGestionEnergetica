@@ -4,6 +4,8 @@ import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.before;
 
+import server.controller.Controller;
+
 public class Router {
 
 	public static void configure() {

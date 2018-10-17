@@ -1,4 +1,4 @@
-package server;
+package server.controller;
 
 import java.util.HashMap;
 import java.util.Optional;
