@@ -1,11 +1,13 @@
 {{#partial "contenido"}}
-	<h2 class="mt-5">Nombre del usuario</h2>
+	<h2 class="mt-5">{{ cliente.nombre }} {{ cliente.apellido }}</h2>
 	<hr>
 	<div class="row">
 	  <div class="col-3">
 	    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 	      <a class="nav-link active" id="consumo-tab" data-toggle="pill" href="#consumo" role="tab" aria-controls="consumo" aria-selected="true">Consumo</a>
+	      {{#if tieneDispositivos}}
 	      <a class="nav-link" id="dispositivos-tab" data-toggle="pill" href="#dispositivos" role="tab" aria-controls="dispositivos" aria-selected="false">Dispositivos</a>
+	      {{/if}}
 	      <a class="nav-link" id="regla-tab" data-toggle="pill" href="#reglas" role="tab" aria-controls="reglas" aria-selected="false">Reglas</a>
 	    </div>
 	  </div>
@@ -13,7 +15,7 @@
 	    <div class="tab-content" id="v-pills-tabContent">
 	      <div class="tab-pane fade show active" id="consumo" role="tabpanel" aria-labelledby="consumo-tab">
 	      	<div class="alert alert-primary" role="alert">
-			  El consumo del periodo actual es de <a href="#" class="alert-link">36.750,28 KW</a>.
+			  El consumo del periodo actual es de <a href="#" class="alert-link">{{ consumoActual }} KW</a>.
 			</div>
 	      	<table class="table table-striped table-bordered">
 			  <thead class="thead-dark">
@@ -40,42 +42,18 @@
 			<button type="button" class="btn btn-primary">Optimizar consumo</button>			      	
 	      </div>
 	      <div class="tab-pane fade" id="dispositivos" role="tabpanel" aria-labelledby="dispositivos-tab">
-	      	<div class="row mb-2">
-	      		<div class="col">			      		
-			      	<div class="card">
-					  <div class="card-body">
-					    <h5 class="card-title">Smart TV</h5>
-					    <h6 class="card-subtitle mb-2 text-muted">Encendido</h6>
-					  </div>
-					</div>
-	      		</div>
-	      		<div class="col">			      		
-			      	<div class="card">
-					  <div class="card-body">
-					    <h5 class="card-title">Heladera</h5>
-					    <h6 class="card-subtitle mb-2 text-muted">Modo ahorro</h6>
-					  </div>
-					</div>
-	      		</div>
-      		</div>
-	      	<div class="row">
-	      		<div class="col">			      		
-			      	<div class="card">
-					  <div class="card-body">
-					    <h5 class="card-title">Aire acondicionado</h5>
-					    <h6 class="card-subtitle mb-2 text-muted">Apagado</h6>
-					  </div>
-					</div>
-	      		</div>
-	      		<div class="col">			      		
-			      	<div class="card">
-					  <div class="card-body">
-					    <h5 class="card-title">PlayStation 4</h5>
-					    <h6 class="card-subtitle mb-2 text-muted">Apagado</h6>
-					  </div>
-					</div>
-	      		</div>
-	      	</div>
+      		{{#each cliente.dispositivos}}
+	      		{{#if isEven @index "<div class="row mb-2">"}} {{/if}}
+		      		<div class="col">
+				      	<div class="card">
+						  <div class="card-body">
+						    <h5 class="card-title">{{ nombre }}</h5>
+						    <h6 class="card-subtitle mb-2 text-muted">Encendido</h6>
+						  </div>
+						</div>
+		      		</div>
+	      		{{#if isOdd @index "</div>"}} {{/if}}
+			{{/each}}
 	      </div>
 	      
 	      <div class="tab-pane fade" id="reglas" role="tabpanel" aria-labelledby="reglas-tab">
@@ -98,8 +76,8 @@
 								<li>Actuador que llama a servicio tecnico</li>
 						    	<li>Actuador que apaga</li>									
 						    </ul>
-						  </div>
-						</div>
+						 </div>
+					</div>
 	      		</div>
 	      		<div class="col">			      		
 			      	<div class="card">

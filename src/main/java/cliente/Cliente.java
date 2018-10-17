@@ -135,6 +135,10 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 		dispositivo.convertirAInteligente(dispositivoConcreto);
 		puntos += 10;		
 	}
+	
+	public boolean tieneDispositivos() {
+		return this.cantidadDispositivos() > 0;
+	}
 
 	public void tieneDispositivo(Dispositivo dispositivo) {
 		if (!dispositivos.stream().anyMatch(unDispositivo -> unDispositivo == dispositivo)) {
