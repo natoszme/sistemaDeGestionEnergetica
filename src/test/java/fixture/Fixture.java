@@ -130,5 +130,6 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	@After
 	public void after() {
 		RepoCategorias.getInstance().limpiarEntidades();
+		
 	}
 }
