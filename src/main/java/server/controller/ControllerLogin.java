@@ -34,7 +34,7 @@ public class ControllerLogin {
 		Optional<Usuario> usuario = RepoUsuarios.getInstance().dameUsuario(username, password);
 		
 		String recurso = usuario.map(user -> tipoUsuarioDe(user))
-				.orElse("/");
+				.orElse("/?username=" + username);
 		
 		usuario.ifPresent(user -> {
 				req.session(true);
