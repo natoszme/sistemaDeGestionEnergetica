@@ -3,7 +3,6 @@ package importacion;
 import categoria.Categoria;
 import repositorio.Repo;
 import repositorio.RepoCategorias;
-import repositorio.RepoEnMemoria;
 
 public class ImportadorCategorias extends Importador<Categoria>{
 	

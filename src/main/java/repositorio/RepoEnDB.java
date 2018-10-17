@@ -1,13 +1,10 @@
 package repositorio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.hibernate.metamodel.source.binder.ToOneAttributeSource;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entidad>,  WithGlobalEntityManager{
@@ -16,7 +13,7 @@ public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entid
 	String tabla;
 
 	public void agregarEntidad(Entidad entidad) {
-		withTransaction(() -> {em.persist(entidad);});
+		em.persist(entidad);
 	}
 
 	public void agregarEntidades(List<Entidad> entidades) {

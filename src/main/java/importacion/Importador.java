@@ -2,7 +2,6 @@ package importacion;
 
 import json.JSONParser;
 import repositorio.Repo;
-import repositorio.RepoEnMemoria;
 
 abstract public class Importador<Entidad> {
 	private String rutaArchivo;

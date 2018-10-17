@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.uqbar.geodds.Point;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import categoria.Categoria;
 import cliente.Cliente;
@@ -26,7 +27,7 @@ import tipoDispositivo.DispositivoInteligente;
 import transformador.Transformador;
 import zona.Zona;
 
-public class Fixture extends AbstractPersistenceTest implements WithGlobalEntityManager {
+public class Fixture extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps {
 	
 	protected Categoria r1, r2, r3, r4, r5, r6, r7, r8, r9;
 	protected Dispositivo candelabro, televisor, microondas, equipoMusica, dvd, play4, televisorSmart, pc, aireAcondicionado;
@@ -46,6 +47,7 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	public Zona palermo, laMatanza, caballito;
 	
 	public Fixture() {
+		  beginTransaction();
 		  r1 = new Categoria("R1", 0, 150, 18.76, 0.644);			
 		  r2 = new Categoria("R2", 150, 325, 35.32, 0.644);			
 		  r3 = new Categoria("R3", 326, 400, 60.71, 0.681);			
@@ -130,6 +132,5 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	@After
 	public void after() {
 		RepoCategorias.getInstance().limpiarEntidades();
-		
 	}
 }
