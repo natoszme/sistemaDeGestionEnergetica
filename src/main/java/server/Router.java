@@ -23,6 +23,8 @@ public class Router {
 		
 		Spark.get("/admin", Controller::adminHome, transformer);
 		Spark.get("/cliente", Controller::clienteHome, transformer);
+		
+		Spark.get("/logout", Controller::logout);
 	}
 
 }

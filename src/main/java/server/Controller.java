@@ -29,6 +29,7 @@ public class Controller {
 	}
 
 	//TODO la pass tiene que llegar aca ya hasheada!
+	//que deberia devolver?
 	public static String validarLogin(Request req, Response res) {		
 		String username = req.queryParams("username");
 		String password = req.queryParams("password");
@@ -110,5 +111,15 @@ public class Controller {
 			recurso = "admin";
 		}
 		return recurso;
+	}
+	
+	//TODO mejor forma de manejar la sesion?
+	public static String logout(Request req, Response res) {
+		res.removeCookie("id");
+		res.removeCookie("tipoUsuario");
+		
+		res.redirect("/");
+		
+		return "200";
 	}
 }
