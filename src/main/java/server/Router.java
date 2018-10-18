@@ -13,12 +13,7 @@ import server.controller.ControllerLogin;
 public class Router {
 
 	public static void configure() {
-		HandlebarsTemplateEngine transformer;
-		HandlebarsTemplateEngineBuilder template = HandlebarsTemplateEngineBuilder.create();
-		
-		//template.withHelper(isEven, EvenHelper.evenHelper())
-		
-		transformer = template.build();
+		HandlebarsTemplateEngine transformer = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
 		
 		Spark.get("/", ControllerLogin::login, transformer);		
 		Spark.post("/", ControllerLogin::validarLogin);
@@ -36,6 +31,7 @@ public class Router {
 		Spark.get("/admin", ControllerAdmin::adminHome, transformer);
 		
 		Spark.get("/cliente", ControllerCliente::clienteHome, transformer);
+		Spark.get("/cliente/optimizarConsumo", ControllerCliente::optimizarUso, transformer);
 		//TODO ver grupo de rutas
 	}
 }
