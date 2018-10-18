@@ -2,6 +2,7 @@ package server.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
@@ -10,15 +11,15 @@ import simplex.OptimizadorUsoDispositivos;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import tipoDispositivo.DispositivoEstandar;
+import usuario.Usuario;
 
 import org.apache.commons.math3.util.Pair;
 
-public class ControllerCliente {
+public class ControllerCliente extends ControllerLogin{
 
-	public static ModelAndView clienteHome(Request req, Response res) {		
+	public ModelAndView clienteHome(Request req, Response res) {		
 		
-		if(!ControllerLogin.tipoUsuario(req).equals("cliente")) {
+		if(!estaLogueado(req)) {
 			res.redirect("/admin");
 			return null;
 		}
@@ -59,6 +60,15 @@ public class ControllerCliente {
 	
 	private static Cliente obtenerClienteDe(Request req) {
 		return RepoUsuarios.getInstance().dameClienteDe(Long.parseLong(req.cookie("id")));
+	}
+
+	@Override
+	protected String home() {
+		return "cliente";
+	}
+
+	protected String nombreCookieId() {
+		return "idCliente";
 	}
 
 }

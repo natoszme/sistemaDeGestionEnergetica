@@ -1,37 +1,65 @@
 package server;
 
+import spark.Request;
+import spark.Response;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.HandlebarsTemplateEngineBuilder;
 
 import static spark.Spark.before;
+import static spark.Spark.path;
 
 import server.controller.ControllerAdmin;
 import server.controller.ControllerCliente;
-import server.controller.ControllerLogin;
 
 public class Router {
 
 	public static void configure() {
 		HandlebarsTemplateEngine transformer = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
 		
-		Spark.get("/", ControllerLogin::login, transformer);		
-		Spark.post("/", ControllerLogin::validarLogin);
-		Spark.get("/logout", ControllerLogin::logout);
+		ControllerAdmin controllerAdmin = new ControllerAdmin();
+		ControllerCliente controllerCliente= new ControllerCliente();
 		
-		//TODO el before admite expresiones regulares. pero con "/*" no funco!
-		before("/admin", (req, res) -> {
-			ControllerLogin.siNoEstaLogueadoEchar(req, res);
+		path("admin", () -> {
+			
+			//hay que definirlo en los dos porque controllerLogin no es estatica
+			before("/*", (req, res) -> {
+				if (!req.uri().equals("/admin/login")) {
+					controllerAdmin.siNoEstaLogueadoEchar(req, res);
+				}
+			});
+			
+			Spark.get("/login", controllerAdmin::login);
+			
+			Spark.get("/", ControllerAdmin::adminHome, transformer);
 		});
 		
-		before("/cliente", (req, res) -> {
-			ControllerLogin.siNoEstaLogueadoEchar(req, res);
+		path("cliente", () -> {
+			
+			before("/*", (req, res) -> {
+				if (!req.uri().equals("/cliente/login")) {
+					controllerCliente.siNoEstaLogueadoEchar(req, res);
+				}
+			});
+			
+			Spark.get("/login", controllerCliente::login);
+			
+			Spark.get("/", controllerCliente::clienteHome, transformer);
+			Spark.get("/cliente/optimizarConsumo", ControllerCliente::optimizarUso, transformer);
 		});
 		
-		Spark.get("/admin", ControllerAdmin::adminHome, transformer);
+		Spark.get("/logout", (req, res) -> {
+			return logout(req, res);
+		});
+	}
+	
+	//TODO habria que cambiar un poco los controllers para que pueda haber un logout generico
+	public static String logout(Request req, Response res) {
+		res.removeCookie("idUsuario");
+		res.removeCookie("idAdmin");
 		
-		Spark.get("/cliente", ControllerCliente::clienteHome, transformer);
-		Spark.get("/cliente/optimizarConsumo", ControllerCliente::optimizarUso, transformer);
-		//TODO ver grupo de rutas
+		res.redirect("/cliente/login");
+		
+		return null;
 	}
 }
