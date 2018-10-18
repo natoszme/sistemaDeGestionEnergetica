@@ -1,14 +1,18 @@
 package server.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
 import login.RepoUsuarios;
+import simplex.OptimizadorUsoDispositivos;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import tipoDispositivo.DispositivoEstandar;
+
+import org.apache.commons.math3.util.Pair;
 
 public class ControllerCliente {
 
@@ -21,23 +25,40 @@ public class ControllerCliente {
 		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
-		Cliente cliente = RepoUsuarios.getInstance().dameClienteDe(Long.parseLong(req.cookie("id")));
+		Cliente cliente = obtenerClienteDe(req);
 		
-		// TODO: sacar los dispositivos harcodeados (fijarse que funcione eleven y odd en la home del cliente)		
-		cliente.agregarDispositivo(new Dispositivo("Play 4", new DispositivoEstandar(), 45.987));
-		cliente.agregarDispositivo(new Dispositivo("Play 3", new DispositivoEstandar(), 455.987));
-		cliente.agregarDispositivo(new Dispositivo("Play 2", new DispositivoEstandar(), 87.987));
-		cliente.agregarDispositivo(new Dispositivo("Play 1", new DispositivoEstandar(), 990.987));
-		cliente.agregarDispositivo(new Dispositivo("Play 0", new DispositivoEstandar(), 7.987));
-		cliente.agregarDispositivo(new Dispositivo("Play -1", new DispositivoEstandar(), 45.987));
-		cliente.agregarDispositivo(new Dispositivo("Play -2", new DispositivoEstandar(), 35.987));
+		// TODO: fijarse que funcione eleven y odd en la home del cliente
+		viewModel = obtenerElementosDeCliente(cliente);		
+		
+		return new ModelAndView(viewModel, "cliente/home.hbs");
+	}
+	
+	public static ModelAndView optimizarUso(Request req, Response res) {
+		Cliente cliente = obtenerClienteDe(req);
+		OptimizadorUsoDispositivos optimizador = new OptimizadorUsoDispositivos(cliente);
+		
+		List<Pair<Dispositivo, Double>> horasOptimas = optimizador.optimizarUsoDispositivos();
+		
+		HashMap<String, Object> viewModel = obtenerElementosDeCliente(cliente);
+		
+		viewModel.put("horasOptimas", horasOptimas);
+		
+		return new ModelAndView(viewModel, "cliente/home.hbs");
+	}
+	
+	public static HashMap<String, Object> obtenerElementosDeCliente(Cliente cliente){
+		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		//TODO deberiamos crear un helper para mostrar el consumo actual sin hacer esto ni cambiar consumoActual() por getConsumoActual()
 		viewModel.put("cliente", cliente);
 		viewModel.put("consumoActual", cliente.consumoActual());
 		viewModel.put("tieneDispositivos", cliente.cantidadDispositivos() > 0);
 		
-		return new ModelAndView(viewModel, "cliente/home.hbs");
+		return viewModel;
+	}
+	
+	private static Cliente obtenerClienteDe(Request req) {
+		return RepoUsuarios.getInstance().dameClienteDe(Long.parseLong(req.cookie("id")));
 	}
 
 }
