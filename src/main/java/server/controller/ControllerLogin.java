@@ -25,7 +25,8 @@ public class ControllerLogin {
 		return new ModelAndView(viewModel, "index.hbs");
 	}
 
-	//TODO la pass tiene que llegar aca ya hasheada!
+	//TODO la pass tiene que llegar aca ya hasheada! y username/password no deberian ir por queryparams (como el form va por post, no deberian
+	//obtenerse de algun otra manera?)
 	//que deberia devolver?
 	public static String validarLogin(Request req, Response res) {		
 		String username = req.queryParams("username");
