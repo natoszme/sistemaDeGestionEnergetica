@@ -1,12 +1,23 @@
 package simplex;
 
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+
+import db.DatosBasicos;
 import dispositivo.Dispositivo;
 import dispositivo.gadgets.actuador.Actuador;
 
-public class RestriccionUsoDispositivo {
+@Entity
+public class RestriccionUsoDispositivo extends DatosBasicos{
+	
+	@ManyToOne
 	private Dispositivo dispositivo;
+	
 	double usoMensualMinimo;
 	double usoMensualMaximo;
+	
+	@Enumerated
 	private Actuador actuadorAlExcederse;
 	
 	public RestriccionUsoDispositivo(Dispositivo dispositivo, double usoMensualMinimo, double usoMensualMaximo, Actuador actuadorAlExcederse) {

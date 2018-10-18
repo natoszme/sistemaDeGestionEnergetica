@@ -128,9 +128,4 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  transformadorPalermo = new Transformador(ubicacionPalermo);
 		  transformadorCaballito = new Transformador(ubicacionCaballito);
 	}
-	
-	@After
-	public void after() {
-		RepoCategorias.getInstance().limpiarEntidades();
-	}
 }
