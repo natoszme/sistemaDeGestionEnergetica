@@ -53,7 +53,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fechaAlta;
 	
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	
