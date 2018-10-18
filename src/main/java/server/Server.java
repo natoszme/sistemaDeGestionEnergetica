@@ -1,6 +1,6 @@
 package server;
 
-import login.DatosDePrueba;
+import server.login.DatosDePrueba;
 import spark.Spark;
 import spark.debug.DebugScreen;
 

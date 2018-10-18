@@ -5,7 +5,7 @@ import java.util.List;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
-import login.RepoUsuarios;
+import server.login.RepoUsuarios;
 import simplex.OptimizadorUsoDispositivos;
 import spark.ModelAndView;
 import spark.Request;

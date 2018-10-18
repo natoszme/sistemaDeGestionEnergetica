@@ -1,4 +1,4 @@
-package login;
+package server.login;
 
 import java.util.Optional;
 
