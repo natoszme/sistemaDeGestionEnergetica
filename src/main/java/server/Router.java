@@ -26,11 +26,11 @@ public class Router {
 		
 		//TODO el before admite expresiones regulares. pero con "/*" no funco!
 		before("/admin", (req, res) -> {
-			ControllerLogin.siNoEstaLogueadoEchar(req,  res);
+			ControllerLogin.siNoEstaLogueadoEchar(req, res);
 		});
 		
 		before("/cliente", (req, res) -> {
-			ControllerLogin.siNoEstaLogueadoEchar(req,  res);
+			ControllerLogin.siNoEstaLogueadoEchar(req, res);
 		});
 		
 		Spark.get("/admin", ControllerAdmin::adminHome, transformer);
@@ -38,5 +38,4 @@ public class Router {
 		Spark.get("/cliente", ControllerCliente::clienteHome, transformer);
 		//TODO ver grupo de rutas
 	}
-
 }

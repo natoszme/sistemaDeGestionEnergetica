@@ -18,12 +18,10 @@ public class HandlebarsTemplateEngineBuilder {
 	}
 
 	public static HandlebarsTemplateEngineBuilder create() {
-		return new HandlebarsTemplateEngineBuilder(
-				new HandlebarsTemplateEngine());
+		return new HandlebarsTemplateEngineBuilder(new HandlebarsTemplateEngine());
 	}
 
-	public HandlebarsTemplateEngineBuilder withHelper(String name,
-			Helper<?> helper) {
+	public HandlebarsTemplateEngineBuilder withHelper(String name, Helper<?> helper) {
 		getHandlerbars().registerHelper(name, helper);
 		return this;
 	}
