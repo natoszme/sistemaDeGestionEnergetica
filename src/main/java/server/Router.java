@@ -2,6 +2,8 @@ package server;
 
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
+import spark.utils.HandlebarsTemplateEngineBuilder;
+
 import static spark.Spark.before;
 
 import server.controller.ControllerAdmin;
@@ -11,18 +13,19 @@ import server.controller.ControllerLogin;
 public class Router {
 
 	public static void configure() {
-		HandlebarsTemplateEngine transformer = new HandlebarsTemplateEngine();
+		// HandlebarsTemplateEngine transformer = new HandlebarsTemplateEngine();
+		HandlebarsTemplateEngine transformer = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
 		
 		Spark.get("/", ControllerLogin::login, transformer);		
 		Spark.post("/", ControllerLogin::validarLogin);
 		
 		//TODO el before admite expresiones regulares. pero con "/*" no funco!
 		before("/admin", (req, res) -> {
-			ControllerLogin.siNoEstaLogueadoEchar(req,  res);
+			ControllerLogin.siNoEstaLogueadoEchar(req, res);
 		});
 		
 		before("/cliente", (req, res) -> {
-			ControllerLogin.siNoEstaLogueadoEchar(req,  res);
+			ControllerLogin.siNoEstaLogueadoEchar(req, res);
 		});
 		
 		Spark.get("/admin", ControllerAdmin::adminHome, transformer);
@@ -30,5 +33,4 @@ public class Router {
 		
 		Spark.get("/logout", ControllerLogin::logout);
 	}
-
 }
