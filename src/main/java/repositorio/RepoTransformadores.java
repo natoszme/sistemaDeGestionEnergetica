@@ -25,7 +25,7 @@ public class RepoTransformadores extends RepoEnDB<Transformador> implements With
 	}
 	
 	public RepoTransformadores(String tabla) {
-		this.tabla = tabla;
+		super(tabla);
 	}
 	
 	public List<Cliente> obtenerClientesDe(Transformador transformador){	

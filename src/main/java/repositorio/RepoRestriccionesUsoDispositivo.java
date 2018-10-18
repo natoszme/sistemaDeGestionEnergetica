@@ -6,11 +6,15 @@ import simplex.RestriccionUsoDispositivo;
 
 public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDispositivo> {
 	
+	public RepoRestriccionesUsoDispositivo(String tabla) {
+		super(tabla);
+	}
+
 	private static RepoRestriccionesUsoDispositivo instancia;	
 	
 	public static RepoRestriccionesUsoDispositivo getInstance(){
 		if (instancia == null) {
-			instancia = new RepoRestriccionesUsoDispositivo();
+			instancia = new RepoRestriccionesUsoDispositivo("RestriccionUsoDispositivo");
 		}
 		return instancia;
 	}

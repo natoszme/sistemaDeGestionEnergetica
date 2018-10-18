@@ -8,7 +8,7 @@ public class RepoCategorias extends RepoEnDB<Categoria> {
 	
 	
 	public RepoCategorias(String tabla) {
-		this.tabla = tabla;
+		super(tabla);
 	}
 	
 	public static  RepoCategorias getInstance() {
@@ -28,6 +28,6 @@ public class RepoCategorias extends RepoEnDB<Categoria> {
 		return this.obtenerTodas().stream().filter(categoria -> categoria.getNombre() == "R1").findFirst().orElse(null);
 	}
 	public Categoria obtenerCategoriaPorNombre(String nombre) {
-		return (Categoria) this.obtenerTodas().stream().filter(categoria->categoria.getNombre()==nombre);
+		return (Categoria) this.obtenerTodas().stream().filter(categoria->categoria.getNombre()==nombre).findFirst().orElse(null);
 	}
 }

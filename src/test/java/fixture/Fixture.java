@@ -22,6 +22,7 @@ import dispositivo.gadgets.regla.Regla;
 import dispositivo.gadgets.regla.ReglaEstricta;
 import dispositivo.gadgets.regla.ReglaPermisiva;
 import repositorio.RepoCategorias;
+import repositorio.RepoClientes;
 import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 import transformador.Transformador;

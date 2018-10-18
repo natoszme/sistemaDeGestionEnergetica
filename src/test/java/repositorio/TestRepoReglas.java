@@ -25,7 +25,7 @@ public class TestRepoReglas extends Fixture{
 	
 	@Before
 	public void before() {
-		RepoReglas.getInstance().limpiarEntidades();
+		//RepoReglas.getInstance().limpiarEntidades();
 		
 		RepoReglas.getInstance().agregarEntidad(new ReglaPermisiva(new HashSet<Actuador>(Arrays.asList(Actuador.ActuadorQueApaga)), new HashSet<CondicionSobreSensor>(Arrays.asList(new CondicionDeConsumoMayorOIgual(10, new SensorHorasEncendido(tele40DeNico)))), tele40DeNico));
 	}

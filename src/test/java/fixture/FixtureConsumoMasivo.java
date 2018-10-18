@@ -13,15 +13,15 @@ public class FixtureConsumoMasivo extends Fixture{
 	@After
 	public void after() {
 		//TODO por que sin estas dos rompe?
-		RepoTransformadores.getInstance().limpiarEntidades();
-		RepoClientes.getInstance().limpiarEntidades();
+		//RepoTransformadores.getInstance().limpiarEntidades();
+		//RepoClientes.getInstance().limpiarEntidades();
 	}
 	
 	@Before
 	public void before() {
 		//TODO misma dudam aca abajo:
-		RepoTransformadores.getInstance().limpiarEntidades();
-		RepoClientes.getInstance().limpiarEntidades();
+		//RepoTransformadores.getInstance().limpiarEntidades();
+		//.RepoClientes.getInstance().limpiarEntidades();
 		
 		RepoTransformadores.getInstance().agregarEntidad(transformadorLaMatanza);
 		RepoTransformadores.getInstance().agregarEntidad(transformadorPalermo);

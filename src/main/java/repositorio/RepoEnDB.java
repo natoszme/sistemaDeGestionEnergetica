@@ -12,6 +12,10 @@ public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entid
 	EntityManager em = entityManager();
 	String tabla;
 
+	public RepoEnDB(String tabla) {
+		this.tabla = tabla;
+	}
+
 	public void agregarEntidad(Entidad entidad) {
 		em.persist(entidad);
 	}
@@ -27,14 +31,6 @@ public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entid
 		entidades = (List<Entidad>) em.createQuery("FROM " + tabla).getResultList();
 		  
 		return entidades;
-	}
-	
-	public void limpiarEntidades() {
-		System.out.print(tabla + " por borrarse");
-		em.createQuery("DELETE FROM " + tabla);
-		obtenerTodas().stream().forEach(entidad->em.detach(entidad));
-		System.out.print(tabla + " borrada");
-		
 	}
 }
 

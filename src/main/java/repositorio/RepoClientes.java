@@ -9,7 +9,7 @@ public class RepoClientes extends RepoEnDB<Cliente> {
 	private static RepoClientes instancia;
 	
 	public RepoClientes(String tabla) {
-		this.tabla = tabla;
+		super(tabla);
 	}
 	
 	

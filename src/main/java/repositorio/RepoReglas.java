@@ -17,7 +17,7 @@ public class RepoReglas extends RepoEnDB<Regla>{
 	}
 	
 	public RepoReglas(String tabla) {
-		this.tabla = tabla;
+		super(tabla);
 	}
 	
 	// TODO revisar y discutir todo lo de abajo!!!

@@ -8,6 +8,4 @@ public interface Repo<Entidad> {
 	public void agregarEntidades(List<Entidad> entidades);
 
 	public List<Entidad> obtenerTodas();
-	
-	public void limpiarEntidades() ;
 }
