@@ -32,6 +32,7 @@ public class ControllerCliente {
 		cliente.agregarDispositivo(new Dispositivo("Play -1", new DispositivoEstandar(), 45.987));
 		cliente.agregarDispositivo(new Dispositivo("Play -2", new DispositivoEstandar(), 35.987));
 		
+		//TODO deberiamos crear un helper para mostrar el consumo actual sin hacer esto ni cambiar consumoActual() por getConsumoActual()
 		viewModel.put("cliente", cliente);
 		viewModel.put("consumoActual", cliente.consumoActual());
 		viewModel.put("tieneDispositivos", cliente.cantidadDispositivos() > 0);
