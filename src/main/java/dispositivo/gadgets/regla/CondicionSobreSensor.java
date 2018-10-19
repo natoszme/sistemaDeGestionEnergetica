@@ -1,5 +1,6 @@
 package dispositivo.gadgets.regla;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -16,7 +17,7 @@ import dispositivo.gadgets.sensor.Sensor;
 @DiscriminatorColumn(name = "tipo")
 public abstract class CondicionSobreSensor extends DatosBasicos implements Gadget{
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(cascade = CascadeType.ALL,optional = false)
 	@JoinColumn(name = "idSensor")
 	private Sensor sensor;
 	

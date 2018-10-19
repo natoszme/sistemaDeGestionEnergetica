@@ -3,8 +3,11 @@ package repositorio;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import javax.persistence.EntityManager;
+
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -23,11 +26,20 @@ public class TestRepoReglas extends Fixture{
 	DispositivoConcreto mockTv40DeNico = Mockito.mock(DispositivoConcreto.class);
 	Dispositivo tele40DeNico = DispositivosBaseFactory.getInstance().tvLed40Pulgadas(mockTv40DeNico);
 	
+	
 	@Before
 	public void before() {
 		//RepoReglas.getInstance().limpiarEntidades();
-		
-		RepoReglas.getInstance().agregarEntidad(new ReglaPermisiva(new HashSet<Actuador>(Arrays.asList(Actuador.ActuadorQueApaga)), new HashSet<CondicionSobreSensor>(Arrays.asList(new CondicionDeConsumoMayorOIgual(10, new SensorHorasEncendido(tele40DeNico)))), tele40DeNico));
+		EntityManager em = entityManager();
+		nico.agregarDispositivo(tele40DeNico);
+		em.merge(nico);
+		//em.merge(tele40DeNico);
+		SensorHorasEncendido sensorEncendido = new SensorHorasEncendido(tele40DeNico);
+		//em.merge(sensorEncendido);
+		CondicionDeConsumoMayorOIgual condicionMayora10 = new CondicionDeConsumoMayorOIgual(10, sensorEncendido);
+		//em.merge(condicionMayora10);
+		//System.out.print(em.find(CondicionDeConsumoMayorOIgual.class, condicionMayora10).toString());
+		RepoReglas.getInstance().agregarEntidad(new ReglaPermisiva(new HashSet<Actuador>(Arrays.asList(Actuador.ActuadorQueApaga)), new HashSet<CondicionSobreSensor>(Arrays.asList(condicionMayora10)), tele40DeNico));
 	}
 	
 	@Test

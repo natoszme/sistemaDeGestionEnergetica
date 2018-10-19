@@ -48,7 +48,8 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	public Zona palermo, laMatanza, caballito;
 	
 	public Fixture() {
-		  beginTransaction();
+		  //rollbackTransaction();
+		 // beginTransaction();
 		  r1 = new Categoria("R1", 0, 150, 18.76, 0.644);			
 		  r2 = new Categoria("R2", 150, 325, 35.32, 0.644);			
 		  r3 = new Categoria("R3", 326, 400, 60.71, 0.681);			

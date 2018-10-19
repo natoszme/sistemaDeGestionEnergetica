@@ -25,12 +25,12 @@ import dispositivo.gadgets.actuador.Actuador;
 @DiscriminatorColumn(name = "tipo")
 public abstract class Regla extends DatosBasicos{
 	
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false,cascade = CascadeType.ALL)
 	@JoinColumn(name = "idDispositivo")
 	protected Dispositivo dispositivo;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "idRegla", nullable = false)
+	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@JoinColumn(name = "idRegla", nullable = true)
 	protected Set<CondicionSobreSensor> condiciones = new HashSet<>();
 	
 	@ElementCollection
