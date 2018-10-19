@@ -8,7 +8,6 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entidad>,  WithGlobalEntityManager{
-	//protected List<Entidad> entidades = new ArrayList<>();
 	EntityManager em = entityManager();
 	String tabla;
 
@@ -17,9 +16,7 @@ public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entid
 	}
 
 	public void agregarEntidad(Entidad entidad) {
-		beginTransaction();
 		em.persist(entidad);
-		//em.flush();
 	}
 
 	public void agregarEntidades(List<Entidad> entidades) {
