@@ -25,7 +25,7 @@ import dispositivo.gadgets.actuador.Actuador;
 @DiscriminatorColumn(name = "tipo")
 public abstract class Regla extends DatosBasicos{
 	
-	@ManyToOne(fetch = FetchType.EAGER, optional = false,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "idDispositivo")
 	protected Dispositivo dispositivo;
 	
