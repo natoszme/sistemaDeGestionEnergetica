@@ -2,7 +2,6 @@ package importador;
 
 import java.util.List;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 import org.junit.Assert;
@@ -25,17 +24,17 @@ public class TestImportadorCliente {
 	}
 
 	@Test
-	public void laCantidadDeClienteCargadosEs3() throws IOException {
+	public void laCantidadDeClienteCargadosEs3() {
 		Assert.assertEquals(3, clientes.size());
 	}
 
 	@Test
-	public void elPrimerUsuarioEsLio() throws IOException {
+	public void elPrimerUsuarioEsLio() {
 		Assert.assertEquals("lio", clientes.get(0).getNombre());
 	}
 
 	@Test
-	public void elApellidoDeLioEsMessi() throws IOException {
+	public void elApellidoDeLioEsMessi() {
 		Assert.assertEquals("messi", clientes.get(0).getApellido());
 	}
 
