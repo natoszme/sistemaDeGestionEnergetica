@@ -22,22 +22,16 @@ import fixture.Fixture;
 
 public class TestRepoReglas extends Fixture{
 	
-	DispositivoConcreto mockTv40DeNico = Mockito.mock(DispositivoConcreto.class);
-	Dispositivo tele40DeNico = DispositivosBaseFactory.getInstance().tvLed40Pulgadas(mockTv40DeNico);
+	Dispositivo tele40DeNico = DispositivosBaseFactory.getInstance().tvLed40Pulgadas(DispositivoConcreto.TVINTELIGENTE);
 	
 	
 	@Before
 	public void before() {
-		//RepoReglas.getInstance().limpiarEntidades();
 		EntityManager em = entityManager();
 		nico.agregarDispositivo(tele40DeNico);
-		em.merge(nico);
-		//em.merge(tele40DeNico);
+		em.persist(nico);
 		SensorHorasEncendido sensorEncendido = new SensorHorasEncendido(tele40DeNico);
-		//em.merge(sensorEncendido);
 		CondicionDeConsumoMayorOIgual condicionMayora10 = new CondicionDeConsumoMayorOIgual(10, sensorEncendido);
-		//em.merge(condicionMayora10);
-		//System.out.print(em.find(CondicionDeConsumoMayorOIgual.class, condicionMayora10).toString());
 		RepoReglas.getInstance().agregarEntidad(new ReglaPermisiva(new HashSet<Actuador>(Arrays.asList(Actuador.ActuadorQueApaga)), new HashSet<CondicionSobreSensor>(Arrays.asList(condicionMayora10)), tele40DeNico));
 	}
 	
