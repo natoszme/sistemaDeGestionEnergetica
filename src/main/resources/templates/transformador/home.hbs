@@ -7,7 +7,7 @@
 {{/partial}}
 
 {{#partial "contenido"}}		
-	<h2><strong>Ubicación de los trasformadores</strong></h2>
+	<h2 class="mt-5">Ubicación de los trasformadores</h2>
 	<hr>	
 
 	<div id="mapa" style="height: 500px"></div>
@@ -16,20 +16,27 @@
 
 {{#partial "scripts"}}		
 	<script type="text/javascript">
+		var transformadores = {{ transformadores }};
+
 		$( document ).ready(function() {
 			mapa = L.map('mapa', {
-		    center: [-34.598313, -58.463745],
-		    zoom: 11.2,  
-		    minZoom: 4,
-		    maxZoom:17,
-		    zoomControl:true 
+			    center: [-34.598313, -58.463745],
+			    zoom: 11.2,  
+			    minZoom: 4,
+			    maxZoom:17,
+			    zoomControl:true 
 			});
-			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		    attribution: ''}).addTo(mapa);
-			var marker = L.marker([-34.578422, -58.425744]).addTo(mapa).bindPopup("Transformador de Palermo<br/> consumo:2344443");
-			
-			var marker2 = L.marker([-34.619188, -58.443747]).addTo(mapa).bindPopup("Transformador de Caballito<br/> consumo:2788489");
 
+			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: ''}).addTo(mapa);
+
+			transformadores.forEach(function(Transformador) {
+				console.log(transformador);
+				L.marker([-34.578422, -58.425744]).addTo(mapa).bindPopup(transformador.nombre + "<br/> Consumo: <b>" + transformador.consumo + "</b>")
+			});
+
+
+			var marker = L.marker([-34.578422, -58.425744]).addTo(mapa).bindPopup("Transformador de Palermo<br/> consumo:2344443");			
+			var marker2 = L.marker([-34.619188, -58.443747]).addTo(mapa).bindPopup("Transformador de Caballito<br/> consumo:2788489");
 			var marker3 = L.marker([-34.58712, -58.39754]).addTo(mapa).bindPopup("Transformador de Recoleta<br/> consumo:999879");
 			
 			var polygon = L.polygon([
@@ -52,6 +59,7 @@
 			    alert("Latitud y Longitud: " + e.latlng);
 			}*/
 		});
+		
 		function onClick(e){
 			var r = confirm("Ir a medrano?");
 			if (r == true) {

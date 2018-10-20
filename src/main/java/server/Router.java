@@ -12,11 +12,13 @@ import static spark.Spark.staticFiles;
 
 import server.controller.ControllerAdmin;
 import server.controller.ControllerCliente;
+import server.controller.ControllerTransformador;
 
 public class Router {
 
 	private static ControllerAdmin controllerAdmin = new ControllerAdmin();
 	private static ControllerCliente controllerCliente= new ControllerCliente();
+	private static ControllerTransformador controllerTransformador = new ControllerTransformador();
 	
 	public static void configure() {
 		HandlebarsTemplateEngine transformer = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
@@ -55,6 +57,8 @@ public class Router {
 			Spark.get("/mediciones", controllerCliente::obtenerMediciones, transformer);
 			
 		});
+		
+		Spark.get("/transformadores", controllerTransformador::home, transformer);
 		
 		Spark.get("/logout", (req, res) -> {
 			return logout(req, res);
