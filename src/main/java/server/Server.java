@@ -8,8 +8,8 @@ public class Server {
 	public static void main(String[] args) {
 		new DatosDePrueba().init();
 		Spark.port(9000);
-		Spark.init();
-		Router.configure();
 		DebugScreen.enableDebugScreen();
+		Router.configure();
+		Spark.init();
 	}
 }

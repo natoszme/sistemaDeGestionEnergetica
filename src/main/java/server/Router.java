@@ -8,6 +8,7 @@ import spark.utils.HandlebarsTemplateEngineBuilder;
 
 import static spark.Spark.before;
 import static spark.Spark.path;
+import static spark.Spark.staticFiles;
 
 import server.controller.ControllerAdmin;
 import server.controller.ControllerCliente;
@@ -19,6 +20,8 @@ public class Router {
 	
 	public static void configure() {
 		HandlebarsTemplateEngine transformer = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
+
+		staticFiles.location("/public");
 		
 		path("/admin", () -> {
 			
