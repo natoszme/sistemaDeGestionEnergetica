@@ -67,17 +67,18 @@
 								<h5 class="card-title">Regla 1 - <small class="text-danger">Estricta</small></h5>
 							</div>
 						  	<div class="card-body">						   
-							    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: Smart TV</h6>
+							    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: dispositivo.nombre</h6>
 							    <h6 class="card-subtitle mb-2 text-muted">Condiciones</h6>
 							    <ul>
-							    	<li>Condicion 1</li>
-							    	<li>Condicion 2</li>
-							    	<li>Condicion 3</li>
+							    	{{#each condiciones}}
+								    	<li>Condicion 1</li>
+							    	{{/each}}
 							    </ul>
 							     <h6 class="card-subtitle mb-2 text-muted">Actuadores</h6>
 							    <ul>
-									<li>Actuador que llama a servicio tecnico</li>
-							    	<li>Actuador que apaga</li>									
+							    	{{#each actuadores}}
+										<li>Actuador que llama a servicio tecnico</li>
+						    		{{/each}}									
 							    </ul>
 							 </div>
 						</div>
