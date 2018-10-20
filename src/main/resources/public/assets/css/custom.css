@@ -1,93 +1,49 @@
-* {
-    font-family: 'Montserrat', sans-serif;
-}
-a:hover {
-	text-decoration: none;
-}
+html,
 body {
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+  height: 100%;
 }
-/***LOG IN***/
-	.inner-bottom-md {
-	    padding-bottom: 100px;
-	}
-	.flex-center {
-	    display: flex;
-	    justify-content: center;
-	    margin-top: 25px;
-	}
-	.login-card {
-	    border: 1px solid #999;
-	    border-radius: 5px;
-	    padding: 15px;
-	    margin-top: 15px;
-	}
-	.login-card .field-row {
-	    margin-bottom: 10px;
-	}
-	.field-row label {
-	    display: block;
-	    font-weight: 700;
-	    font-size: 14px;
-	    color: #3d3d3d;
-	}
-	.field-row input {
-    	width: 100%;
-	}
-	.le-input {
-	    border-radius: 3px;
-	    background-color: #ececec;
-	    border: none;
-	    color: #3d3d3d;
-	    padding: 5px;
-	    transition: all 0.3s ease;
-	}
-	.buttons-holder {
-		margin:20px 0;
-	}
-	.login-card .login-button, .login-card .register-button {
-    	width: 100%;
-	}
-	.le-button {
-	    font-size: 14px;
-	    text-transform: uppercase;
-	    font-weight: normal;
-		background-color: black;
-	    padding: 10px 20px;
-	    display: inline-block;
-	    line-height: 16px;
-	    border: none;
-	    color: #fff;
-	    transition: all 0.3s ease;
-	    cursor: pointer;
-	}
-	.login-card .bottom-section {
-	    padding: 10px 0;
-	    border-top: 1px solid #999;
-	}
-	.login-card .title {
-	    color: #333;
-	    margin-bottom: 20px;
-        font-size: 22px;
-	}
-	.login-card .bottom-section .register-button {
-	    display: block;
-	    text-align: center;
-	    width: 100%;
-	}
-	.login-card .bottom-section .register-button:hover, .login-card .login-button:hover  {
-		background:#585858;
-		color:white;
-		transition: all 0.3s ease;
-	}
-	@media (max-width: 767px){
-	
-		.inner-bottom-md {
-		    padding-bottom: 65px;
-		}
 
-	}
-		
-/***LOG IN***/
+body {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
