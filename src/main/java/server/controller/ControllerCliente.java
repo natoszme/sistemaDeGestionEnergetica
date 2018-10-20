@@ -6,38 +6,39 @@ import java.util.List;
 import cliente.Cliente;
 import dispositivo.Dispositivo;
 import repositorio.RepoClientes;
+import repositorio.RepoConsumoEnFecha;
 import server.login.Autenticable;
 import simplex.OptimizadorUsoDispositivos;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import tipoDispositivo.ConsumoEnFecha;
 
 import org.apache.commons.math3.util.Pair;
 
-public class ControllerCliente extends ControllerLogin{
+public class ControllerCliente extends ControllerLogin {
 
+	List<Pair<Dispositivo, Double>> horasOptimas;
+	List<ConsumoEnFecha> mediciones;
+	
 	public ModelAndView home(Request req, Response res) {
 		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		Cliente cliente = obtenerClienteDe(req);
 		
-		viewModel = obtenerElementosDeCliente(cliente);		
+		viewModel = obtenerElementosDeCliente(cliente);
 		
 		return new ModelAndView(viewModel, "cliente/home.hbs");
 	}
 	
 	public ModelAndView optimizarUso(Request req, Response res) {
 		Cliente cliente = obtenerClienteDe(req);
-		OptimizadorUsoDispositivos optimizador = new OptimizadorUsoDispositivos(cliente);
 		
-		List<Pair<Dispositivo, Double>> horasOptimas = optimizador.optimizarUsoDispositivos();
+		OptimizadorUsoDispositivos optimizador = new OptimizadorUsoDispositivos(cliente);		
+		horasOptimas = optimizador.optimizarUsoDispositivos();
 		
-		HashMap<String, Object> viewModel = obtenerElementosDeCliente(cliente);
-		
-		viewModel.put("horasOptimas", horasOptimas);
-		
-		return new ModelAndView(viewModel, "cliente/home.hbs");
+		return this.home(req, res);
 	}
 	
 	public HashMap<String, Object> obtenerElementosDeCliente(Cliente cliente){
@@ -47,6 +48,9 @@ public class ControllerCliente extends ControllerLogin{
 		viewModel.put("cliente", cliente);
 		viewModel.put("consumoActual", cliente.consumoActual());
 		viewModel.put("tieneDispositivos", cliente.cantidadDispositivos() > 0);
+		viewModel.put("tieneReglas", cliente.getReglas().size() > 0);		
+		viewModel.put("horasOptimas", horasOptimas);
+		viewModel.put("mediciones", mediciones);
 		
 		return viewModel;
 	}
@@ -68,4 +72,10 @@ public class ControllerCliente extends ControllerLogin{
 		return RepoClientes.getInstance().dameCliente(Long.parseLong(req.cookie(nombreCookieId())));
 	}
 	
+	public ModelAndView obtenerMediciones(Request req, Response res) {
+		Cliente cliente = obtenerClienteDe(req);
+		mediciones = RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, req.queryParams("desde"), req.queryParams("hasta"));		
+		
+		return this.home(req, res);
+	}	
 }

@@ -6,20 +6,29 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 
 @Embeddable
+@FilterDef(
+	name = "filtroDeFecha", 
+	parameters = { @ParamDef(name = "desde", type = "datetime"), @ParamDef(name = "hasta", type = "datetime") }
+)
 public class ConsumoEnFecha {
 	
 	@Column(nullable = false)
 	@Convert(converter = LocalDateTimeConverter.class)
+    @Filter(name = "filtroDeFecha", condition = "fecha BETWEEN :desde AND :hasta")
 	private LocalDateTime fecha;
 	
 	@Column(nullable = false)
 	private Double consumo;
 	
-	public ConsumoEnFecha(LocalDateTime fecha,Double consumo) {
+	public ConsumoEnFecha(LocalDateTime fecha, Double consumo) {
 		this.fecha = fecha;
 		this.consumo = consumo;
 	}

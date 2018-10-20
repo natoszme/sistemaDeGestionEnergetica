@@ -50,7 +50,9 @@ public class Router {
 			Spark.post("/login", controllerCliente::validarLogin);
 			
 			Spark.get("/home", controllerCliente::home, transformer);
-			Spark.get("/cliente/optimizarConsumo", controllerCliente::optimizarUso, transformer);
+			Spark.get("/optimizarConsumo", controllerCliente::optimizarUso, transformer);
+			
+			Spark.get("/mediciones", controllerCliente::obtenerMediciones, transformer);
 			
 		});
 		

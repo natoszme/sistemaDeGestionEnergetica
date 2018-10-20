@@ -26,7 +26,7 @@ import dispositivo.DispositivoConcreto;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-public abstract class TipoDispositivo extends DatosBasicos{
+public abstract class TipoDispositivo extends DatosBasicos {
 	
 	public abstract double puntosPorRegistrar();
 	public abstract boolean esInteligente();

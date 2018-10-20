@@ -155,8 +155,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 		}
 	}
 	
-	public double consumoRealizadoEntre(LocalDateTime fechaInicial,LocalDateTime fechaFinal) {
-		
+	public double consumoRealizadoEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {		
 		return dispositivos.stream().mapToDouble(dispositivo -> dispositivo.consumoEntre(fechaInicial, fechaFinal)).sum();
 	}
 	
