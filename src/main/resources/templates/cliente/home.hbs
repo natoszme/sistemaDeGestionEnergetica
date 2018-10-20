@@ -43,7 +43,7 @@
 	      </div>
 	      <div class="tab-pane fade" id="dispositivos" role="tabpanel" aria-labelledby="dispositivos-tab">
       		{{#each cliente.dispositivos}}
-	      		{{ isEven @index '<div class="row mb-2">' }}
+	      		{{{ isEven @index '<div class="row mb-2">' }}}
 		      		<div class="col">
 				      	<div class="card">
 						  <div class="card-body">
@@ -52,7 +52,7 @@
 						  </div>
 						</div>
 		      		</div>
-	      		{{ isOdd @index '</div>' }}
+	      		{{{ isOdd @index '</div>' }}}
 			{{/each}}
 	      </div>
 	      
