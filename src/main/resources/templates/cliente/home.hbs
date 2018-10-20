@@ -53,6 +53,9 @@
 						</div>
 		      		</div>
 	      		{{{ isOdd @index '</div>' }}}
+	      		{{#if @last}}
+				{{{ isEven @index '</div>' }}}
+				{{/if}}
 			{{/each}}
 	      </div>
 	      
