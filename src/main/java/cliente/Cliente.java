@@ -3,7 +3,9 @@ package cliente;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,6 +29,7 @@ import converter.PointConverter;
 import db.DatosBasicos;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
+import dispositivo.gadgets.regla.Regla;
 import repositorio.RepoCategorias;
 import server.login.Autenticable;
 
@@ -227,5 +230,9 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 
 	public long id() {
 		return id;
+	}
+	
+	public List<Regla> getReglas() {
+		return (List<Regla>) this.getDispositivos().stream().map(dispositivo -> dispositivo.getReglas()).flatMap(Collection::stream).collect(Collectors.toList());
 	}
 }

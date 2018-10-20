@@ -22,7 +22,6 @@ public class ControllerCliente extends ControllerLogin{
 		
 		Cliente cliente = obtenerClienteDe(req);
 		
-		// TODO: fijarse que funcione eleven y odd en la home del cliente
 		viewModel = obtenerElementosDeCliente(cliente);		
 		
 		return new ModelAndView(viewModel, "cliente/home.hbs");

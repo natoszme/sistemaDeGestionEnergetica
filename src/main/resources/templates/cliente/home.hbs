@@ -60,46 +60,32 @@
 	      </div>
 	      
 	      <div class="tab-pane fade" id="reglas" role="tabpanel" aria-labelledby="reglas-tab">
-	      	<div class="row mb-2">
-	      		<div class="col">			      		
-			      	<div class="card">
-			      		<div class="card-header">
-							<h5 class="card-title">Regla 1 - <small class="text-danger">Estricta</small></h5>
+		      {{#each cliente.reglas}}
+		      		{{{ isEven @index '<div class="row mb-2">' }}}
+			      		<div class="card">
+				      		<div class="card-header">
+								<h5 class="card-title">Regla 1 - <small class="text-danger">Estricta</small></h5>
+							</div>
+						  	<div class="card-body">						   
+							    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: Smart TV</h6>
+							    <h6 class="card-subtitle mb-2 text-muted">Condiciones</h6>
+							    <ul>
+							    	<li>Condicion 1</li>
+							    	<li>Condicion 2</li>
+							    	<li>Condicion 3</li>
+							    </ul>
+							     <h6 class="card-subtitle mb-2 text-muted">Actuadores</h6>
+							    <ul>
+									<li>Actuador que llama a servicio tecnico</li>
+							    	<li>Actuador que apaga</li>									
+							    </ul>
+							 </div>
 						</div>
-					  	<div class="card-body">						   
-						    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: Smart TV</h6>
-						    <h6 class="card-subtitle mb-2 text-muted">Condiciones</h6>
-						    <ul>
-						    	<li>Condicion 1</li>
-						    	<li>Condicion 2</li>
-						    	<li>Condicion 3</li>
-						    </ul>
-						     <h6 class="card-subtitle mb-2 text-muted">Actuadores</h6>
-						    <ul>
-								<li>Actuador que llama a servicio tecnico</li>
-						    	<li>Actuador que apaga</li>									
-						    </ul>
-						 </div>
-					</div>
-	      		</div>
-	      		<div class="col">			      		
-			      	<div class="card">
-		      			<div class="card-header">
-							<h5 class="card-title">Regla 2 - <small class="text-success">Permisiva</small></h5>
-						</div>
-					    <div class="card-body">
-						    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: xx</h6>
-					     	<h6 class="card-subtitle mb-2 text-muted">Condiciones</h6>
-					    	<ul>
-					    		<li>Consumo mayor o igual a 20</li>
-					    	</ul>
-					     	<h6 class="card-subtitle mb-2 text-muted">Actuadores</h6>
-					    	<ul>						
-					    		<li>Actuador que prende</li>									
-					    	</ul>
-					    </div>
-					</div>
-	      		</div>
+		      		{{{ isOdd @index '</div>' }}}
+		      		{{#if @last}}
+					{{{ isEven @index '</div>' }}}
+					{{/if}}
+				{{/each}}
       		</div>	   
 	      </div>
 	    </div>

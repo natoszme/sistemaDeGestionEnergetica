@@ -37,7 +37,7 @@ public class DatosDePrueba extends AbstractPersistenceTest implements WithGlobal
 			unCliente.agregarDispositivo(new Dispositivo("Play 1", new DispositivoEstandar(), 990.987));
 			unCliente.agregarDispositivo(new Dispositivo("Play 0", new DispositivoEstandar(), 7.987));
 			unCliente.agregarDispositivo(new Dispositivo("Play -1", new DispositivoEstandar(), 45.987));
-			unCliente.agregarDispositivo(new Dispositivo("Play -2", new DispositivoEstandar(), 35.987));	
+			unCliente.agregarDispositivo(new Dispositivo("Play -2", new DispositivoEstandar(), 35.987));
 			
 			em.persist(unCliente);
 		});
