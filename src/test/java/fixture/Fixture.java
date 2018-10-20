@@ -103,12 +103,12 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  laMatanza = new Zona(ubicacionLaMatanza, 5);
 		  caballito = new Zona (ubicacionCaballito, 5);
 		
-		  alejandro = new Cliente("Alejandro", "Saez", TipoDocumento.DNI, 3876675, 43543245, "Macos Sastre 324", r1, dispositivos, ubicacionLaMatanza);
-		  nico = new Cliente("nico", "otamendi", TipoDocumento.DNI, 35102594, 42012594, "Av. Siempre Viva 20", r1, new ArrayList<Dispositivo>(), ubicacionPalermo);
-		  pepe = new Cliente("pepe", "argento", TipoDocumento.CI, 12549785, 40000001, "Manuel Rodriguez 1251", r1, new ArrayList<Dispositivo>(), ubicacionLaPlata);
-		  lio = new Cliente("lio", "messi", TipoDocumento.DNI, 40216458, 10101010, "Av. Catalunia 10", r2, new ArrayList<Dispositivo>(), ubicacionCaballito);
-		  ricardo = new Cliente("ricardo", "ruben", TipoDocumento.DNI, 45178257, 41013591, "Av. Lugones 1001", r2, new ArrayList<Dispositivo>(), ubicacionPalermo);
-		  yanina = new Cliente("yanina","latorre", TipoDocumento.DNI, 7865432,46498374, "Av. Constituyentes 2012",r1 , new ArrayList<Dispositivo>(), ubicacionCaballito);
+		  alejandro = new Cliente(null, null, "Alejandro", "Saez", TipoDocumento.DNI, 3876675, 43543245, "Macos Sastre 324", r1, dispositivos, ubicacionLaMatanza);
+		  nico = new Cliente(null, null, "nico", "otamendi", TipoDocumento.DNI, 35102594, 42012594, "Av. Siempre Viva 20", r1, new ArrayList<Dispositivo>(), ubicacionPalermo);
+		  pepe = new Cliente(null, null, "pepe", "argento", TipoDocumento.CI, 12549785, 40000001, "Manuel Rodriguez 1251", r1, new ArrayList<Dispositivo>(), ubicacionLaPlata);
+		  lio = new Cliente(null, null, "lio", "messi", TipoDocumento.DNI, 40216458, 10101010, "Av. Catalunia 10", r2, new ArrayList<Dispositivo>(), ubicacionCaballito);
+		  ricardo = new Cliente(null, null, "ricardo", "ruben", TipoDocumento.DNI, 45178257, 41013591, "Av. Lugones 1001", r2, new ArrayList<Dispositivo>(), ubicacionPalermo);
+		  yanina = new Cliente(null, null, "yanina","latorre", TipoDocumento.DNI, 7865432,46498374, "Av. Constituyentes 2012",r1 , new ArrayList<Dispositivo>(), ubicacionCaballito);
 		  
 		  
 		  

@@ -28,10 +28,14 @@ import db.DatosBasicos;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
 import repositorio.RepoCategorias;
+import server.login.Autenticable;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"tipoDocumento", "nroDocumento"}))
-public class Cliente extends DatosBasicos implements ConsumidorMasivo {
+public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autenticable {
+	
+	private String username;
+	private String password;
 	
 	@Column(nullable = false)
 	private String nombre;
@@ -70,9 +74,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	@Column(nullable = false)
 	private Point ubicacion;
 	
-	public Cliente() {}
-	
-	public Cliente(String nombre, String apellido, TipoDocumento tipoDocumento, long nroDocumento, long telefono, String domicilio, Categoria categoria, List<Dispositivo> dispositivos, Point ubicacion) {
+	public Cliente(String username, String password, String nombre, String apellido, TipoDocumento tipoDocumento, long nroDocumento, long telefono, String domicilio, Categoria categoria, List<Dispositivo> dispositivos, Point ubicacion) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipoDocumento = tipoDocumento;
@@ -83,7 +85,11 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 		this.dispositivos = dispositivos;
 		this.fechaAlta = LocalDate.now();
 		this.ubicacion = ubicacion;
+		this.username = username;
+		this.password = password;
 	}
+	
+	public Cliente() {}
 	
 	public boolean algunInteligenteEncendido() {
 		return this.cantidadInteligentesEncendidos() > 0;
@@ -217,5 +223,9 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 
 	public void limpiarDispositivos() {
 		dispositivos.clear();		
+	}
+
+	public long id() {
+		return id;
 	}
 }

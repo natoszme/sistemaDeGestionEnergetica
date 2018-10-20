@@ -27,4 +27,10 @@ public class RepoCategorias extends RepoEnDB<Categoria> {
 	private Categoria dameR1() {
 		return this.obtenerTodas().stream().filter(categoria -> categoria.getNombre() == "R1").findFirst().orElse(null);
 	}
+
+	@Override
+	public void limpiarEntidades() {
+		// TODO Auto-generated method stub
+		
+	}
 }

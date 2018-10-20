@@ -1,13 +1,10 @@
 package server.controller;
 
 import java.util.HashMap;
-import java.util.Optional;
-
-import server.login.RepoUsuarios;
+import server.login.Autenticable;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import usuario.Usuario;
 
 public abstract class ControllerLogin {
 	
@@ -19,12 +16,14 @@ public abstract class ControllerLogin {
 		}
 		
 		HashMap<String, Object> viewModel = new HashMap<>();
-		viewModel.put("username", req.queryParams("username"));
+		viewModel.put("username", req.cookie("username"));
+		viewModel.put("home", home());
+		
 		return new ModelAndView(viewModel, "login.hbs");
 	}
 
 	protected void redirigirAHome(Response res) {
-		res.redirect("/" + home());
+		res.redirect("/" + home() + "/home");
 	}
 	
 	protected abstract String home();
@@ -34,27 +33,29 @@ public abstract class ControllerLogin {
 		String username = req.queryParams("username");
 		String password = req.queryParams("password");
 		
-		Optional<Usuario> usuario = RepoUsuarios.getInstance().dameUsuario(username, password);
+		Autenticable aut = obtenerAutenticable(username, password);
 		
-		if(!usuario.isPresent()) {
-			res.redirect("/" + home() + "/login/?username=" + username);
+		if(aut == null) {
+			res.cookie("username", username);
+			res.redirect("/" + home() + "/login");
 			return null;
 		}
 		
-		res = setearCookies(res, usuario.get().id);
+		res.removeCookie("username");
+		res = setearCookies(res, aut.id());
 		
 		redirigirAHome(res);		
 		return null;
 	}
-	
-	protected abstract Usuario autenticar(String username, String password);
+
+	protected abstract Autenticable obtenerAutenticable(String username, String password);
 
 	protected Response setearCookies(Response res, long id) {
 		res.cookie(nombreCookieId(), String.valueOf(id));
 		return res;
 	}
 
-	protected abstract String nombreCookieId();
+	public abstract String nombreCookieId();
 
 	public void siNoEstaLogueadoEchar(Request req, Response res) {
 		if(!estaLogueado(req)) {

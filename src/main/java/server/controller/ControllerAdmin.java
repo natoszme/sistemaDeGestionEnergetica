@@ -1,21 +1,16 @@
 package server.controller;
 
 import java.util.HashMap;
-import java.util.Optional;
 
+import server.login.Autenticable;
+import server.login.RepoAdmins;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import usuario.Usuario;
 
 public class ControllerAdmin extends ControllerLogin{
 
-	public static ModelAndView adminHome(Request req, Response res) {
-		
-		if(!estaLogueado()) {
-			res.redirect("/cliente");
-			return null;
-		}
+	public ModelAndView home(Request req, Response res) {
 		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
@@ -28,22 +23,11 @@ public class ControllerAdmin extends ControllerLogin{
 		return "admin";
 	}
 
-	@Override
-	protected Usuario autenticar(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public String nombreCookieId() {
+		return "idAdmin";
 	}
-
-	@Override
-	protected String nombreCookieId() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	protected Autenticable obtenerAutenticable(String username, String password) {
+		return RepoAdmins.getInstance().dameAutenticable(username, password);
 	}
-
-	@Override
-	public boolean estaLogueado(Request req) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

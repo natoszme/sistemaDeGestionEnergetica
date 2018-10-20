@@ -25,7 +25,7 @@
     	<class>transformador.Transformador</class>	
     	<class>zona.Zona</class>
     	<class>tipoDispositivo.ConsumoEnFecha</class>
-    	<class>usuario.Usuario</class>
+    	<class>server.login.Admin</class>
     	
         <properties> 
 	    	<property name="hibernate.archive.autodetection" value="class"/>

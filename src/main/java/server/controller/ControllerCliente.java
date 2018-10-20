@@ -2,27 +2,21 @@ package server.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
-import server.login.RepoUsuarios;
+import repositorio.RepoClientes;
+import server.login.Autenticable;
 import simplex.OptimizadorUsoDispositivos;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import usuario.Usuario;
 
 import org.apache.commons.math3.util.Pair;
 
 public class ControllerCliente extends ControllerLogin{
 
-	public ModelAndView clienteHome(Request req, Response res) {		
-		
-		if(!estaLogueado(req)) {
-			res.redirect("/admin");
-			return null;
-		}
+	public ModelAndView home(Request req, Response res) {
 		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
@@ -34,7 +28,7 @@ public class ControllerCliente extends ControllerLogin{
 		return new ModelAndView(viewModel, "cliente/home.hbs");
 	}
 	
-	public static ModelAndView optimizarUso(Request req, Response res) {
+	public ModelAndView optimizarUso(Request req, Response res) {
 		Cliente cliente = obtenerClienteDe(req);
 		OptimizadorUsoDispositivos optimizador = new OptimizadorUsoDispositivos(cliente);
 		
@@ -47,7 +41,7 @@ public class ControllerCliente extends ControllerLogin{
 		return new ModelAndView(viewModel, "cliente/home.hbs");
 	}
 	
-	public static HashMap<String, Object> obtenerElementosDeCliente(Cliente cliente){
+	public HashMap<String, Object> obtenerElementosDeCliente(Cliente cliente){
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		//TODO deberiamos crear un helper para mostrar el consumo actual sin hacer esto ni cambiar consumoActual() por getConsumoActual()
@@ -57,18 +51,22 @@ public class ControllerCliente extends ControllerLogin{
 		
 		return viewModel;
 	}
-	
-	private static Cliente obtenerClienteDe(Request req) {
-		return RepoUsuarios.getInstance().dameClienteDe(Long.parseLong(req.cookie("id")));
-	}
 
 	@Override
 	protected String home() {
 		return "cliente";
 	}
 
-	protected String nombreCookieId() {
+	public String nombreCookieId() {
 		return "idCliente";
 	}
 
+	protected Autenticable obtenerAutenticable(String username, String password) {
+		return RepoClientes.getInstance().dameAutenticable(username, password);
+	}
+	
+	private Cliente obtenerClienteDe(Request req) {
+		return RepoClientes.getInstance().dameCliente(Long.parseLong(req.cookie(nombreCookieId())));
+	}
+	
 }
