@@ -31,10 +31,10 @@ import zona.Zona;
 public class Fixture extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps {
 	
 	protected Categoria r1, r2, r3, r4, r5, r6, r7, r8, r9;
-	protected Dispositivo candelabro, televisor, microondas, equipoMusica, dvd, play4, televisorSmart, pc, aireAcondicionado;
+	protected Dispositivo candelabro, televisor, microondas, equipoMusica, dvd, play4, televisorSmart, tvNormal, pc, aireAcondicionado;
 	protected List<Dispositivo> dispositivos = new ArrayList<>();
 	protected Cliente alejandro, lio, pepe, nico, ricardo, yanina;
-	protected DispositivoConcreto mockPcConcreta, mockAireConcreto, mockTelevisorSmartConcreto, mockCandelabroConcreto, mockLampara, mockLavarropas, mockMicroondas, mockPlancha, mockVentilador,mockTv40;
+	protected DispositivoConcreto mockPcConcreta, mockAireConcreto, mockTelevisorSmartConcreto, mockTelevisorNormalConcreto, mockCandelabroConcreto, mockLampara, mockLavarropas, mockMicroondas, mockPlancha, mockVentilador,mockTv40;
 	protected Regla unaReglaEstricta, unaReglaPermisiva;
 	protected Actuador actuadorQueApaga, actuadorQueEnciende;
 	protected CondicionSobreSensor mockCondicionSobreSensorQueCumple, mockCondicionSobreSensorQueNoCumple;
@@ -63,7 +63,8 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  mockPcConcreta = Mockito.mock(DispositivoConcreto.class);
 		  mockAireConcreto = Mockito.mock(DispositivoConcreto.class);
 		  mockTelevisorSmartConcreto = Mockito.mock(DispositivoConcreto.class);
-
+		  mockTelevisorNormalConcreto = Mockito.mock(DispositivoConcreto.class);
+		  
 		  mockCandelabroConcreto = Mockito.mock(DispositivoConcreto.class);
 		  
 		  mockLampara = Mockito.mock(DispositivoConcreto.class);
@@ -83,7 +84,7 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  pc = new Dispositivo("PC", new DispositivoInteligente(mockPcConcreta), 100);
 		  aireAcondicionado = new Dispositivo("Aire acondicionado", new DispositivoInteligente(mockAireConcreto), 120);
 		  televisorSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(mockTelevisorSmartConcreto), 90);
-		
+		  tvNormal = new Dispositivo("Televisor Normal", new DispositivoInteligente(mockTelevisorNormalConcreto), 0.9);
 		  
 		  //TODO revisar si se puede sacar esto, ya esta arriba!
 		  dispositivos = new ArrayList<Dispositivo>();	

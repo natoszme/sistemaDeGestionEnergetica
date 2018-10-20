@@ -38,7 +38,7 @@ public class FixtureSimplex extends Fixture{
 		nico.agregarDispositivo(lavarropas);
 		
 		yanina.agregarDispositivo(tv40);
-		yanina.agregarDispositivo(televisorSmart);
+		yanina.agregarDispositivo(tvNormal);
 		
 		RepoClientes.getInstance().agregarEntidad(nico);
 		RepoClientes.getInstance().agregarEntidad(lio);
@@ -55,7 +55,7 @@ public class FixtureSimplex extends Fixture{
 		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(aire3500Frigorias, 90, 360, Actuador.ActuadorQueApaga));
 		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(lavarropas, 6, 30, Actuador.ActuadorQuePoneEnAhorroDeEnergia));
 		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(microondas, 6, 15, Actuador.ActuadorQueApaga));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(televisorSmart, 50, 400, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(tvNormal, 50, 400, Actuador.ActuadorQueApaga));
 		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(tv40, 50, 400, Actuador.ActuadorQueApaga));	
 	}
 }
