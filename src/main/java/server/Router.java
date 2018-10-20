@@ -54,6 +54,8 @@ public class Router {
 		Spark.get("/logout", (req, res) -> {
 			return logout(req, res);
 		});
+		
+		Spark.staticFiles.location("/public");
 	}
 	
 	//TODO habria que cambiar un poco los controllers para que pueda haber un logout generico
