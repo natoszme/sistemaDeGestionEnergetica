@@ -38,6 +38,10 @@ public class Router {
 			Spark.post("/login", controllerAdmin::validarLogin);
 			
 			Spark.get("/home", controllerAdmin::home, transformer);
+			
+			// No macheo ninguna ruta, esta en el admin (logueado), lo llevo a la home
+			// TODO: nunca borra la cookie del admin (al cerrar sesion)
+			Spark.get("", controllerAdmin::home, transformer);
 		});
 		
 		Spark.get("/dispositivos/nuevo", controllerAdmin::crearDispositivoView, transformer);
@@ -61,6 +65,9 @@ public class Router {
 				return controllerCliente.obtenerMediciones(req, res);
 			});
 			
+			// No macheo la ruta, pero esta logueado
+			// TODO: si esta logueado y vas a root:host/cliente tira error, como que no esta seteada la cookie
+			Spark.get("", controllerCliente::home, transformer);
 		});
 		
 		Spark.get("/transformadores", controllerTransformador::home, transformer);
@@ -68,6 +75,9 @@ public class Router {
 		Spark.get("/logout", (req, res) -> {
 			return logout(req, res);
 		});
+		
+		// No macheo ninguna ruta, va al mapa de transformadores		
+		Spark.get("/", controllerTransformador::home, transformer);
 	}
 	
 	//TODO habria que cambiar un poco los controllers para que pueda haber un logout generico
