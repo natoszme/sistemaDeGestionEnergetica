@@ -123,7 +123,7 @@
 	});
 
 	function filtrarMediciones() {
-		const desde = $('[name="desde"]').datepicker("getDate"), hasta = $('[name="hasta"]').datepicker("getDate");
+		const desde = $('[name="desde"]').val(), hasta = $('[name="hasta"]').val();
 
 		$.get("/cliente/mediciones",
 			{ desde: desde, hasta: hasta },

@@ -1,11 +1,15 @@
 package repositorio;
 
+import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import cliente.Cliente;
 import repositorio.RepoEnDB;
@@ -27,7 +31,7 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 	}
 	
 	public List<ConsumoEnFecha> filtrarMedicionesXCliente(Cliente cliente, String desde, String hasta) { 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		Query query = entityManager()
 						.createQuery(
@@ -44,19 +48,20 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 		query.setParameter("cliente", cliente);
 		
 		if (!desde.isEmpty()) {
-			query.setParameter("desde", LocalDateTime.parse(desde + " 00:00:00", formatter));
-		}
+			LocalDateTime fechaDesde = LocalDateTime.of(LocalDate.parse(desde, formatter), LocalTime.of(0, 0, 0));
+			query.setParameter("desde", fechaDesde);
+		}		
 		
 		if (!hasta.isEmpty()) {
-			query.setParameter("hasta", LocalDateTime.parse(hasta + " 23:59:59", formatter)).getResultList();
+			LocalDateTime fechaHasta = LocalDateTime.of(LocalDate.parse(hasta, formatter), LocalTime.of(23, 59, 59));
+			query.setParameter("hasta", fechaHasta);
 		}
 		
 		List<Object[]> results = query.getResultList();
 		List<ConsumoEnFecha> mediciones = new ArrayList<ConsumoEnFecha>();
 		
 		results.stream().forEach(result -> {
-			mediciones.add(new ConsumoEnFecha((LocalDateTime) result[0], (Double) result[1]));
-			
+			mediciones.add(new ConsumoEnFecha((LocalDateTime) result[0], (Double) result[1]));			
 		});
 		
 		return mediciones;
