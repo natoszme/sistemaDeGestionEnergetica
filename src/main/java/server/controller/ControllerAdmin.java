@@ -11,7 +11,6 @@ import spark.Response;
 public class ControllerAdmin extends ControllerLogin{
 
 	public ModelAndView home(Request req, Response res) {
-		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
 		//viewModel.put("consumos", //lo que devuelva el reporte);
@@ -29,5 +28,16 @@ public class ControllerAdmin extends ControllerLogin{
 	
 	protected Autenticable obtenerAutenticable(String username, String password) {
 		return RepoAdmins.getInstance().dameAutenticable(username, password);
+	}
+	
+	public ModelAndView crearDispositivoView(Request req, Response res) {
+		HashMap<String, Object> viewModel = new HashMap<>();
+		
+		return new ModelAndView(viewModel, "admin/nuevo-dispositivo-generico.hbs");
+	}
+	
+	public String crearDispositivo(Request req, Response res) {
+		res.redirect("/admin/home");
+		return null;
 	}
 }
