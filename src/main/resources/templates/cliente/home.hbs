@@ -45,7 +45,7 @@
 		  		</div>
 			</form>
 			<hr>
-	      	<table class="table table-striped table-bordered">
+	      	<table id="mediciones" class="table table-striped table-bordered">
 			  <thead class="thead-dark">
 			    <tr>
 			      <th scope="col">Fecha de medici&oacute;n</th>
@@ -53,18 +53,6 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr>
-			      <td scope="row">7/10/2018</td>
-			      <td>85.254,32 KW</td>
-			    </tr>
-			    <tr>
-			      <td scope="row">21/09/2018</td>
-			      <td>25.000 KW</td>
-			    </tr>
-			    <tr>
-			      <td scope="row">17/08/2018</td>
-			      <td>12.003,2 KW</td>
-			    </tr>
 			  </tbody>
 			</table>
 			<button type="button" class="btn btn-primary">Optimizar consumo</button>			      	
@@ -130,14 +118,27 @@
 		orientation: "bottom auto"
 	});
 
+	$(function() {
+		filtrarMediciones();
+	});
+
 	function filtrarMediciones() {
 		const desde = $('[name="desde"]').datepicker("getDate"), hasta = $('[name="hasta"]').datepicker("getDate");
 
-		$.get("/cliente/mediciones", // url
-			{ desde: desde, hasta: hasta }, // data 
+		$.get("/cliente/mediciones",
+			{ desde: desde, hasta: hasta },
 			function(data, status) {
-				console.log("Data: " + data, "\nStatus: " + status);
-	    	} // callback
+				const rowsMediciones = data.reduce(function(row, medicion) {
+					return row + '' +
+						'<tr>' +
+					      '<td scope="row">' + medicion.fecha + '</td>' +
+					      '<td>' + medicion.consumo + ' KW</td>' +
+					    '</tr>';
+				}, '');
+
+				$('#mediciones tbody').html(rowsMediciones);
+	    	}, 
+	    	"json" // dataType expected
 	    );
 	}
 	
