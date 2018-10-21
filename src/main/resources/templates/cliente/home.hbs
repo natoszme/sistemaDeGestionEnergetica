@@ -3,6 +3,10 @@
 	<link id="bsdp-css" href="https://uxsolutions.github.io/bootstrap-datepicker/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 	<script src="https://uxsolutions.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 	<script src="https://uxsolutions.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+
+	<!-- DataTables -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
 {{/partial}}
 
 {{#partial "contenido"}}
@@ -27,7 +31,7 @@
 			  El consumo del periodo actual es de <a href="#" class="alert-link">{{ consumoActual }} KW</a>.
 			</div>
 			<form class="mt-3" action="javascript:filtrarMediciones();" role="form">			
-		  		<div class="form-row align-items-center">
+		  		<div class="form-row align-items-center justify-content-center">
              		<div class="col-auto">
 	             		<div class="input-daterange input-group" id="datepicker">
 	           				<div class="col-auto">
@@ -131,12 +135,13 @@
 				const rowsMediciones = data.reduce(function(row, medicion) {
 					return row + '' +
 						'<tr>' +
-					      '<td scope="row">' + medicion.fecha + '</td>' +
+					      '<td>' + medicion.fecha + '</td>' +
 					      '<td>' + medicion.consumo + ' KW</td>' +
 					    '</tr>';
 				}, '');
 
 				$('#mediciones tbody').html(rowsMediciones);
+				$('#mediciones').DataTable();
 	    	}, 
 	    	"json" // dataType expected
 	    );
