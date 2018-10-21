@@ -5,20 +5,22 @@ import java.util.List;
 import java.time.LocalDate;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import cliente.Cliente;
 import cliente.TipoDocumento;
 import importacion.ImportadorClientes;
 import repositorio.RepoClientes;
 
-public class TestImportadorCliente {
+public class TestImportadorCliente extends AbstractPersistenceTest implements WithGlobalEntityManager{
 
 	static List<Cliente> clientes;
 
-	@BeforeClass
-	public static void fixture() {
+	@Before
+	public void fixture() {
 		ImportadorClientes.getInstance().importarJSON();
 		clientes = RepoClientes.getInstance().obtenerTodas();
 	}
