@@ -5,6 +5,7 @@ import java.util.List;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
+import json.JSONParser;
 import repositorio.RepoClientes;
 import repositorio.RepoConsumoEnFecha;
 import server.login.Autenticable;
@@ -19,7 +20,6 @@ import org.apache.commons.math3.util.Pair;
 public class ControllerCliente extends ControllerLogin {
 
 	List<Pair<Dispositivo, Double>> horasOptimas;
-	List<ConsumoEnFecha> mediciones;
 	
 	public ModelAndView home(Request req, Response res) {
 		
@@ -50,7 +50,6 @@ public class ControllerCliente extends ControllerLogin {
 		viewModel.put("tieneDispositivos", cliente.cantidadDispositivos() > 0);
 		viewModel.put("tieneReglas", cliente.getReglas().size() > 0);		
 		viewModel.put("horasOptimas", horasOptimas);
-		viewModel.put("mediciones", mediciones);
 		
 		return viewModel;
 	}
@@ -72,10 +71,11 @@ public class ControllerCliente extends ControllerLogin {
 		return RepoClientes.getInstance().dameCliente(Long.parseLong(req.cookie(nombreCookieId())));
 	}
 	
-	public ModelAndView obtenerMediciones(Request req, Response res) {
-		Cliente cliente = obtenerClienteDe(req);
-		mediciones = RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, req.queryParams("desde"), req.queryParams("hasta"));		
+	public String obtenerMediciones(Request req, Response res) {
+		JSONParser<ConsumoEnFecha> parser = new JSONParser<ConsumoEnFecha>();
 		
-		return this.home(req, res);
+		Cliente cliente = obtenerClienteDe(req);
+		List<ConsumoEnFecha> mediciones = RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, req.queryParams("desde"), req.queryParams("hasta"));
+		return parser.listToJson(mediciones);  
 	}	
 }
