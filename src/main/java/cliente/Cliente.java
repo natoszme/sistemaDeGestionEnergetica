@@ -232,6 +232,6 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 	}
 	
 	public List<Regla> getReglas() {
-		return (List<Regla>) this.getDispositivos().stream().map(dispositivo -> dispositivo.getReglas()).flatMap(Collection::stream).collect(Collectors.toList());
+		return (List<Regla>) this.getDispositivos().stream().filter(Dispositivo::esInteligente).map(dispositivo -> dispositivo.getReglas()).flatMap(Collection::stream).collect(Collectors.toList());
 	}
 }

@@ -35,6 +35,10 @@ public abstract class CondicionSobreSensor extends DatosBasicos implements Gadge
 		return sensor;
 	}
 	
+	public String getNombre() {
+		return this.getClass().getSimpleName().toString();
+	}
+	
 	@Override
 	public boolean esIgualA(Gadget gadget) {
 		return Gadget.super.esIgualA(gadget) && sensor == ((CondicionSobreSensor)gadget).getSensor();

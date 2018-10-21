@@ -26,4 +26,8 @@ public enum Actuador implements Gadget {
 	};
 	
 	public abstract void actuarSobre(Dispositivo dispositivo);
+	
+	public String getNombre() {
+		return this.name();
+	}
 }

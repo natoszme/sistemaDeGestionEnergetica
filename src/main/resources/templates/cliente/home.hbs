@@ -92,20 +92,20 @@
 		      		{{{ isEven @index '<div class="row mb-2">' }}}
 			      		<div class="card">
 				      		<div class="card-header">
-								<h5 class="card-title">Regla 1 - <small class="text-danger">Estricta</small></h5>
+								<h5 class="card-title">Regla - <small class="text-danger">{{ nombre }}</small></h5>
 							</div>
 						  	<div class="card-body">						   
-							    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: dispositivo.nombre</h6>
+							    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: <span class="text-body">{{ dispositivo.nombre }}</span></h6>
 							    <h6 class="card-subtitle mb-2 text-muted">Condiciones</h6>
 							    <ul>
 							    	{{#each condiciones}}
-								    	<li>Condicion 1</li>
+								    	<li>{{ nombre }}</li>
 							    	{{/each}}
 							    </ul>
 							     <h6 class="card-subtitle mb-2 text-muted">Actuadores</h6>
 							    <ul>
 							    	{{#each actuadores}}
-										<li>Actuador que llama a servicio tecnico</li>
+										<li>{{ nombre }}</li>
 						    		{{/each}}									
 							    </ul>
 							 </div>
