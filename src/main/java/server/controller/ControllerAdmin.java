@@ -15,6 +15,8 @@ import server.login.RepoAdmins;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import tipoDispositivo.DispositivoEstandar;
+import tipoDispositivo.DispositivoInteligente;
 
 public class ControllerAdmin extends ControllerLogin{
 
@@ -56,5 +58,32 @@ public class ControllerAdmin extends ControllerLogin{
 	
 	protected Autenticable obtenerAutenticable(String username, String password) {
 		return RepoAdmins.getInstance().dameAutenticable(username, password);
+	}
+	
+	public ModelAndView crearDispositivoView(Request req, Response res) {
+		HashMap<String, Object> viewModel = new HashMap<>();
+		
+		return new ModelAndView(viewModel, "admin/nuevo-dispositivo-generico.hbs");
+	}
+	
+	public String crearDispositivo(Request req, Response res) {
+		
+		String nombre = req.queryParams("nombre");
+		double kwPorHora = Double.parseDouble(req.queryParams("consumo"));
+		String tipoDispositivo = req.queryParams("tipoDispositivo");
+		
+		Dispositivo dispositivo;
+		
+		if(tipoDispositivo.equals("estandar")) {
+			dispositivo = new Dispositivo(nombre, new DispositivoEstandar(), kwPorHora);
+		}
+		else {
+			dispositivo = new Dispositivo(nombre, new DispositivoInteligente(null), kwPorHora);
+		}
+		
+		RepoDispositivosBase.getInstance().agregarEntidad(dispositivo);
+		
+		res.redirect("/admin/home");
+		return null;
 	}
 }

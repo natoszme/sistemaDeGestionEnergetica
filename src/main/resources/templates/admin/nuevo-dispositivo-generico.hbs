@@ -1,19 +1,19 @@
 {{#partial "contenido"}}
 	<div class="pb-2 mt-4 mb-2">
-		<h2>Alta de dispositivos genéricos</h2>
+		<h2>Alta de dispositivo genérico</h2>
 	</div>
 	<br>
-	<form>
+	<form method="post" action="/dispositivos">
 	  <div class="form-group row">
 	    <label for="nombre" class="col-sm-4 col-form-label">Nombre</label>
 	    <div class="col-sm-8">
-	    	<input type="text" class="form-control" id="nombre" placeholder="Nombre">
+	    	<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
 		</div>
 	  </div>
 	  <div class="form-group row">
 	    <label for="kwPorHora" class="col-sm-4 col-form-label">Consumo</label>
 	    <div class="col-sm-8">
-		    <input type="number" class="form-control" id="kwPorHora" placeholder="Consumo">
+		    <input type="number" class="form-control" id="kwPorHora" name="consumo" placeholder="Consumo" required>
 		    <small class="form-text text-muted">En KW por hora</small>
 	    </div>
 	  </div>
@@ -21,13 +21,13 @@
 			<legend class="col-form-label col-sm-4 pt-0">Tipo de dispositivo</legend>
 			<div class="col-sm-8">
 			  	<div class="form-check">
-				  <input class="form-check-input" type="radio" name="tipoDispositivo" id="estandar" value="">
+				  <input class="form-check-input" type="radio" id="estandar" name="tipoDispositivo" value="estandar" checked="checked">
 				  <label class="form-check-label" for="estandar">
 				    Estandar
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="tipoDispositivo" id="inteligente" value="">
+				  <input class="form-check-input" type="radio" id="inteligente" name="tipoDispositivo" value="inteligente">
 				  <label class="form-check-label" for="inteligente">
 				    Inteligente
 				  </label>

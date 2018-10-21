@@ -40,6 +40,9 @@ public class Router {
 			Spark.get("/home", controllerAdmin::home, transformer);
 		});
 		
+		Spark.get("/dispositivos/nuevo", controllerAdmin::crearDispositivoView, transformer);
+		Spark.post("/dispositivos", controllerAdmin::crearDispositivo);
+		
 		path("/cliente", () -> {
 			
 			before("/*", (req, res) -> {
