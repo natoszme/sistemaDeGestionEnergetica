@@ -77,7 +77,9 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 	@Column(nullable = false)
 	private Point ubicacion;
 	
-	public Cliente(String username, String password, String nombre, String apellido, TipoDocumento tipoDocumento, long nroDocumento, long telefono, String domicilio, Categoria categoria, List<Dispositivo> dispositivos, Point ubicacion) {
+	public Cliente(String username, String password, String nombre, String apellido, 
+			TipoDocumento tipoDocumento, long nroDocumento, long telefono, String domicilio, 
+			Categoria categoria, List<Dispositivo> dispositivos, Point ubicacion) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipoDocumento = tipoDocumento;
@@ -94,6 +96,8 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 	
 	public Cliente() {}
 	
+	
+
 	public boolean algunInteligenteEncendido() {
 		return this.cantidadInteligentesEncendidos() > 0;
 	}
