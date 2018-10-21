@@ -13,15 +13,19 @@ import transformador.Transformador;
 
 import repositorio.RepoClientes;
 
-public class RepoTransformadores extends RepoEnMemoria<Transformador> implements WithGlobalEntityManager{
+public class RepoTransformadores extends RepoEnDB<Transformador> implements WithGlobalEntityManager{
 	
 	private static RepoTransformadores instancia;
 	
 	public static RepoTransformadores getInstance() {
 		if(instancia == null) {
-			instancia = new RepoTransformadores();
+			instancia = new RepoTransformadores("Transformador");
 		}
 		return instancia;
+	}
+	
+	public RepoTransformadores(String tabla) {
+		super(tabla);
 	}
 	
 	public List<Cliente> obtenerClientesDe(Transformador transformador){	
@@ -38,7 +42,7 @@ public class RepoTransformadores extends RepoEnMemoria<Transformador> implements
 	}*/
 		
 	private Transformador transformadorMasCercanoA(Cliente cliente) {	
-		return entidades.stream().min(Comparator.comparing(unTransformador -> unTransformador.distanciaA(cliente))).get();	
+		return obtenerTodas().stream().min(Comparator.comparing(unTransformador -> unTransformador.distanciaA(cliente))).get();	
 	}
 	
 	public long obtenerCantidadTransformadores() {

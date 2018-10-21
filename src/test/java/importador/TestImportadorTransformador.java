@@ -6,12 +6,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.uqbar.geodds.Point;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import transformador.Transformador;
 import importacion.ImportadorTransformadores;
 import repositorio.RepoTransformadores;
 
-public class TestImportadorTransformador {
+public class TestImportadorTransformador extends AbstractPersistenceTest implements WithGlobalEntityManager{
 	static List<Transformador> transformadores;
 
 	@Before

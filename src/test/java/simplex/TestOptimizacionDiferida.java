@@ -18,7 +18,7 @@ public class TestOptimizacionDiferida extends FixtureSimplex {
 		JobOptimizador job = JobOptimizador.getInstance();
 		job.ejecutar();
 		
-		verify(mockTelevisorSmartConcreto, times(0)).apagar();
+		verify(mockTelevisorNormalConcreto, times(0)).apagar();
     }
 	 
 	@Test

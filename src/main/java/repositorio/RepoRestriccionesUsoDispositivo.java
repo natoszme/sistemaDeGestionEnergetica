@@ -1,23 +1,26 @@
 package repositorio;
 import dispositivo.Dispositivo;
 import dispositivo.gadgets.actuador.Actuador;
-import repositorio.RepoEnMemoria;
 import simplex.NoExisteRestriccionPara;
 import simplex.RestriccionUsoDispositivo;
 
-public class RepoRestriccionesUsoDispositivo extends RepoEnMemoria<RestriccionUsoDispositivo> {
+public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDispositivo> {
 	
+	public RepoRestriccionesUsoDispositivo(String tabla) {
+		super(tabla);
+	}
+
 	private static RepoRestriccionesUsoDispositivo instancia;	
 	
 	public static RepoRestriccionesUsoDispositivo getInstance(){
 		if (instancia == null) {
-			instancia = new RepoRestriccionesUsoDispositivo();
+			instancia = new RepoRestriccionesUsoDispositivo("RestriccionUsoDispositivo");
 		}
 		return instancia;
 	}
 	
 	private RestriccionUsoDispositivo obtenerRestriccionDe(Dispositivo dispositivo) {
-		RestriccionUsoDispositivo restriccion = entidades.stream().filter(unaRestriccion -> unaRestriccion.esDe(dispositivo)).
+		RestriccionUsoDispositivo restriccion = obtenerTodas().stream().filter(unaRestriccion -> unaRestriccion.esDe(dispositivo)).
 				findFirst().orElseThrow(() -> new NoExisteRestriccionPara(dispositivo));
 		return restriccion;
 	}

@@ -5,17 +5,24 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public abstract class RepoEnDB<Entidad> implements Repo<Entidad>,  WithGlobalEntityManager{
-	//protected List<Entidad> entidades = new ArrayList<>();
+public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entidad>,  WithGlobalEntityManager{
 	EntityManager em = entityManager();
+
 	protected String tabla;
+  
+	public RepoEnDB(String tabla) {
+		this.tabla = tabla;
+	}
+
+
 	public void agregarEntidad(Entidad entidad) {
 		em.persist(entidad);
 	}
 
 	public void agregarEntidades(List<Entidad> entidades) {
-		entidades.forEach(entidad->em.persist(entidad));
+		entidades.forEach(entidad->this.agregarEntidad(entidad));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -23,3 +30,4 @@ public abstract class RepoEnDB<Entidad> implements Repo<Entidad>,  WithGlobalEnt
 		return (List<Entidad>) em.createQuery("FROM " + tabla).getResultList();
 	}
 }
+

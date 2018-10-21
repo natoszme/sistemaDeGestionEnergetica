@@ -9,11 +9,12 @@ import server.login.RepoAutenticables;
 public class RepoClientes extends RepoAutenticables<Cliente> {
 	private static RepoClientes instancia;
 	
-	public RepoClientes(String tabla, Class<Cliente> entidad) {
+
+	public RepoClientes(String tabla, Class<Cliente> entidad){
 		super(entidad);
 		this.tabla = tabla;
 	}	
-	
+  
 	public static RepoClientes getInstance(){
 		if (instancia == null) {
 			instancia = new RepoClientes("Cliente", Cliente.class);

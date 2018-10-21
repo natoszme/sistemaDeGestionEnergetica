@@ -6,6 +6,10 @@
 	    "nroDocumento" : 40216458,
 	    "telefono" : 10101010,
 	    "domicilio" : "Av. Catalunia 10",
+    	"ubicacion": {
+    		"x": 1,
+    		"y": 2
+    	},
 	    "dispositivos" : [
 			{
 			    "nombre" : "tv",
@@ -38,6 +42,10 @@
 	    "nroDocumento" : 40513264,
 	    "telefono" : 411112061,
 	    "domicilio" : "Juan B. Justo 24",
+	    "ubicacion": {
+    		"x": 1,
+    		"y": 2
+    	},
 	    "dispositivos" : [],
 	    "fechaAlta": "2018-04-25"
 	},
@@ -48,6 +56,10 @@
 	    "nroDocumento": 40000000,
 	    "telefono" : 465219475,
 	    "domicilio" : "Rodriguez Peña 3051",
+	    "ubicacion": {
+    		"x": 2,
+    		"y": 1
+    	},
 	    "dispositivos" : [],
 	    "fechaAlta": "2018-04-25"
 	}

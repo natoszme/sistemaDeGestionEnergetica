@@ -26,6 +26,7 @@
     	<class>zona.Zona</class>
     	<class>tipoDispositivo.ConsumoEnFecha</class>
     	<class>server.login.Admin</class>
+    	<class>simplex.RestriccionUsoDispositivo</class>
     	
         <properties> 
 	    	<property name="hibernate.archive.autodetection" value="class"/>

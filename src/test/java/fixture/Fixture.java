@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.uqbar.geodds.Point;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import categoria.Categoria;
 import cliente.Cliente;
@@ -21,18 +22,19 @@ import dispositivo.gadgets.regla.Regla;
 import dispositivo.gadgets.regla.ReglaEstricta;
 import dispositivo.gadgets.regla.ReglaPermisiva;
 import repositorio.RepoCategorias;
+import repositorio.RepoClientes;
 import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 import transformador.Transformador;
 import zona.Zona;
 
-public class Fixture extends AbstractPersistenceTest implements WithGlobalEntityManager {
+public class Fixture extends AbstractPersistenceTest implements WithGlobalEntityManager, TransactionalOps {
 	
 	protected Categoria r1, r2, r3, r4, r5, r6, r7, r8, r9;
-	protected Dispositivo candelabro, televisor, microondas, equipoMusica, dvd, play4, televisorSmart, pc, aireAcondicionado;
+	protected Dispositivo candelabro, televisor, microondas, equipoMusica, dvd, play4, televisorSmart, tvNormal, pc, aireAcondicionado;
 	protected List<Dispositivo> dispositivos = new ArrayList<>();
 	protected Cliente alejandro, lio, pepe, nico, ricardo, yanina;
-	protected DispositivoConcreto mockPcConcreta, mockAireConcreto, mockTelevisorSmartConcreto, mockCandelabroConcreto, mockLampara, mockLavarropas, mockMicroondas, mockPlancha, mockVentilador,mockTv40;
+	protected DispositivoConcreto mockPcConcreta, mockAireConcreto, mockTelevisorSmartConcreto, mockTelevisorNormalConcreto, mockCandelabroConcreto, mockLampara, mockLavarropas, mockMicroondas, mockPlancha, mockVentilador,mockTv40;
 	protected Regla unaReglaEstricta, unaReglaPermisiva;
 	protected Actuador actuadorQueApaga, actuadorQueEnciende;
 	protected CondicionSobreSensor mockCondicionSobreSensorQueCumple, mockCondicionSobreSensorQueNoCumple;
@@ -46,6 +48,8 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	public Zona palermo, laMatanza, caballito;
 	
 	public Fixture() {
+		  //rollbackTransaction();
+		 // beginTransaction();
 		  r1 = new Categoria("R1", 0, 150, 18.76, 0.644);			
 		  r2 = new Categoria("R2", 150, 325, 35.32, 0.644);			
 		  r3 = new Categoria("R3", 326, 400, 60.71, 0.681);			
@@ -59,7 +63,8 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  mockPcConcreta = Mockito.mock(DispositivoConcreto.class);
 		  mockAireConcreto = Mockito.mock(DispositivoConcreto.class);
 		  mockTelevisorSmartConcreto = Mockito.mock(DispositivoConcreto.class);
-
+		  mockTelevisorNormalConcreto = Mockito.mock(DispositivoConcreto.class);
+		  
 		  mockCandelabroConcreto = Mockito.mock(DispositivoConcreto.class);
 		  
 		  mockLampara = Mockito.mock(DispositivoConcreto.class);
@@ -79,7 +84,7 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  pc = new Dispositivo("PC", new DispositivoInteligente(mockPcConcreta), 100);
 		  aireAcondicionado = new Dispositivo("Aire acondicionado", new DispositivoInteligente(mockAireConcreto), 120);
 		  televisorSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(mockTelevisorSmartConcreto), 90);
-		
+		  tvNormal = new Dispositivo("Televisor Normal", new DispositivoInteligente(mockTelevisorNormalConcreto), 0.9);
 		  
 		  //TODO revisar si se puede sacar esto, ya esta arriba!
 		  dispositivos = new ArrayList<Dispositivo>();	
@@ -125,10 +130,5 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  transformadorLaMatanza = new Transformador(ubicacionLaMatanza);
 		  transformadorPalermo = new Transformador(ubicacionPalermo);
 		  transformadorCaballito = new Transformador(ubicacionCaballito);
-	}
-	
-	@After
-	public void after() {
-		RepoCategorias.getInstance().limpiarEntidades();
 	}
 }

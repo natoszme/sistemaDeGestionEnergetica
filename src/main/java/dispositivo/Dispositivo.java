@@ -21,7 +21,7 @@ public class Dispositivo extends DatosBasicos {
 	@Column(nullable = false)
 	private String nombre;
 
-	@OneToOne(cascade = CascadeType.PERSIST, optional = false)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
 	@JoinColumn(name = "tipoDispositivo")
 	private TipoDispositivo tipoDispositivo;
 

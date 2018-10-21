@@ -3,18 +3,20 @@ package importador;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import categoria.Categoria;
 import importacion.ImportadorCategorias;
 import repositorio.RepoCategorias;
 
-public class TestImportadorCategoria {
+public class TestImportadorCategoria extends AbstractPersistenceTest implements WithGlobalEntityManager{
 	static List<Categoria> categorias;
 
-	@BeforeClass
-	public static void fixture() {
+	@Before
+	public void fixture() {
 		ImportadorCategorias.getInstance().importarJSON();
 		categorias = RepoCategorias.getInstance().obtenerTodas();
 	}

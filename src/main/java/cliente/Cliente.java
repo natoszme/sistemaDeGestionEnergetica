@@ -60,12 +60,12 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fechaAlta;
 	
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "idCliente", nullable = false)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idCliente", nullable = true)
 	private List<Dispositivo> dispositivos = new ArrayList<>();
 	
 	private double puntos = 0;

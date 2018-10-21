@@ -5,7 +5,6 @@ import org.junit.Before;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -23,7 +22,6 @@ import dispositivo.gadgets.sensor.SensorHorasEncendido;
 import fixture.Fixture;
 import importacion.ImportadorTransformadores;
 import repositorio.RepoTransformadores;
-import transformador.Transformador;
 
 public class TestCasoDePrueba extends Fixture {
 	EntityManager em = entityManager();
@@ -141,11 +139,8 @@ public class TestCasoDePrueba extends Fixture {
 		// Se importan los transformadores del JSON y se persisten		
 		ImportadorTransformadores.getInstance().importarJSON();
 		
-		List<Transformador> transformadores = RepoTransformadores.getInstance().obtenerTodas();		
-		transformadores.forEach(transformador -> em.persist(transformador));
-		
 		long cantidadTransformadoresPersistidos = RepoTransformadores.getInstance().obtenerCantidadTransformadores();
 		
-		Assert.assertEquals(3 + transformadores.size(), cantidadTransformadoresPersistidos);
+		Assert.assertEquals(3 + 3, cantidadTransformadoresPersistidos);
 	}
 }

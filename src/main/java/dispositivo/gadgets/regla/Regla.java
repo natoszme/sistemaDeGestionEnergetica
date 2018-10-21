@@ -29,8 +29,8 @@ public abstract class Regla extends DatosBasicos{
 	@JoinColumn(name = "idDispositivo")
 	protected Dispositivo dispositivo;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "idRegla", nullable = false)
+	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+	@JoinColumn(name = "idRegla", nullable = true)
 	protected Set<CondicionSobreSensor> condiciones = new HashSet<>();
 	
 	@ElementCollection

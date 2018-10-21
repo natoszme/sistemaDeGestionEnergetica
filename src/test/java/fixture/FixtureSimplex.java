@@ -3,14 +3,11 @@ package fixture;
 import java.time.LocalDateTime;
 
 import org.junit.Before;
-import org.mockito.Mockito;
 
 import dispositivo.Dispositivo;
-import dispositivo.DispositivoConcreto;
 import dispositivo.DispositivosBaseFactory;
 import dispositivo.gadgets.actuador.Actuador;
 import repositorio.RepoClientes;
-import repositorio.RepoReglas;
 import repositorio.RepoRestriccionesUsoDispositivo;
 import simplex.RestriccionUsoDispositivo;
 
@@ -25,9 +22,6 @@ public class FixtureSimplex extends Fixture{
 	
 	public FixtureSimplex() {
 		super();
-		
-		mockLavarropas = Mockito.mock(DispositivoConcreto.class);
-		mockMicroondas = Mockito.mock(DispositivoConcreto.class);
 	}
 	
 	@Before
@@ -44,8 +38,8 @@ public class FixtureSimplex extends Fixture{
 		nico.agregarDispositivo(lavarropas);
 		
 		yanina.agregarDispositivo(tv40);
+		yanina.agregarDispositivo(tvNormal);
 		
-		RepoClientes.getInstance().limpiarEntidades();
 		RepoClientes.getInstance().agregarEntidad(nico);
 		RepoClientes.getInstance().agregarEntidad(lio);
 		RepoClientes.getInstance().agregarEntidad(yanina);
@@ -61,9 +55,7 @@ public class FixtureSimplex extends Fixture{
 		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(aire3500Frigorias, 90, 360, Actuador.ActuadorQueApaga));
 		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(lavarropas, 6, 30, Actuador.ActuadorQuePoneEnAhorroDeEnergia));
 		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(microondas, 6, 15, Actuador.ActuadorQueApaga));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(televisorSmart, 50, 400, Actuador.ActuadorQueApaga));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(tv40, 50, 400, Actuador.ActuadorQueApaga));
-		
-		RepoReglas.getInstance().limpiarEntidades();		
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(tvNormal, 50, 400, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(tv40, 50, 400, Actuador.ActuadorQueApaga));	
 	}
 }
