@@ -12,6 +12,8 @@ import org.hibernate.annotations.ParamDef;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Embeddable
 @FilterDef(
@@ -23,6 +25,7 @@ public class ConsumoEnFecha {
 	@Column(nullable = false)
 	@Convert(converter = LocalDateTimeConverter.class)
     @Filter(name = "filtroDeFecha", condition = "fecha BETWEEN :desde AND :hasta")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime fecha;
 	
 	@Column(nullable = false)
