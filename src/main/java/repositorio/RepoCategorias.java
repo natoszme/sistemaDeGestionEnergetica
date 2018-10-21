@@ -29,5 +29,6 @@ public class RepoCategorias extends RepoEnDB<Categoria> {
 	}
 	public Categoria obtenerCategoriaPorNombre(String nombre) {
 		return (Categoria) this.obtenerTodas().stream().filter(categoria->categoria.getNombre()==nombre).findFirst().orElse(null);
+
 	}
 }

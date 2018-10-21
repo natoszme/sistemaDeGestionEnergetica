@@ -3,7 +3,9 @@ package cliente;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,11 +29,16 @@ import converter.PointConverter;
 import db.DatosBasicos;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
+import dispositivo.gadgets.regla.Regla;
 import repositorio.RepoCategorias;
+import server.login.Autenticable;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"tipoDocumento", "nroDocumento"}))
-public class Cliente extends DatosBasicos implements ConsumidorMasivo {
+public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autenticable {
+	
+	private String username;
+	private String password;
 	
 	@Column(nullable = false)
 	private String nombre;
@@ -70,9 +77,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 	@Column(nullable = false)
 	private Point ubicacion;
 	
-	public Cliente() {}
-	
-	public Cliente(String nombre, String apellido, TipoDocumento tipoDocumento, long nroDocumento, long telefono, String domicilio, Categoria categoria, List<Dispositivo> dispositivos, Point ubicacion) {
+	public Cliente(String username, String password, String nombre, String apellido, TipoDocumento tipoDocumento, long nroDocumento, long telefono, String domicilio, Categoria categoria, List<Dispositivo> dispositivos, Point ubicacion) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipoDocumento = tipoDocumento;
@@ -83,7 +88,11 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 		this.dispositivos = dispositivos;
 		this.fechaAlta = LocalDate.now();
 		this.ubicacion = ubicacion;
+		this.username = username;
+		this.password = password;
 	}
+	
+	public Cliente() {}
 	
 	public boolean algunInteligenteEncendido() {
 		return this.cantidadInteligentesEncendidos() > 0;
@@ -135,6 +144,10 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 		dispositivo.convertirAInteligente(dispositivoConcreto);
 		puntos += 10;		
 	}
+	
+	public boolean tieneDispositivos() {
+		return this.cantidadDispositivos() > 0;
+	}
 
 	public void tieneDispositivo(Dispositivo dispositivo) {
 		if (!dispositivos.stream().anyMatch(unDispositivo -> unDispositivo == dispositivo)) {
@@ -142,8 +155,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 		}
 	}
 	
-	public double consumoRealizadoEntre(LocalDateTime fechaInicial,LocalDateTime fechaFinal) {
-		
+	public double consumoRealizadoEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {		
 		return dispositivos.stream().mapToDouble(dispositivo -> dispositivo.consumoEntre(fechaInicial, fechaFinal)).sum();
 	}
 	
@@ -213,5 +225,13 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo {
 
 	public void limpiarDispositivos() {
 		dispositivos.clear();		
+	}
+
+	public long id() {
+		return id;
+	}
+	
+	public List<Regla> getReglas() {
+		return (List<Regla>) this.getDispositivos().stream().map(dispositivo -> dispositivo.getReglas()).flatMap(Collection::stream).collect(Collectors.toList());
 	}
 }

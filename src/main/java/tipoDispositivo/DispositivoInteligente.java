@@ -19,7 +19,7 @@ import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
 
 @Entity
-public class DispositivoInteligente extends TipoDispositivo{
+public class DispositivoInteligente extends TipoDispositivo {
 	
 	@Enumerated(EnumType.STRING)
 	private DispositivoConcreto dispositivoConcreto;

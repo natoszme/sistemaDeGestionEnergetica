@@ -1,6 +1,7 @@
 package dispositivo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import db.DatosBasicos;
+import dispositivo.gadgets.regla.Regla;
+import repositorio.RepoReglas;
 import tipoDispositivo.DispositivoInteligente;
 import tipoDispositivo.TipoDispositivo;
 
@@ -122,5 +125,9 @@ public class Dispositivo extends DatosBasicos {
 	
 	public double consumoEntre(LocalDateTime fechaInicial, LocalDateTime fechaFinal) {
 		return tipoDispositivo.consumoEntre(fechaInicial, fechaFinal);
+	}
+	
+	public List<Regla> getReglas() {
+		return RepoReglas.getInstance().reglasDeDispositivo(this);
 	}
 }

@@ -9,11 +9,13 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entidad>,  WithGlobalEntityManager{
 	EntityManager em = entityManager();
-	String tabla;
 
+	protected String tabla;
+  
 	public RepoEnDB(String tabla) {
 		this.tabla = tabla;
 	}
+
 
 	public void agregarEntidad(Entidad entidad) {
 		em.persist(entidad);
@@ -25,11 +27,7 @@ public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entid
 
 	@SuppressWarnings("unchecked")
 	public List<Entidad> obtenerTodas() {
-		List<Entidad> entidades = null;
-		
-		entidades = (List<Entidad>) em.createQuery("FROM " + tabla).getResultList();
-		  
-		return entidades;
+		return (List<Entidad>) em.createQuery("FROM " + tabla).getResultList();
 	}
 }
 
