@@ -29,8 +29,8 @@ public class ControllerAdmin extends ControllerLogin{
 		
 		//List<Cliente> clientes = RepoClientes.getInstance().obtenerTodas();
 		List<Cliente> clientes= new ArrayList<>();
-		List<Dispositivo> dispositivos;
-		Cliente clienteEjemplo = new Cliente("Bebe","1","Bebe", "Perro", TipoDocumento.DNI,(long)11111111, (long)1123894928, "Casa de nato", RepoCategorias.getInstance().obtenerCategoriaPorNombre("R1"),dispositivos, new org.uqbar.geodds.Point(0,1));
+		List<Dispositivo> dispositivos = new ArrayList<>();
+		Cliente clienteEjemplo = new Cliente("Bebe","1","Bebe", "Perro", TipoDocumento.DNI,(long)11111111, (long)1123894928, "Casa de nato", RepoCategorias.getInstance().obtenerCategoriaPorNombre("R1"), dispositivos, new org.uqbar.geodds.Point(0,1));
 		clientes.add(clienteEjemplo);
 		
 		
