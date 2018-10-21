@@ -1,9 +1,6 @@
 package repositorio;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +25,7 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 		return instancia;
 	}
 	
-	public List<ConsumoEnFecha> filtrarMedicionesXCliente(Cliente cliente, String desde, String hasta) { 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
+	public List<ConsumoEnFecha> filtrarMedicionesXCliente(Cliente cliente, LocalDateTime desde, LocalDateTime hasta) {		
 		Query query = entityManager()
 						.createQuery(
 							"SELECT hc.fecha AS fecha, hc.consumo AS consumo "
@@ -39,26 +34,24 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 							+ "INNER JOIN d.tipoDispositivo td "
 							+ "INNER JOIN  td.consumosHastaElMomento AS hc "
 							+ "WHERE c = :cliente "
-							+ (!desde.isEmpty() ? "AND hc.fecha >= :desde " : "")
-							+ (!hasta.isEmpty() ? "AND hc.fecha <= :hasta" : "")
+							+ (desde != null ? "AND hc.fecha >= :desde " : "")
+							+ (hasta != null ? "AND hc.fecha <= :hasta " : "")
 						);
 		
 		query.setParameter("cliente", cliente);
 		
-		if (!desde.isEmpty()) {
-			LocalDateTime fechaDesde = LocalDateTime.of(LocalDate.parse(desde, formatter), LocalTime.of(0, 0, 0));
-			query.setParameter("desde", fechaDesde);
-		}		
-		
-		if (!hasta.isEmpty()) {
-			LocalDateTime fechaHasta = LocalDateTime.of(LocalDate.parse(hasta, formatter), LocalTime.of(23, 59, 59));
-			query.setParameter("hasta", fechaHasta);
+		if (desde != null) {			
+			query.setParameter("desde", desde);
 		}
 		
-		List<Object[]> results = query.getResultList();
+		if (hasta != null) {			
+			query.setParameter("hasta", desde);
+		}
 		
-		// TODO: esto lo deberia hacer directamente la query (dice que no lo sabe castear)
-		// Ni siquiera si en el select se hace new ConsumoDeFecha(..., ...)
+		return convertirAMediciones(query.getResultList());
+	}
+	
+	private List<ConsumoEnFecha> convertirAMediciones(List<Object[]> results) {
 		List<ConsumoEnFecha> mediciones = new ArrayList<ConsumoEnFecha>();
 		
 		results.stream().forEach(result -> {

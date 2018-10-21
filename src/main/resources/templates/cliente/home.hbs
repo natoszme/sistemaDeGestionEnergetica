@@ -112,13 +112,13 @@
 
 {{#partial "scripts"}}
   <script type="text/javascript">
-    $('#datepicker').datepicker({
-		clearBtn: true,
-		language: "es",
-		orientation: "bottom auto"
-	});
+	$(document).ready(function() {
+	    $('#datepicker').datepicker({
+			clearBtn: true,
+			language: "es",
+			orientation: "bottom auto"
+		});
 
-	$(function() {
 		filtrarMediciones();
 	});
 

@@ -1,5 +1,9 @@
 package server.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -72,10 +76,19 @@ public class ControllerCliente extends ControllerLogin {
 	}
 	
 	public String obtenerMediciones(Request req, Response res) {
-		JSONParser<ConsumoEnFecha> parser = new JSONParser<ConsumoEnFecha>();
+		JSONParser<ConsumoEnFecha> parser = new JSONParser<ConsumoEnFecha>();		 
 		
 		Cliente cliente = obtenerClienteDe(req);
-		List<ConsumoEnFecha> mediciones = RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, req.queryParams("desde"), req.queryParams("hasta"));
+		
+		LocalDateTime desde = formatearFecha(req.queryParams("desde"), LocalTime.of(0, 0, 0));
+		LocalDateTime hasta = formatearFecha(req.queryParams("hasta"), LocalTime.of(23, 59, 59));
+		
+		List<ConsumoEnFecha> mediciones = RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, desde, hasta);
 		return parser.listToJson(mediciones);  
-	}	
+	}
+	
+	private LocalDateTime formatearFecha(String fecha, LocalTime tiempo) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return (!fecha.isEmpty() ? LocalDateTime.of(LocalDate.parse(fecha, formatter), tiempo) : null);		
+	}
 }
