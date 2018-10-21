@@ -1,6 +1,5 @@
 package repositorio;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
-import javax.persistence.TemporalType;
 
 import cliente.Cliente;
 import repositorio.RepoEnDB;
@@ -58,6 +56,9 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 		}
 		
 		List<Object[]> results = query.getResultList();
+		
+		// TODO: esto lo deberia hacer directamente la query (dice que no lo sabe castear)
+		// Ni siquiera si en el select se hace new ConsumoDeFecha(..., ...)
 		List<ConsumoEnFecha> mediciones = new ArrayList<ConsumoEnFecha>();
 		
 		results.stream().forEach(result -> {
