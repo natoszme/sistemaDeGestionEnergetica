@@ -6,11 +6,12 @@ import org.hibernate.criterion.Restrictions;
 
 import repositorio.RepoEnDB;
 
-public class RepoAutenticables<Entidad extends Autenticable> extends RepoEnDB<Entidad>{
+public abstract class RepoAutenticables<Entidad extends Autenticable> extends RepoEnDB<Entidad>{
 	
 	private Class<Entidad> entidad;
 	
-	public RepoAutenticables(Class<Entidad> entidad) {
+	public RepoAutenticables(String tabla, Class<Entidad> entidad) {
+		super(tabla);
 		this.entidad = entidad;
 	}
 	
@@ -23,11 +24,5 @@ public class RepoAutenticables<Entidad extends Autenticable> extends RepoEnDB<En
 		        .uniqueResult();
 		
 		return autenticable;
-	}
-
-	@Override
-	public void limpiarEntidades() {
-		// TODO Auto-generated method stub
-		
 	}
 }

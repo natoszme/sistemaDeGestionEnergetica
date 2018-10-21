@@ -11,7 +11,7 @@ public class RepoClientes extends RepoAutenticables<Cliente> {
 	
 
 	public RepoClientes(String tabla, Class<Cliente> entidad){
-		super(entidad);
+		super(tabla, entidad);
 		this.tabla = tabla;
 	}	
   
@@ -24,12 +24,6 @@ public class RepoClientes extends RepoAutenticables<Cliente> {
 	
 	public List<Cliente> obtenerAhorradores() {
 		return this.obtenerTodas().stream().filter(Cliente::permiteAhorroAutomatico).collect(Collectors.toList());
-	}
-
-	@Override
-	public void limpiarEntidades() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public Cliente dameCliente(long id) {

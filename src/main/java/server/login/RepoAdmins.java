@@ -3,7 +3,7 @@ package server.login;
 public class RepoAdmins extends RepoAutenticables<Admin>{
 	
 	public RepoAdmins(Class<Admin> entidad) {
-		super(entidad);
+		super("Admin", entidad);
 	}
 
 	private static RepoAdmins instancia;

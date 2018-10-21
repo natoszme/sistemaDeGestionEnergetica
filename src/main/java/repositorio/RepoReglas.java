@@ -38,10 +38,10 @@ public class RepoReglas extends RepoEnDB<Regla>{
 	}
 
 	public boolean tieneReglaDe(Dispositivo dispositivo) {
-		return entidades.stream().anyMatch(regla -> regla.esDe(dispositivo));
+		return obtenerTodas().stream().anyMatch(regla -> regla.esDe(dispositivo));
 	}	
 	
 	public List<Regla> reglasDeDispositivo(Dispositivo dispositivo) {
-		return (List<Regla>) entidades.stream().filter(regla -> regla.esDe(dispositivo)).collect(Collectors.toList());
+		return (List<Regla>) obtenerTodas().stream().filter(regla -> regla.esDe(dispositivo)).collect(Collectors.toList());
 	}
 }

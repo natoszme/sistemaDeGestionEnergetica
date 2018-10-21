@@ -15,9 +15,13 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 	
 	private static RepoConsumoEnFecha instancia;
 	
+	public RepoConsumoEnFecha(String tabla) {
+		super(tabla);
+	}
+	
 	public static RepoConsumoEnFecha getInstance() {
 		if(instancia == null) {
-			instancia = new RepoConsumoEnFecha();
+			instancia = new RepoConsumoEnFecha("HistorialConsumos");
 		}
 		return instancia;
 	}
@@ -43,10 +47,5 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 		session.disableFilter("filtroDeFecha");
 		
 		return results;
-	}
-
-	@Override
-	public void limpiarEntidades() {
-		// TODO Auto-generated method stub		
 	}
 }
