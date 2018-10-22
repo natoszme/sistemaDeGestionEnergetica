@@ -69,7 +69,7 @@ public abstract class ControllerLogin {
 	
 	public String logout(Request req, Response res) {
 		res.removeCookie(nombreCookieId());
-		res.redirect("/" + home());
+		redirigirAHome(res);
 		return null;
 	}
 }
