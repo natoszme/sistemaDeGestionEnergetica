@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import cliente.Cliente;
 import repositorio.RepoEnDB;
@@ -45,7 +46,7 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 		}
 		
 		if (hasta != null) {			
-			query.setParameter("hasta", desde);
+			query.setParameter("hasta", hasta);
 		}
 		
 		return convertirAMediciones(query.getResultList());
