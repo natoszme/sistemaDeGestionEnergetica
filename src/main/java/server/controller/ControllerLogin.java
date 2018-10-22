@@ -17,7 +17,6 @@ public abstract class ControllerLogin {
 		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		viewModel.put("username", req.cookie("username"));
-		viewModel.put("home", home());
 		
 		return new ModelAndView(viewModel, "login.hbs");
 	}
