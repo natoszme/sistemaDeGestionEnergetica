@@ -65,5 +65,11 @@ public abstract class ControllerLogin {
 
 	public boolean estaLogueado(Request req) {
 		return req.cookie(nombreCookieId()) != null;
-	}	
+	}
+	
+	public String logout(Request req, Response res) {
+		res.removeCookie(nombreCookieId());
+		res.redirect("/" + home());
+		return null;
+	}
 }

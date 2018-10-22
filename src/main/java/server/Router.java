@@ -1,7 +1,5 @@
 package server;
 
-import spark.Request;
-import spark.Response;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.HandlebarsTemplateEngineBuilder;
@@ -36,6 +34,7 @@ public class Router {
 			
 			Spark.get("/login", controllerAdmin::login, transformer);
 			Spark.post("/login", controllerAdmin::validarLogin);
+			Spark.get("/logout", controllerAdmin::logout);
 			
 			Spark.get("/home", controllerAdmin::home, transformer);
 		});
@@ -53,6 +52,7 @@ public class Router {
 			
 			Spark.get("/login", controllerCliente::login, transformer);
 			Spark.post("/login", controllerCliente::validarLogin);
+			Spark.get("/logout", controllerCliente::logout);
 			
 			Spark.get("/home", controllerCliente::home, transformer);
 			Spark.get("/optimizarConsumo", controllerCliente::optimizarUso, transformer);
@@ -62,19 +62,5 @@ public class Router {
 		});
 		
 		Spark.get("/transformadores", controllerTransformador::home, transformer);
-		
-		Spark.get("/logout", (req, res) -> {
-			return logout(req, res);
-		});
-	}
-	
-	//TODO habria que cambiar un poco los controllers para que pueda haber un logout generico
-	public static String logout(Request req, Response res) {		
-		res.removeCookie("/cliente", controllerCliente.nombreCookieId());
-		res.removeCookie("/admin", controllerAdmin.nombreCookieId());
-		
-		res.redirect("/cliente/login");
-		
-		return null;
 	}
 }
