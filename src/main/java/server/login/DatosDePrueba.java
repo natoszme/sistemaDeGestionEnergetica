@@ -26,6 +26,7 @@ public class DatosDePrueba extends AbstractPersistenceTest implements WithGlobal
 		
 		Admin unAdmin = new Admin("admin", "123");
 		Cliente unCliente = new Cliente("asaez", "1", "Alejandro", "Saez", TipoDocumento.DNI, 3876675, 43543245, "Macos Sastre 324", r1, new ArrayList<>(), ubicacionLaMatanza);
+		Cliente otroCliente = new Cliente("mkrane", "123", "Matias", "Kranevitter", TipoDocumento.DNI, 3696675, 43543245, "Figueroa Alcorta", r1, new ArrayList<>(), ubicacionLaMatanza);
 		
 		Dispositivo play4 = new Dispositivo("Play 4", new DispositivoInteligente(DispositivoConcreto.TVINTELIGENTE), 45.987);
 		Dispositivo play3 = new Dispositivo("Play 3", new DispositivoEstandar(), 455.987);
@@ -51,9 +52,9 @@ public class DatosDePrueba extends AbstractPersistenceTest implements WithGlobal
 		unCliente.agregarDispositivo(play4);
 		unCliente.agregarDispositivo(play3);
 		unCliente.agregarDispositivo(play2);
-		unCliente.agregarDispositivo(play1);
-		unCliente.agregarDispositivo(asus);
-		unCliente.agregarDispositivo(dell);
+		otroCliente.agregarDispositivo(play1);
+		otroCliente.agregarDispositivo(asus);
+		otroCliente.agregarDispositivo(dell);
 		
 		withTransaction(() -> {
 			em.persist(unAdmin);		
