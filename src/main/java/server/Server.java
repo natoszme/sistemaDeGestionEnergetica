@@ -9,6 +9,6 @@ public class Server {
 		new DatosDePrueba().init();
 		Spark.port(9000);
 		DebugScreen.enableDebugScreen();
-		Router.configure();
+		new Router().configure();
 	}
 }

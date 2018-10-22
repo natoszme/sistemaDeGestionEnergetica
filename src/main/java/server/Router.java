@@ -8,20 +8,33 @@ import static spark.Spark.before;
 import static spark.Spark.path;
 import static spark.Spark.staticFiles;
 
+import javax.persistence.EntityManager;
+
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+
 import server.controller.ControllerAdmin;
 import server.controller.ControllerCliente;
 import server.controller.ControllerTransformador;
 
-public class Router {
+public class Router implements TransactionalOps, WithGlobalEntityManager{
 
 	private static ControllerAdmin controllerAdmin = new ControllerAdmin();
 	private static ControllerCliente controllerCliente= new ControllerCliente();
 	private static ControllerTransformador controllerTransformador = new ControllerTransformador();
 	
-	public static void configure() {
+	EntityManager em = entityManager();
+	
+	public void configure() {
 		HandlebarsTemplateEngine transformer = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
 
 		staticFiles.location("/public");
+		
+		Spark.before("/*", (req, res) -> {
+			if(req.requestMethod() != "GET") {
+				em.getTransaction().begin();
+			}
+		});
 		
 		path("/admin", () -> {
 			
@@ -62,5 +75,11 @@ public class Router {
 		});
 		
 		Spark.get("/transformadores", controllerTransformador::home, transformer);
+		
+		Spark.before("/*", (req, res) -> {
+			if(req.requestMethod() != "GET") {
+				em.getTransaction().commit();
+			}
+		});
 	}
 }
