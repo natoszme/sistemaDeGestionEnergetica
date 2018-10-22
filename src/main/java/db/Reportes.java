@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
@@ -22,9 +21,9 @@ public class Reportes implements TransactionalOps, WithGlobalEntityManager{
 
 	EntityManager em = entityManager();
 	
-	public static void main(String[] args) {
+	public void main(String[] args) {
 			
-		EntityManager em = PerThreadEntityManagers.getEntityManager();
+		EntityManager em = entityManager();
 		EntityTransaction transaction = em.getTransaction();
 		
 		transaction.begin();
