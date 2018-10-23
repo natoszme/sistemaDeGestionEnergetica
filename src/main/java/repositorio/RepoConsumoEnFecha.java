@@ -1,11 +1,12 @@
 package repositorio;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.hibernate.Session;
-import org.hibernate.Filter;
+import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import cliente.Cliente;
 import repositorio.RepoEnDB;
@@ -26,26 +27,37 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 		return instancia;
 	}
 	
-	public List<ConsumoEnFecha> filtrarMedicionesXCliente(Cliente cliente, String desde, String hasta) { 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-			
-		Session session = entityManager().unwrap(Session.class);
-		Filter filter = session.enableFilter("filtroDeFecha");
+	public List<ConsumoEnFecha> filtrarMedicionesXCliente(Cliente cliente, LocalDateTime desde, LocalDateTime hasta) {		
+		Query query = entityManager()
+						.createQuery(
+							"SELECT hc.fecha AS fecha, hc.consumo AS consumo "
+							+ "FROM Cliente c "
+							+ "INNER JOIN  c.dispositivos AS d "
+							+ "INNER JOIN d.tipoDispositivo td "
+							+ "INNER JOIN  td.consumosHastaElMomento AS hc "
+							+ "WHERE c = :cliente "
+							+ (desde != null ? "AND hc.fecha >= :desde " : "")
+							+ (hasta != null ? "AND hc.fecha <= :hasta " : "")
+						);
 		
-		filter.setParameter("desde", LocalDateTime.parse(desde, formatter));
-		filter.setParameter("hasta", LocalDateTime.parse(hasta, formatter));
+		query.setParameter("cliente", cliente);
 		
-		String query = "SELECT hc.* FROM Cliente c INNER JOIN  c.dispositivos AS d INNER JOIN  d.tipoDispositivo.consumosHastaElMomento AS hc";
-		query = "FROM ConsumoEnFecha";
-		List<ConsumoEnFecha> results = (List<ConsumoEnFecha>) session.createQuery(query);
-		
-		for (ConsumoEnFecha c: results) {
-			System.out.println(c.getFecha());
-			System.out.println(c.getConsumo());
+		if (desde != null) {			
+			query.setParameter("desde", desde);
 		}
 		
-		session.disableFilter("filtroDeFecha");
+		if (hasta != null) {			
+			query.setParameter("hasta", hasta);
+		}
 		
-		return results;
+		return convertirAMediciones(query.getResultList());
+	}
+	
+	private List<ConsumoEnFecha> convertirAMediciones(List<Object[]> results) {
+		List<ConsumoEnFecha> mediciones = new ArrayList<ConsumoEnFecha>();
+		
+		mediciones = results.stream().map(result -> new ConsumoEnFecha((LocalDateTime) result[0], (Double) result[1])).collect(Collectors.toList());
+		
+		return mediciones;
 	}
 }

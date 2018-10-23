@@ -1,4 +1,5 @@
 package repositorio;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import dispositivo.Dispositivo;
@@ -20,19 +21,35 @@ public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDisp
 		return instancia;
 	}
 	
+	// TODO: evitar repeticion de logica de los metodos que obtienen la restriccion (max y min)
+	// TODO: ver que hacer con el try catch
 	public double dameRestriccionMaximaDe(Dispositivo dispositivo) {
 		Query query = em.createQuery("SELECT res.usoMensualMaximo FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Double.class);
 		query.setParameter("dispositivo", dispositivo);
 		
-		Double usoMensualMaximo = (Double) query.getSingleResult();
+		Double usoMensualMaximo;
+		
+		try {
+			usoMensualMaximo = (Double) query.getSingleResult();			
+		} catch (NoResultException e) {
+			usoMensualMaximo = 0.0;
+		}
+		
 		return usoMensualMaximo.doubleValue();
 	}
 	
 	public double dameRestriccionMinimaDe(Dispositivo dispositivo) {
 		Query query = em.createQuery("SELECT res.usoMensualMinimo FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Double.class);
-		query.setParameter("dispositivo", dispositivo);
+		query.setParameter("dispositivo", dispositivo);		
 		
-		Double usoMensualMinimo = (Double) query.getSingleResult();
+		Double usoMensualMinimo;
+		
+		try {
+			usoMensualMinimo = (Double) query.getSingleResult();			
+		} catch (NoResultException e) {
+			usoMensualMinimo = 0.0;
+		}
+		
 		return usoMensualMinimo.doubleValue();
 	}
 

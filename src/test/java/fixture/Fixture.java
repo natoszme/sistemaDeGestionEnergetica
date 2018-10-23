@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.After;
 import org.mockito.Mockito;
 import org.uqbar.geodds.Point;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -22,7 +21,6 @@ import dispositivo.gadgets.regla.Regla;
 import dispositivo.gadgets.regla.ReglaEstricta;
 import dispositivo.gadgets.regla.ReglaPermisiva;
 import repositorio.RepoCategorias;
-import repositorio.RepoClientes;
 import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 import transformador.Transformador;

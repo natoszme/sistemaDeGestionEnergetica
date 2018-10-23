@@ -1,10 +1,15 @@
 package server.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
+import json.JSONParser;
 import repositorio.RepoClientes;
 import repositorio.RepoConsumoEnFecha;
 import server.login.Autenticable;
@@ -19,7 +24,6 @@ import org.apache.commons.math3.util.Pair;
 public class ControllerCliente extends ControllerLogin {
 
 	List<Pair<Dispositivo, Double>> horasOptimas;
-	List<ConsumoEnFecha> mediciones;
 	
 	public ModelAndView home(Request req, Response res) {
 		
@@ -50,7 +54,6 @@ public class ControllerCliente extends ControllerLogin {
 		viewModel.put("tieneDispositivos", cliente.cantidadDispositivos() > 0);
 		viewModel.put("tieneReglas", cliente.getReglas().size() > 0);		
 		viewModel.put("horasOptimas", horasOptimas);
-		viewModel.put("mediciones", mediciones);
 		viewModel.put("resultadosOptimizador", new OptimizadorUsoDispositivos(cliente).optimizarUsoDispositivos());
 		
 		return viewModel;
@@ -73,10 +76,20 @@ public class ControllerCliente extends ControllerLogin {
 		return RepoClientes.getInstance().dameCliente(Long.parseLong(req.cookie(nombreCookieId())));
 	}
 	
-	public ModelAndView obtenerMediciones(Request req, Response res) {
-		Cliente cliente = obtenerClienteDe(req);
-		mediciones = RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, req.queryParams("desde"), req.queryParams("hasta"));		
+	public String obtenerMediciones(Request req, Response res) {
+		JSONParser<ConsumoEnFecha> parser = new JSONParser<ConsumoEnFecha>();		 
 		
-		return this.home(req, res);
-	}	
+		Cliente cliente = obtenerClienteDe(req);
+		
+		LocalDateTime desde = formatearFecha(req.queryParams("desde"), LocalTime.of(0, 0, 0, 0));
+		LocalDateTime hasta = formatearFecha(req.queryParams("hasta"), LocalTime.of(23, 59, 59, 999));
+		
+		List<ConsumoEnFecha> mediciones = RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, desde, hasta);
+		return parser.listToJson(mediciones);  
+	}
+	
+	private LocalDateTime formatearFecha(String fecha, LocalTime tiempo) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return (!fecha.isEmpty() ? LocalDateTime.of(LocalDate.parse(fecha, formatter), tiempo) : null);		
+	}
 }
