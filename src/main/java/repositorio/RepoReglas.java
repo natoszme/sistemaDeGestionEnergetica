@@ -39,9 +39,14 @@ public class RepoReglas extends RepoEnDB<Regla>{
 
 	public boolean tieneReglaDe(Dispositivo dispositivo) {
 		return obtenerTodas().stream().anyMatch(regla -> regla.esDe(dispositivo));
-	}	
+
+		// TODO: con esto tira error de dispositivos transient
+		// return !reglasDeDispositivo(dispositivo).isEmpty(); 
+	}
 	
 	public List<Regla> reglasDeDispositivo(Dispositivo dispositivo) {
-		return (List<Regla>) obtenerTodas().stream().filter(regla -> regla.esDe(dispositivo)).collect(Collectors.toList());
+		String string = "FROM Regla r WHERE r.dispositivo = :dispositivo";
+		
+		return (List<Regla>) em.createQuery(string, Regla.class).setParameter("dispositivo", dispositivo).getResultList();
 	}
 }

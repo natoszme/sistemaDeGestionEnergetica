@@ -23,7 +23,7 @@ public class RepoClientes extends RepoAutenticables<Cliente> {
 	}
 	
 	public List<Cliente> obtenerAhorradores() {
-		return this.obtenerTodas().stream().filter(Cliente::permiteAhorroAutomatico).collect(Collectors.toList());
+		return (List<Cliente>) em.createQuery("FROM Cliente c WHERE c.ahorroAutomatico = true").getResultList();
 	}
 
 	public Cliente dameCliente(long id) {

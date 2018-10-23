@@ -4,8 +4,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
-
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import cliente.Cliente;
@@ -46,8 +44,6 @@ public class RepoTransformadores extends RepoEnDB<Transformador> implements With
 	}
 	
 	public long obtenerCantidadTransformadores() {
-		EntityManager em = entityManager();
 		return (long) em.createQuery("SELECT COUNT(*) FROM Transformador").getSingleResult();
-	}
-	
+	}	
 }
