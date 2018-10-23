@@ -1,4 +1,7 @@
 package repositorio;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+
 import dispositivo.Dispositivo;
 import dispositivo.gadgets.actuador.Actuador;
 import simplex.NoExisteRestriccionPara;
@@ -20,15 +23,25 @@ public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDisp
 	}
 	
 	private RestriccionUsoDispositivo obtenerRestriccionDe(Dispositivo dispositivo) {
-		RestriccionUsoDispositivo restriccion = obtenerTodas().stream().filter(unaRestriccion -> unaRestriccion.esDe(dispositivo)).
-				findFirst().orElseThrow(() -> new NoExisteRestriccionPara(dispositivo));
+		Query query = em.createQuery("SELECT res FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", RestriccionUsoDispositivo.class);
+		query.setParameter("dispositivo", dispositivo);
+		
+		RestriccionUsoDispositivo restriccion;
+		try {
+			restriccion = (RestriccionUsoDispositivo) query.getSingleResult();
+		}
+		catch (NoResultException e) {
+			throw new NoExisteRestriccionPara(dispositivo);
+		}
 		return restriccion;
 	}
 	
 	public double dameRestriccionMaximaDe(Dispositivo dispositivo) {
-		RestriccionUsoDispositivo restriccion = obtenerRestriccionDe(dispositivo);
+		Query query = em.createQuery("SELECT res.usoMensualMaximo FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Double.class);
+		query.setParameter("dispositivo", dispositivo);
 		
-		return restriccion.getUsoMensualMaximo();
+		Double usoMensualMaximo = (Double) query.getSingleResult();
+		return usoMensualMaximo.doubleValue();
 	}
 	
 	public double dameRestriccionMinimaDe(Dispositivo dispositivo) {
