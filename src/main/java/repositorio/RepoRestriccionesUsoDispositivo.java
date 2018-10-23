@@ -1,10 +1,8 @@
 package repositorio;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import dispositivo.Dispositivo;
 import dispositivo.gadgets.actuador.Actuador;
-import simplex.NoExisteRestriccionPara;
 import simplex.RestriccionUsoDispositivo;
 
 public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDispositivo> {
@@ -22,20 +20,6 @@ public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDisp
 		return instancia;
 	}
 	
-	private RestriccionUsoDispositivo obtenerRestriccionDe(Dispositivo dispositivo) {
-		Query query = em.createQuery("SELECT res FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", RestriccionUsoDispositivo.class);
-		query.setParameter("dispositivo", dispositivo);
-		
-		RestriccionUsoDispositivo restriccion;
-		try {
-			restriccion = (RestriccionUsoDispositivo) query.getSingleResult();
-		}
-		catch (NoResultException e) {
-			throw new NoExisteRestriccionPara(dispositivo);
-		}
-		return restriccion;
-	}
-	
 	public double dameRestriccionMaximaDe(Dispositivo dispositivo) {
 		Query query = em.createQuery("SELECT res.usoMensualMaximo FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Double.class);
 		query.setParameter("dispositivo", dispositivo);
@@ -45,12 +29,17 @@ public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDisp
 	}
 	
 	public double dameRestriccionMinimaDe(Dispositivo dispositivo) {
-		RestriccionUsoDispositivo restriccion = obtenerRestriccionDe(dispositivo);
+		Query query = em.createQuery("SELECT res.usoMensualMinimo FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Double.class);
+		query.setParameter("dispositivo", dispositivo);
 		
-		return restriccion.getUsoMensualMinimo();
+		Double usoMensualMinimo = (Double) query.getSingleResult();
+		return usoMensualMinimo.doubleValue();
 	}
 
 	public Actuador dameAccionDe(Dispositivo dispositivo) {
-		return obtenerRestriccionDe(dispositivo).getActuadorAlExcederse();
+		Query query = em.createQuery("SELECT res.actuadorAlExcederse FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Actuador.class);
+		query.setParameter("dispositivo", dispositivo);
+		
+		return (Actuador) query.getSingleResult();
 	}
 }
