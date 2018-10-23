@@ -1,7 +1,9 @@
 package repositorio;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+
 import dispositivo.Dispositivo;
 import dispositivo.gadgets.actuador.Actuador;
-import simplex.NoExisteRestriccionPara;
 import simplex.RestriccionUsoDispositivo;
 
 public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDispositivo> {
@@ -19,25 +21,42 @@ public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDisp
 		return instancia;
 	}
 	
-	private RestriccionUsoDispositivo obtenerRestriccionDe(Dispositivo dispositivo) {
-		RestriccionUsoDispositivo restriccion = obtenerTodas().stream().filter(unaRestriccion -> unaRestriccion.esDe(dispositivo)).
-				findFirst().orElseThrow(() -> new NoExisteRestriccionPara(dispositivo));
-		return restriccion;
-	}
-	
+	// TODO: evitar repeticion de logica de los metodos que obtienen la restriccion (max y min)
+	// TODO: ver que hacer con el try catch
 	public double dameRestriccionMaximaDe(Dispositivo dispositivo) {
-		RestriccionUsoDispositivo restriccion = obtenerRestriccionDe(dispositivo);
+		Query query = em.createQuery("SELECT res.usoMensualMaximo FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Double.class);
+		query.setParameter("dispositivo", dispositivo);
 		
-		return restriccion.getUsoMensualMaximo();
+		Double usoMensualMaximo;
+		
+		try {
+			usoMensualMaximo = (Double) query.getSingleResult();			
+		} catch (NoResultException e) {
+			usoMensualMaximo = 0.0;
+		}
+		
+		return usoMensualMaximo.doubleValue();
 	}
 	
 	public double dameRestriccionMinimaDe(Dispositivo dispositivo) {
-		RestriccionUsoDispositivo restriccion = obtenerRestriccionDe(dispositivo);
+		Query query = em.createQuery("SELECT res.usoMensualMinimo FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Double.class);
+		query.setParameter("dispositivo", dispositivo);		
 		
-		return restriccion.getUsoMensualMinimo();
+		Double usoMensualMinimo;
+		
+		try {
+			usoMensualMinimo = (Double) query.getSingleResult();			
+		} catch (NoResultException e) {
+			usoMensualMinimo = 0.0;
+		}
+		
+		return usoMensualMinimo.doubleValue();
 	}
 
 	public Actuador dameAccionDe(Dispositivo dispositivo) {
-		return obtenerRestriccionDe(dispositivo).getActuadorAlExcederse();
+		Query query = em.createQuery("SELECT res.actuadorAlExcederse FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Actuador.class);
+		query.setParameter("dispositivo", dispositivo);
+		
+		return (Actuador) query.getSingleResult();
 	}
 }

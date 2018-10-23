@@ -56,6 +56,11 @@ public abstract class Regla extends DatosBasicos{
 		return actuadores;
 	}
 	
+	public String getNombre() {
+		
+		return this.getClass().getSimpleName();
+	}
+	
 	private void validarDispositivoInteligente(Dispositivo dispositivo) {
 		if(!dispositivo.esInteligente()) throw new NoSePuedeUsarReglaSobreDispositivoNoInteligenteException();
 	}

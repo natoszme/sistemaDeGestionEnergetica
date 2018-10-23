@@ -54,6 +54,7 @@ public class ControllerCliente extends ControllerLogin {
 		viewModel.put("tieneDispositivos", cliente.cantidadDispositivos() > 0);
 		viewModel.put("tieneReglas", cliente.getReglas().size() > 0);		
 		viewModel.put("horasOptimas", horasOptimas);
+		viewModel.put("resultadosOptimizador", new OptimizadorUsoDispositivos(cliente).optimizarUsoDispositivos());
 		
 		return viewModel;
 	}

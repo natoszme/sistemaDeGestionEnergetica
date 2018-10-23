@@ -17,7 +17,6 @@ public abstract class ControllerLogin {
 		
 		HashMap<String, Object> viewModel = new HashMap<>();
 		viewModel.put("username", req.cookie("username"));
-		viewModel.put("home", home());
 		
 		return new ModelAndView(viewModel, "login.hbs");
 	}
@@ -65,5 +64,11 @@ public abstract class ControllerLogin {
 
 	public boolean estaLogueado(Request req) {
 		return req.cookie(nombreCookieId()) != null;
-	}	
+	}
+	
+	public String logout(Request req, Response res) {
+		res.removeCookie(nombreCookieId());
+		redirigirAHome(res);
+		return null;
+	}
 }

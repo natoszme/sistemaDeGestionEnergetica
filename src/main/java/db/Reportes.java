@@ -8,9 +8,8 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
@@ -18,13 +17,13 @@ import repositorio.RepoTransformadores;
 import transformador.Transformador;
 
 
-public class Reportes extends AbstractPersistenceTest implements WithGlobalEntityManager{
+public class Reportes implements TransactionalOps, WithGlobalEntityManager{
 
 	EntityManager em = entityManager();
 	
-	public static void main(String[] args) {
+	public void main(String[] args) {
 			
-		EntityManager em = PerThreadEntityManagers.getEntityManager();
+		EntityManager em = entityManager();
 		EntityTransaction transaction = em.getTransaction();
 		
 		transaction.begin();

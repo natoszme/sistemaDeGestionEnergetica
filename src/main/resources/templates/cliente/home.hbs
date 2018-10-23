@@ -22,6 +22,9 @@
 	      {{#if tieneReglas}}
 	      <a class="nav-link" id="regla-tab" data-toggle="pill" href="#reglas" role="tab" aria-controls="reglas" aria-selected="false">Reglas</a>
 	      {{/if}}
+	      {{#if tieneDispositivos}}
+	      <a class="nav-link" id="optimizador-tab" data-toggle="pill" href="#optimizador" role="tab" aria-controls="optimizador" aria-selected="false">Resultado Optimizador</a>
+	      {{/if}}
 	    </div>
 	  </div>
 	  <div class="col-9">
@@ -58,9 +61,9 @@
 			  </thead>
 			  <tbody>
 			  </tbody>
-			</table>
-			<button type="button" class="btn btn-primary">Optimizar consumo</button>			      	
+			</table>			      	
 	      </div>
+	      
 	      <div class="tab-pane fade" id="dispositivos" role="tabpanel" aria-labelledby="dispositivos-tab">
       		{{#each cliente.dispositivos}}
 	      		{{{ isEven @index '<div class="row mb-2">' }}}
@@ -81,23 +84,23 @@
 	      
 	      <div class="tab-pane fade" id="reglas" role="tabpanel" aria-labelledby="reglas-tab">
 		      {{#each cliente.reglas}}
-		      		{{{ isEven @index '<div class="row mb-2">' }}}
+	      			{{{ isEven @index '<div class="row mb-2">' }}}
 			      		<div class="card">
 				      		<div class="card-header">
-								<h5 class="card-title">Regla 1 - <small class="text-danger">Estricta</small></h5>
+								<h5 class="card-title">Regla - <small class="text-danger">{{ nombre }}</small></h5>
 							</div>
 						  	<div class="card-body">						   
-							    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: dispositivo.nombre</h6>
+							    <h6 class="card-subtitle mb-2 text-muted">Dispositivo: <span class="text-body">{{ dispositivo.nombre }}</span></h6>
 							    <h6 class="card-subtitle mb-2 text-muted">Condiciones</h6>
 							    <ul>
 							    	{{#each condiciones}}
-								    	<li>Condicion 1</li>
+								    	<li>{{ nombre }}</li>
 							    	{{/each}}
 							    </ul>
 							     <h6 class="card-subtitle mb-2 text-muted">Actuadores</h6>
 							    <ul>
 							    	{{#each actuadores}}
-										<li>Actuador que llama a servicio tecnico</li>
+										<li>{{ nombre }}</li>
 						    		{{/each}}									
 							    </ul>
 							 </div>
@@ -106,9 +109,29 @@
 		      		{{#if @last}}
 					{{{ isEven @index '</div>' }}}
 					{{/if}}
-				{{/each}}
-      		</div>	   
-	      </div>
+			{{/each}}
+      	</div>	
+    	
+			<div class="tab-pane fade" id="optimizador" role="tabpanel" aria-labelledby="optimizador-tab">
+		    	<table class="table table-striped table-bordered">
+					<thead class="thead-dark">
+						<tr>
+					      <th scope="col">Dispositivo</th>
+					      <th scope="col">Resultado cant. horas &oacute;ptimas</th>
+					   	</tr>
+				  	</thead>
+			  		<tbody>
+			  		{{#each resultadosOptimizador }}
+					    <tr>
+					      <td scope="row">{{ first.nombre }}</td>
+					      <td>{{ second }} horas</td>
+					    </tr>
+			    	{{/each}} 
+				  	</tbody>
+				</table>		      	
+		  </div>
+		     
+		  </div>
 	    </div>
 	  </div>
 	</div>

@@ -10,4 +10,6 @@ public interface Gadget{
 	public default boolean esIgualA(Gadget otroGadget) {
 		return otroGadget.getClass() == this.getClass();
 	}
+	
+	public String getNombre();
 }

@@ -83,7 +83,7 @@ public class ControllerAdmin extends ControllerLogin{
 		
 		RepoDispositivosBase.getInstance().agregarEntidad(dispositivo);
 		
-		res.redirect("/admin/home");
+		redirigirAHome(res);
 		return null;
 	}
 }

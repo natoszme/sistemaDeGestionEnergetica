@@ -49,5 +49,5 @@ public class DispositivosBaseFactory {
 		return new Dispositivo("Ventilador de techo", new DispositivoInteligente(dispositivoConcreto), 0.06);
 	}
 	
-	//faltan todos los estandar? estaria bueno que haya al menos un ejemplo de uno
+	//TODO faltan todos los estandar? estaria bueno que haya al menos un ejemplo de uno
 }
