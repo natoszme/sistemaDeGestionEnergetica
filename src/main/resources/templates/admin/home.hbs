@@ -31,6 +31,36 @@
 			</form>
         </div>
     </div>
+    
+    <div class="list-group list-group-flush mt-5">
+     		{{#each clientes}}
+	      		{{{ isEven @index '<div class="row mb-2">' }}}
+		      		<div class="col">
+				      	<div class="card">
+						  <div class="card-body">
+						    <h5 class="card-title">{{ nombre }}</h5>
+						    <h6 class="card-subtitle mb-2 text-muted">Encendido</h6>
+						  </div>
+						</div>
+						,,
+						 <li class="list-group-item">
+						    <div class="d-flex w-100 justify-content-between">
+						      <h5 class="mb-1">{{ nombre }}</h5>
+						      <small class="text-muted">1500 KW</small>
+						    </div>
+						    <p class="mb-1">Categor&iacute;a: R1</p>
+						    <small class="text-muted">Cliente desde 10/02/2018</small>
+						  </li>
+						 ,,
+						
+		      		</div>
+	      		{{{ isOdd @index '</div>' }}}
+	      		{{#if @last}}
+				{{{ isEven @index '</div>' }}}
+				{{/if}}
+			{{/each}}
+      </div>
+    
 	<div class="list-group list-group-flush mt-5">
 	  <li class="list-group-item">
 	    <div class="d-flex w-100 justify-content-between">
