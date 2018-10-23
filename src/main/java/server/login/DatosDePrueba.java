@@ -22,6 +22,8 @@ import dispositivo.gadgets.regla.Regla;
 import dispositivo.gadgets.regla.ReglaEstricta;
 import dispositivo.gadgets.sensor.SensorHorasEncendido;
 import repositorio.RepoReglas;
+import repositorio.RepoRestriccionesUsoDispositivo;
+import simplex.RestriccionUsoDispositivo;
 import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 
@@ -45,6 +47,10 @@ public class DatosDePrueba extends AbstractPersistenceTest implements WithGlobal
 		condiciones.add(condicionConsumo);
 
 		Dispositivo teleSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(DispositivoConcreto.TVINTELIGENTE), 0.9);
+		Dispositivo play4 = new Dispositivo("Play 4", new DispositivoEstandar(), 0.2);
+		Dispositivo play3 = new Dispositivo("Play 2", new DispositivoEstandar(), 0.3);
+		Dispositivo play2 = new Dispositivo("Play 3", new DispositivoEstandar(), 1);
+		Dispositivo play1 = new Dispositivo("Play 1", new DispositivoEstandar(), 0.56);
 		Regla unaReglaEstricta = new ReglaEstricta(actuadores, condiciones, teleSmart);
 		
 		em.remove(unCliente);
@@ -55,17 +61,19 @@ public class DatosDePrueba extends AbstractPersistenceTest implements WithGlobal
 			em.persist(r1);
 			
 			unCliente.agregarDispositivo(teleSmart);
-			unCliente.agregarDispositivo(new Dispositivo("Play 4", new DispositivoEstandar(), 45.987));
-			unCliente.agregarDispositivo(new Dispositivo("Play 3", new DispositivoEstandar(), 455.987));
-			unCliente.agregarDispositivo(new Dispositivo("Play 2", new DispositivoEstandar(), 87.987));
-			unCliente.agregarDispositivo(new Dispositivo("Play 1", new DispositivoEstandar(), 990.987));
-			unCliente.agregarDispositivo(new Dispositivo("Play 0", new DispositivoEstandar(), 7.987));
-			unCliente.agregarDispositivo(new Dispositivo("Play -1", new DispositivoEstandar(), 45.987));
-			unCliente.agregarDispositivo(new Dispositivo("Play -2", new DispositivoEstandar(), 35.987));
+			unCliente.agregarDispositivo(play4);
+			unCliente.agregarDispositivo(play3);
+			unCliente.agregarDispositivo(play2);
+			unCliente.agregarDispositivo(play1);
 
 			em.persist(unCliente);
 
 			RepoReglas.getInstance().agregarEntidad(unaReglaEstricta);
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(teleSmart, 90, 360, Actuador.ActuadorQueApaga));
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play4, 90, 360, Actuador.ActuadorQueApaga));
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play3, 90, 360, Actuador.ActuadorQueApaga));
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play2, 6, 30, Actuador.ActuadorQuePoneEnAhorroDeEnergia));
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play1, 6, 15, Actuador.ActuadorQueApaga));
 		});
 	}
 }

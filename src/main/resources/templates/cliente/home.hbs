@@ -19,7 +19,7 @@
 	      <a class="nav-link" id="regla-tab" data-toggle="pill" href="#reglas" role="tab" aria-controls="reglas" aria-selected="false">Reglas</a>
 	      {{/if}}
 	      {{#if tieneDispositivos}}
-	      <a class="nav-link" id="optimizador-tab" data-toggle="pill" href="#optimizador" role="tab" aria-controls="optimizador" aria-selected="false">Optimizar consumo</a>
+	      <a class="nav-link" id="optimizador-tab" data-toggle="pill" href="#optimizador" role="tab" aria-controls="optimizador" aria-selected="false">Resultado Optimizador</a>
 	      {{/if}}
 	    </div>
 	  </div>
@@ -129,18 +129,12 @@
 					   	</tr>
 				  	</thead>
 			  		<tbody>
+			  		{{#each resultadosOptimizador }}
 					    <tr>
-					      <td scope="row">7/10/2018</td>
-					      <td>85.254,32 KW</td>
+					      <td scope="row">{{ first.nombre }}</td>
+					      <td>{{ second }} horas</td>
 					    </tr>
-					    <tr>
-					      <td scope="row">21/09/2018</td>
-					      <td>25.000 KW</td>
-					    </tr>
-					    <tr>
-					      <td scope="row">17/08/2018</td>
-					      <td>12.003,2 KW</td>
-					    </tr> 
+			    	{{/each}} 
 				  	</tbody>
 				</table>		      	
 		  </div>
