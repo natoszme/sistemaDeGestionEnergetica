@@ -3,6 +3,7 @@ package repositorio;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
@@ -55,9 +56,7 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 	private List<ConsumoEnFecha> convertirAMediciones(List<Object[]> results) {
 		List<ConsumoEnFecha> mediciones = new ArrayList<ConsumoEnFecha>();
 		
-		results.stream().forEach(result -> {
-			mediciones.add(new ConsumoEnFecha((LocalDateTime) result[0], (Double) result[1]));			
-		});
+		mediciones = results.stream().map(result -> new ConsumoEnFecha((LocalDateTime) result[0], (Double) result[1])).collect(Collectors.toList());
 		
 		return mediciones;
 	}

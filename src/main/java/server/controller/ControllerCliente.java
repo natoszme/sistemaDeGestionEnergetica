@@ -80,8 +80,8 @@ public class ControllerCliente extends ControllerLogin {
 		
 		Cliente cliente = obtenerClienteDe(req);
 		
-		LocalDateTime desde = formatearFecha(req.queryParams("desde"), LocalTime.of(0, 0, 0));
-		LocalDateTime hasta = formatearFecha(req.queryParams("hasta"), LocalTime.of(23, 59, 59));
+		LocalDateTime desde = formatearFecha(req.queryParams("desde"), LocalTime.of(0, 0, 0, 0));
+		LocalDateTime hasta = formatearFecha(req.queryParams("hasta"), LocalTime.of(23, 59, 59, 999));
 		
 		List<ConsumoEnFecha> mediciones = RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, desde, hasta);
 		return parser.listToJson(mediciones);  
