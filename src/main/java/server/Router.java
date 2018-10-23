@@ -70,8 +70,7 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 			Spark.get("/home", controllerCliente::home, transformer);
 			Spark.get("/optimizarConsumo", controllerCliente::optimizarUso, transformer);
 			
-			Spark.get("/mediciones", controllerCliente::obtenerMediciones, transformer);
-			
+			Spark.get("/mediciones", controllerCliente::obtenerMediciones, transformer);			
 		});
 		
 		Spark.get("/transformadores", controllerTransformador::home, transformer);
@@ -81,5 +80,7 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 				em.getTransaction().commit();
 			}
 		});
+		
+		Spark.get("/", controllerTransformador::home, transformer);
 	}
 }
