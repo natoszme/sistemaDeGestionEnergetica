@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 
 import org.uqbar.geodds.Point;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import categoria.Categoria;
 import cliente.Cliente;
@@ -28,7 +28,7 @@ import simplex.RestriccionUsoDispositivo;
 import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 
-public class DatosDePrueba extends AbstractPersistenceTest implements WithGlobalEntityManager{
+public class DatosDePrueba implements TransactionalOps, WithGlobalEntityManager{
 	public void init() {
 		EntityManager em = entityManager();
 		
