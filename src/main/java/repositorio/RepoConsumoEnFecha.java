@@ -49,8 +49,32 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 		if (hasta != null) {			
 			query.setParameter("hasta", hasta);
 		}
-		
 		return convertirAMediciones(query.getResultList());
+	}
+	
+	public double obtenerConsumoDeClienteEnFecha(Cliente cliente, LocalDateTime desde, LocalDateTime hasta) {		
+		Query query = entityManager()
+						.createQuery(
+							"SELECT SUM(hc.consumo)"
+							+ "FROM Cliente c "
+							+ "INNER JOIN  c.dispositivos AS d "
+							+ "INNER JOIN d.tipoDispositivo td "
+							+ "INNER JOIN  td.consumosHastaElMomento AS hc "
+							+ "WHERE c = :cliente "
+							+ (desde != null ? "AND hc.fecha >= :desde " : "")
+							+ (hasta != null ? "AND hc.fecha <= :hasta " : "")
+						);
+		
+		query.setParameter("cliente", cliente);
+		
+		if (desde != null) {			
+			query.setParameter("desde", desde);
+		}
+		
+		if (hasta != null) {			
+			query.setParameter("hasta", hasta);
+		}
+		return query.getFirstResult();
 	}
 	
 	private List<ConsumoEnFecha> convertirAMediciones(List<Object[]> results) {
