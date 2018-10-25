@@ -62,6 +62,7 @@ public class ControllerCliente extends ControllerLogin {
 	}
 	
 	public ModelAndView ejecutarOptimizadorDiferido(Request req, Response res) {
+		System.out.println("holahola");
 		Cliente cliente = obtenerClienteDe(req);
 		JobOptimizador job = JobOptimizador.getInstance();
 		job.ejecutarAUnCliente(cliente);
