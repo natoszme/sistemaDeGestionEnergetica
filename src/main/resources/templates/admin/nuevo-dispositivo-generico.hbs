@@ -7,7 +7,7 @@
 		<h2>Alta de dispositivo genérico</h2>
 	</div>
 	<br>
-	<form method="post" action="javascript:crearDispositivo()">
+	<form id="formCreadDispositivo" method="post" action="javascript:crearDispositivo();">
 	  <div class="form-group row">
 	    <label for="nombre" class="col-sm-4 col-form-label">Nombre</label>
 	    <div class="col-sm-8">
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<div class="text-right">
-		  <button type="submit" class="btn btn-primary" onclick="dispositivoCreado()">Guardar</button>
+		  <button type="submit" id="botonEnviar" class="btn btn-primary" onclick="">Guardar</button>
 		</div>
 	</form>
 
@@ -48,11 +48,12 @@
 {{#partial "scripts"}}
 	<script>
 		function crearDispositivo() {
-			var posting = $.post("/dispositivos", { nombre: $('#nombre').val(),
+			$.post("/dispositivos", { nombre: $('#nombre').val(),
 			consumo: $('#consumo').val(),
-			tipoDispositivo: $('input[name=tipoDispositivo]:checked').val() });
-			
-		    posting.done(dispositivoCreado());
+			tipoDispositivo: $('input[name=tipoDispositivo]:checked').val() })
+			.done(function(data){
+		    	dispositivoCreado();
+		    });
 		}	
 	
 		function dispositivoCreado() {	
@@ -60,12 +61,17 @@
 			    title: 'Dispositivo creado',
 			    html: 'Listo! El dispositivo ha sido creado. Redireccionando...',
 			    type: 'success',
-			    timer: 2000,
+			    timer: 2500,
 			    showConfirmButton: false
 			}).then((result) => {
 				  window.location.replace("/admin/home");
 			});
 		}
+		
+		$('#formCreadDispositivo').submit(function(data){
+			$('#botonEnviar').prop('disabled', 'disabled');
+			$('#botonEnviar').text('Enviando...');
+		});
 	</script>
 {{/partial}}
 
