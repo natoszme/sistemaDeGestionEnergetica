@@ -44,7 +44,7 @@
     <div id="clientes" class="list-group list-group-flush mt-5">
     	
      		
-      </div>
+    </div>
   
 {{/partial}}
 
@@ -69,23 +69,23 @@
 			{ desde: desde, hasta: hasta },
 			function(data, status) {
 				const rowsCliente = data.reduce(function(row, cliente) {
-					return row + 
-					    '<div class="col">' +
+					return row + ''+
+					    
 						 '<li class="list-group-item">'+
 						   ' <div class="d-flex w-100 justify-content-between">'+
-						     ' <h5 class="mb-1">'+ cliente.nombre +'</h5>'+
-						      '<small class="text-muted">'+cliente.consumo+'</small>' +
-						   ' </div>'
-						  	  '<p class="mb-1">Categor&iacute;a: '+cliente.categoria+'</p>'+
-						      '<small class="text-muted">Cliente desde'+cliente.fechaAlta+'</small>'+
-						 '</li>'+
-		      		'</div>';
+						     ' <h5 class="mb-1">'+  cliente[1] +'</h5>'+
+						      '<small class="text-muted">Consumo '+cliente[3]+'</small>' +
+						   ' </div>'+
+					  	   '<p class="mb-1">Categor&iacute;a: '+cliente[0]+'</p>'+
+					      '<small class="text-muted">Cliente desde '+cliente[2]+'</small>'+
+						 '</li>'
+		      			;
 				}, '');
 
 					
 
 				$('#clientes').html(rowsCliente);
-				$('#clientes').DataTable();
+				
 	    	}, 
 	    	"json" // dataType expected
 	    );
