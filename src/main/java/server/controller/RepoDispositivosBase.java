@@ -17,5 +17,4 @@ public class RepoDispositivosBase extends RepoEnDB<Dispositivo>{
 		}
 		return instancia;
 	}
-
 }

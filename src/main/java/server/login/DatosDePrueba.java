@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 
 import org.uqbar.geodds.Point;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import categoria.Categoria;
 import cliente.Cliente;
@@ -28,7 +28,7 @@ import simplex.RestriccionUsoDispositivo;
 import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 
-public class DatosDePrueba extends AbstractPersistenceTest implements WithGlobalEntityManager{
+public class DatosDePrueba implements TransactionalOps, WithGlobalEntityManager{
 	public void init() {
 		EntityManager em = entityManager();
 		
@@ -86,25 +86,27 @@ public class DatosDePrueba extends AbstractPersistenceTest implements WithGlobal
 		otroCliente.agregarDispositivo(asus);
 		otroCliente.agregarDispositivo(dell);
 		
-		withTransaction(() -> {
-			em.persist(unAdmin);
-			
-			em.persist(r1);
-			
-			unCliente.agregarDispositivo(teleSmart);
-			unCliente.agregarDispositivo(play4);
-			unCliente.agregarDispositivo(play3);
-			unCliente.agregarDispositivo(play2);
-			unCliente.agregarDispositivo(play1);
+		beginTransaction();
+		
+		em.persist(unAdmin);
+		
+		em.persist(r1);
+		
+		unCliente.agregarDispositivo(teleSmart);
+		unCliente.agregarDispositivo(play4);
+		unCliente.agregarDispositivo(play3);
+		unCliente.agregarDispositivo(play2);
+		unCliente.agregarDispositivo(play1);
 
-			em.persist(unCliente);
+		em.persist(unCliente);
 
-			RepoReglas.getInstance().agregarEntidad(unaReglaEstricta);
-			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(teleSmart, 90, 360, Actuador.ActuadorQueApaga));
-			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play4, 90, 360, Actuador.ActuadorQueApaga));
-			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play3, 90, 360, Actuador.ActuadorQueApaga));
-			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play2, 6, 30, Actuador.ActuadorQuePoneEnAhorroDeEnergia));
-			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play1, 6, 15, Actuador.ActuadorQueApaga));
-		});
+		RepoReglas.getInstance().agregarEntidad(unaReglaEstricta);
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(teleSmart, 90, 360, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play4, 90, 360, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play3, 90, 360, Actuador.ActuadorQueApaga));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play2, 6, 30, Actuador.ActuadorQuePoneEnAhorroDeEnergia));
+		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play1, 6, 15, Actuador.ActuadorQueApaga));
+		
+		commitTransaction();
 	}
 }

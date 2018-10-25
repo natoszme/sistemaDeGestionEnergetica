@@ -32,7 +32,7 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 		
 		Spark.before("/*", (req, res) -> {
 			if(req.requestMethod() != "GET") {
-				em.getTransaction().begin();
+				beginTransaction();
 			}
 		});
 		
@@ -82,9 +82,9 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 		
 		Spark.get("/transformadores", controllerTransformador::home, transformer);
 		
-		Spark.before("/*", (req, res) -> {
+		Spark.after("/*", (req, res) -> {
 			if(req.requestMethod() != "GET") {
-				em.getTransaction().commit();
+				commitTransaction();
 			}
 		});
 		
