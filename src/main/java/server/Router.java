@@ -9,6 +9,7 @@ import static spark.Spark.path;
 import static spark.Spark.staticFiles;
 
 import javax.persistence.EntityManager;
+import javax.persistence.RollbackException;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
@@ -86,8 +87,14 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 		
 		Spark.after("/*", (req, res) -> {
 			if(req.requestMethod() != "GET") {
-				commitTransaction();
-				em.clear();
+				try {
+					commitTransaction();
+					em.clear();
+				}
+				catch (RollbackException e) {
+					rollbackTransaction();
+				}
+				
 			}
 		});
 		
