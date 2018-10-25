@@ -57,6 +57,14 @@ public class RepoRestriccionesUsoDispositivo extends RepoEnDB<RestriccionUsoDisp
 		Query query = em.createQuery("SELECT res.actuadorAlExcederse FROM RestriccionUsoDispositivo res WHERE dispositivo = :dispositivo", Actuador.class);
 		query.setParameter("dispositivo", dispositivo);
 		
-		return (Actuador) query.getSingleResult();
+		Actuador actuador;
+		
+		try {
+			actuador = (Actuador) query.getSingleResult();
+		} catch (NoResultException e) {
+			actuador = Actuador.ActuadorQueApaga;
+		}
+		
+		return actuador;
 	}
 }

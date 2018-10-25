@@ -50,5 +50,6 @@ public class JobOptimizador {
 	
 	public void ejecutarAUnCliente(Cliente cliente) {
 		this.obtenerMaximosYGenerarReglas(cliente);
+		cliente.getReglas().forEach(regla -> regla.aplicarSiCumpleCriterio() );
 	}
 }
