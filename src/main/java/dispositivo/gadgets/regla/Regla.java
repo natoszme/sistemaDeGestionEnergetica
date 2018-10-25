@@ -44,6 +44,8 @@ public abstract class Regla extends DatosBasicos{
 		this.condiciones = condiciones;
 	}
 
+	public Regla() {}
+
 	public Dispositivo getDispositivo() {
 		return dispositivo;
 	}

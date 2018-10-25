@@ -86,27 +86,26 @@ public class DatosDePrueba implements TransactionalOps, WithGlobalEntityManager{
 		otroCliente.agregarDispositivo(asus);
 		otroCliente.agregarDispositivo(dell);
 		
-		beginTransaction();
-		
-		em.persist(unAdmin);
-		
-		em.persist(r1);
-		
-		unCliente.agregarDispositivo(teleSmart);
-		unCliente.agregarDispositivo(play4);
-		unCliente.agregarDispositivo(play3);
-		unCliente.agregarDispositivo(play2);
-		unCliente.agregarDispositivo(play1);
+		withTransaction(() -> {
+			em.persist(unAdmin);
+			
+			em.persist(r1);
+			
+			unCliente.agregarDispositivo(teleSmart);
+			unCliente.agregarDispositivo(play4);
+			unCliente.agregarDispositivo(play3);
+			unCliente.agregarDispositivo(play2);
+			unCliente.agregarDispositivo(play1);
 
-		em.persist(unCliente);
+			em.persist(unCliente);
 
-		RepoReglas.getInstance().agregarEntidad(unaReglaEstricta);
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(teleSmart, 90, 360, Actuador.ActuadorQueApaga));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play4, 90, 360, Actuador.ActuadorQueApaga));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play3, 90, 360, Actuador.ActuadorQueApaga));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play2, 6, 30, Actuador.ActuadorQuePoneEnAhorroDeEnergia));
-		RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play1, 6, 15, Actuador.ActuadorQueApaga));
-		
-		commitTransaction();
+			RepoReglas.getInstance().agregarEntidad(unaReglaEstricta);
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(teleSmart, 90, 360, Actuador.ActuadorQueApaga));
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play4, 90, 360, Actuador.ActuadorQueApaga));
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play3, 90, 360, Actuador.ActuadorQueApaga));
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play2, 6, 30, Actuador.ActuadorQuePoneEnAhorroDeEnergia));
+			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play1, 6, 15, Actuador.ActuadorQueApaga));
+			
+		});
 	}
 }
