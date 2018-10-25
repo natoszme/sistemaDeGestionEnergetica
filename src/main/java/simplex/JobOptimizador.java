@@ -46,4 +46,8 @@ public class JobOptimizador {
 	private Set<Actuador> obtenerActuadoresDe(Dispositivo dispositivo) {
 		return new HashSet<Actuador>(Arrays.asList(RepoRestriccionesUsoDispositivo.getInstance().dameAccionDe(dispositivo)));
 	}	
+	
+	public void ejecutarAUnCliente(Cliente cliente) {
+		this.obtenerMaximosYGenerarReglas(cliente);
+	}
 }

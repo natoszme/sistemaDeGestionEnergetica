@@ -62,7 +62,7 @@ public abstract class Regla extends DatosBasicos{
 	}
 	
 	private void validarDispositivoInteligente(Dispositivo dispositivo) {
-		if(!dispositivo.esInteligente()) throw new NoSePuedeUsarReglaSobreDispositivoNoInteligenteException();
+		if(!dispositivo.getEsInteligente()) throw new NoSePuedeUsarReglaSobreDispositivoNoInteligenteException();
 	}
 	
 	public void aplicarSiCumpleCriterio() {

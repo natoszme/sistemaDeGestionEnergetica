@@ -13,6 +13,7 @@ import json.JSONParser;
 import repositorio.RepoClientes;
 import repositorio.RepoConsumoEnFecha;
 import server.login.Autenticable;
+import simplex.JobOptimizador;
 import simplex.OptimizadorUsoDispositivos;
 import spark.ModelAndView;
 import spark.Request;
@@ -55,9 +56,21 @@ public class ControllerCliente extends ControllerLogin {
 		viewModel.put("tieneReglas", cliente.getReglas().size() > 0);		
 		viewModel.put("horasOptimas", horasOptimas);
 		viewModel.put("resultadosOptimizador", new OptimizadorUsoDispositivos(cliente).optimizarUsoDispositivos());
+		viewModel.put("esAhorradorAutomatico", cliente.getPermiteAhorroAutomatico());
 		
 		return viewModel;
 	}
+	
+	public ModelAndView ejecutarOptimizadorDiferido(Request req, Response res) {
+		Cliente cliente = obtenerClienteDe(req);
+		JobOptimizador job = JobOptimizador.getInstance();
+		job.ejecutarAUnCliente(cliente);
+		HashMap<String, Object> viewModel = new HashMap<>();
+				
+		viewModel = obtenerElementosDeCliente(cliente);
+		
+		return new ModelAndView(viewModel, "cliente/home.hbs");
+	} 
 
 	@Override
 	protected String home() {

@@ -55,22 +55,22 @@ public class Dispositivo extends DatosBasicos {
 		tipoDispositivo.convertirAInteligente(this, dispositivoConcreto);
 	}
 
-	public boolean esInteligente() {
+	public boolean getEsInteligente() {
 		return tipoDispositivo.esInteligente();
 	}
-
-	public boolean estaEncendido() {
+	
+	public boolean getEstaEncendido() {
 		return tipoDispositivo.estaEncendido();
 	}
 
-	public boolean estaEnAhorroEnergia() {
+	public boolean getEstaEnAhorroEnergia() {
 		return tipoDispositivo.estaEnAhorroEnergia();
 	}
 
-	public boolean estaApagado() {
+	public boolean getEstaApagado() {
 		return tipoDispositivo.estaApagado();
 	}
-
+	
 	public double consumoEnLasUltimas(int horas, Dispositivo dispositivo) {
 		return tipoDispositivo.consumoEnLasUltimas(horas, dispositivo);
 	}

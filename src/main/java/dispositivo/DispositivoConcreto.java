@@ -20,8 +20,12 @@ public enum DispositivoConcreto implements InterfazDispositivoConcreto{
 			return 0;
 		}
 		
+		public boolean getEsInteligente() {
+			return true;
+		}
+		
 		public boolean estaEncendido() {
-			return false;
+			return true;
 		}
 		
 		public boolean estaApagado() {

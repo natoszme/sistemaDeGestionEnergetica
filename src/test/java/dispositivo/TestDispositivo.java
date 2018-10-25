@@ -16,7 +16,7 @@ public class TestDispositivo extends Fixture {
 	@Test
 	public void candelabroEsInteligenteDespuesDeConvertirseAInteligente() {
 		candelabro.convertirAInteligente(mockCandelabroConcreto);
-		Assert.assertTrue(candelabro.esInteligente());
+		Assert.assertTrue(candelabro.getEsInteligente());
 	}
 	
 	@Test
@@ -26,12 +26,12 @@ public class TestDispositivo extends Fixture {
 	
 	@Test
 	public void candelabroNoEsInteligente() {
-		Assert.assertFalse(candelabro.esInteligente());
+		Assert.assertFalse(candelabro.getEsInteligente());
 	}
 
 	@Test(expected = ElMensajeEnviadoNoPuedeSerRespondidoPorUnEstandarException.class)
 	public void candelabroNoPuedeEstarEnAModoAhorro() {
-		candelabro.estaEnAhorroEnergia();
+		candelabro.getEstaEnAhorroEnergia();
 	}
 	
 	@Test
@@ -42,7 +42,7 @@ public class TestDispositivo extends Fixture {
 	
 	@Test
 	public void smartTvEsInteligente() {
-		Assert.assertTrue(televisorSmart.esInteligente());
+		Assert.assertTrue(televisorSmart.getEsInteligente());
 	}	
 	
 	@Test(expected = NoSePuedeReConvertirAInteligenteException.class)

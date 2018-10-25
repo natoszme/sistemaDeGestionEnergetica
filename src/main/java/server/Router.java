@@ -70,6 +70,8 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 			Spark.get("/home", controllerCliente::home, transformer);
 			Spark.get("/optimizarConsumo", controllerCliente::optimizarUso, transformer);
 			
+			Spark.post("/optimizadorDiferido", controllerCliente::ejecutarOptimizadorDiferido);
+			
 			Spark.get("/mediciones", (req, res) -> {
 				return controllerCliente.obtenerMediciones(req, res);
 			});

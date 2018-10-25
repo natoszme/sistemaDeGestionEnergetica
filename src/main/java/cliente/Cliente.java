@@ -104,14 +104,14 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 	
 	public long cantidadInteligentesEncendidos() {
 		return dispositivos.stream().
-				filter(Dispositivo::esInteligente).
-				filter(Dispositivo::estaEncendido).count();
+				filter(Dispositivo::getEsInteligente).
+				filter(Dispositivo::getEstaEncendido).count();
 	}
 	
 	public long cantidadInteligentesEnAhorroEnergia() {
 		return dispositivos.stream().
-				filter(Dispositivo::esInteligente).
-				filter(Dispositivo::estaEnAhorroEnergia).count();
+				filter(Dispositivo::getEsInteligente).
+				filter(Dispositivo::getEstaEnAhorroEnergia).count();
 	}
 	
 	public long cantidadDispositivosApagados() {
@@ -119,7 +119,7 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 	}
 
 	public long cantidadDispositivosInteligentes() {
-		return dispositivos.stream().filter(Dispositivo::esInteligente).count();
+		return dispositivos.stream().filter(Dispositivo::getEsInteligente).count();
 	}
 	
 	public long cantidadDispositivos() {
@@ -210,12 +210,12 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 
 	public double consumoActual() {
 		return dispositivos.stream().
-				filter(Dispositivo::esInteligente).
+				filter(Dispositivo::getEsInteligente).
 				mapToDouble(Dispositivo::consumoActual).
 				sum();
 	}
 	
-	public boolean permiteAhorroAutomatico() {
+	public boolean getPermiteAhorroAutomatico() {
 		return ahorroAutomatico;
 	}
 
@@ -236,6 +236,6 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 	}
 	
 	public List<Regla> getReglas() {
-		return (List<Regla>) this.getDispositivos().stream().filter(Dispositivo::esInteligente).map(dispositivo -> dispositivo.getReglas()).flatMap(Collection::stream).collect(Collectors.toList());
+		return (List<Regla>) this.getDispositivos().stream().filter(Dispositivo::getEsInteligente).map(dispositivo -> dispositivo.getReglas()).flatMap(Collection::stream).collect(Collectors.toList());
 	}
 }

@@ -109,7 +109,7 @@ public class OptimizadorUsoDispositivos {
 	
 	public List<Pair<Dispositivo, Double>> obtenerMaximosDeConsumoDeInteligentes() {		
 		return optimizarUsoDispositivos().stream().filter(
-			par -> par.getFirst().esInteligente()
+			par -> par.getFirst().getEsInteligente()
 		).collect(Collectors.toList());
 	}
 

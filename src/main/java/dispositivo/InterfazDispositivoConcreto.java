@@ -8,7 +8,7 @@ public interface InterfazDispositivoConcreto {
 	public boolean estaEncendido();
 	public boolean estaApagado();
 	public boolean estaEnAhorroEnergia();
-
+	public boolean getEsInteligente();
 	public double horasEncendidoEn(double horasDeMesActual);
 
 	public double consumoActual();
