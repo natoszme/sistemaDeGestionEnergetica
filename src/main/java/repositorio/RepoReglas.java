@@ -1,7 +1,9 @@
 package repositorio;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import cliente.Cliente;
 import dispositivo.Dispositivo;
 import dispositivo.gadgets.regla.Regla;
 
@@ -52,5 +54,9 @@ public class RepoReglas extends RepoEnDB<Regla>{
 
 	public void ejecutarTodas() {
 		obtenerTodas().forEach(Regla::aplicarSiCumpleCriterio);		
+	}
+
+	public static List<Regla> obtenerXCliente(Cliente cliente) {
+		return (List<Regla>) cliente.getDispositivos().stream().filter(Dispositivo::getEsInteligente).map(dispositivo -> dispositivo.getReglas()).flatMap(Collection::stream).collect(Collectors.toList());
 	}
 }
