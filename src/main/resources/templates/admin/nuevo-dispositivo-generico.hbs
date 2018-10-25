@@ -1,3 +1,7 @@
+{{#partial "headTags"}}
+	<script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
+{{/partial}}
+
 {{#partial "contenido"}}
 	<div class="pb-2 mt-4 mb-2">
 		<h2>Alta de dispositivo genérico</h2>
@@ -35,10 +39,24 @@
 			</div>
 		</div>
 		<div class="text-right">
-		  <button type="submit " class="btn btn-primary">Guardar</button>
+		  <button type="submit " class="btn btn-primary" onclick="dispositivoCreado">Guardar</button>
 		</div>
 	</form>
 
+{{/partial}}
+
+{{#partial "scripts"}}
+	<script>
+		function dispositivoCreado() {	
+		  swal({
+		    title: 'Dispositivo creado',
+		    text: 'Listo! El dispositivo ha sido creado. Redireccionando...',
+		    html: '<p>Mensaje de texto con <strong>formato</strong>.</p>',
+		    type: 'success',
+		    timer: 3000,
+		  });
+		}
+	</script>
 {{/partial}}
 
 {{>layout.hbs}}
