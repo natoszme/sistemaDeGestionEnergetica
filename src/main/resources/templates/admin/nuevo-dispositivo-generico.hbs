@@ -51,9 +51,7 @@
 			$.post("/dispositivos", { nombre: $('#nombre').val(),
 			consumo: $('#consumo').val(),
 			tipoDispositivo: $('input[name=tipoDispositivo]:checked').val() })
-			.done(function(data){
-		    	dispositivoCreado();
-		    });
+			.done(dispositivoCreado);
 		}	
 	
 		function dispositivoCreado() {	
