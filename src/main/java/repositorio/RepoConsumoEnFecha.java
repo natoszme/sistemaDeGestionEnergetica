@@ -60,8 +60,8 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 							+ "INNER JOIN  c.dispositivos AS d "
 							+ "INNER JOIN d.tipoDispositivo td "
 							+ "INNER JOIN  td.consumosHastaElMomento AS hc "
-							+ "INNER JOIN  c.categoria AS cat "
-							+ (desde != null ? "AND hc.fecha >= :desde " : "")
+							+ "INNER JOIN  c.categoria AS cat "			
+							+ (desde != null ? "WHERE hc.fecha >= :desde " : "")
 							+ (hasta != null ? "AND hc.fecha <= :hasta " : "")
 							+ "GROUP BY c.id, c.nombre,cat.nombre,c.fechaAlta"
 						);
