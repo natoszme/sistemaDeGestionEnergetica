@@ -30,7 +30,6 @@ public class FixtureReportes extends Fixture{
 		EntityManager em = entityManager();
 		
 		Point ubicacionLaMatanza = new Point(-34.762985, -58.631242);
-//		Categoria r1 = new Categoria("R1", 0, 150, 18.76, 0.644);
 				
 		Cliente unCliente = new Cliente("asaez", "1", "Alejandro", "Saez", TipoDocumento.DNI, 3876675, 43543245, "Macos Sastre 324", r1, new ArrayList<>(), ubicacionLaMatanza);
 
@@ -50,8 +49,6 @@ public class FixtureReportes extends Fixture{
 		tvSony.guardarConsumoDeFecha(LocalDateTime.now(), 254);
 		tvSony.guardarConsumoDeFecha(LocalDateTime.now(), 132);
 
-		withTransaction(() -> {
-			
 			em.persist(r1);
 			
 			unCliente.agregarDispositivo(teleSmart);
@@ -62,8 +59,6 @@ public class FixtureReportes extends Fixture{
 			
 			em.persist(unCliente);
 
-		});
-		
 	}
 
 }
