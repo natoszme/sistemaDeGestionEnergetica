@@ -90,11 +90,9 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 				try {
 					commitTransaction();
 					em.clear();
-				}
-				catch (RollbackException e) {
+				} catch (RollbackException e) {
 					rollbackTransaction();
-				}
-				
+				}				
 			}
 		});
 		
