@@ -21,23 +21,23 @@ public class Reportes implements TransactionalOps, WithGlobalEntityManager{
 
 	EntityManager em = entityManager();
 	
-	public void main(String[] args) {
-			
-		EntityManager em = entityManager();
-		EntityTransaction transaction = em.getTransaction();
-		
-		transaction.begin();
-		Reportes instancia = new Reportes();
-		
-		instancia.consumoPorHogarEntre(LocalDateTime.of(2018, 9, 10,0, 0), LocalDateTime.now());
-		
-		transaction.commit();
-			
-	}
-	
-	public Map<Cliente, Double> consumoPorHogarEntre(LocalDateTime desde, LocalDateTime hasta) {
-		Map<Cliente, Double> consumoPorHogar  = new HashMap <Cliente, Double>();
-		/*List<Object []> resultados = */em.createQuery("SELECT c.nombre, SUM(hc.consumo) FROM Cliente c "
+//	public void main(String[] args) {
+//			
+//		EntityManager em = entityManager();
+//		EntityTransaction transaction = em.getTransaction();
+//		
+//		transaction.begin();
+//		Reportes instancia = new Reportes();
+//		
+//		instancia.consumoPorHogarEntre(LocalDateTime.of(2018, 9, 10,0, 0), LocalDateTime.now());
+//		
+//		transaction.commit();
+//			
+//	}
+	@SuppressWarnings("unchecked")
+	public List<Object[]> consumoPorHogarEntre(LocalDateTime desde, LocalDateTime hasta) {
+//		Map<Cliente, Double> consumoPorHogar  = new HashMap <Cliente, Double>();
+		List<Object[]> resultados = em.createQuery("SELECT c.nombre, SUM(hc.consumo) FROM Cliente c "
 			+ " INNER JOIN  c.dispositivos AS d"
 			+ " INNER JOIN  d.tipoDispositivo.consumosHastaElMomento AS hc"
 			+ " WHERE hc.fecha <= :desde AND hc.fecha >= :hasta"
@@ -49,25 +49,37 @@ public class Reportes implements TransactionalOps, WithGlobalEntityManager{
 				
 			}
 		}*/
-		return consumoPorHogar;
+		return resultados;
 	}
-
-	public Map<Dispositivo, Double> consumoPromedioPorDispositivoDe() {
-		Map<Dispositivo, Double> consumoPromedioPorDispositivo = new HashMap<Dispositivo, Double>();
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> consumoPromedioPorDispositivoDe() {
+		//Map<Dispositivo, Double> consumoPromedioPorDispositivo = new HashMap<Dispositivo, Double>();
 		List<Object[]> lista =
-			em.createQuery("SELECT c.nombre, d.nombre, AVG(hc.consumo) promedio" + " FROM cliente c "
+			em.createQuery("SELECT c.nombre, d.nombre, AVG(hc.consumo)" + " FROM Cliente c "
 					+ " INNER JOIN c.dispositivos AS d" 
 					+ " INNER JOIN d.tipoDispositivo AS td"
 					+ " INNER JOIN td.consumosHastaElMomento AS hc" 
 					+ " GROUP BY d.id, c.id").getResultList();
 		
+		List<Cliente> lista2 =
+				em.createQuery("FROM Cliente").getResultList();
+		
+		for(Cliente c : lista2) {
+			System.out.print("fafaf " + c.getNombre());
+		}
+		
+		System.out.println("asdasd");
+		
 		for (Object[] object : lista) {
 			for (int i = 0; i < 3; i++) {
-				System.out.println(object[i]);
+				System.out.println("asdasd" + object[i]);
 
 			}
 		}
-		return consumoPromedioPorDispositivo;
+		
+		System.out.println("asdasd");
+		return lista;
 	}
 
 	public Map<Transformador, Double> consumoPorTransformadorEntre(LocalDateTime fechaInicial,
