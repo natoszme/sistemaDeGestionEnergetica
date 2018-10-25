@@ -55,14 +55,15 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 	public List<Object> obtenerConsumoDeClientesEnFecha(LocalDateTime desde, LocalDateTime hasta) {		
 		Query query = entityManager()
 						.createQuery(
-							"SELECT c.categoria, c.nombre, c.fechaAlta, SUM(hc.consumo)"
+							"SELECT cat.nombre, c.nombre, c.fechaAlta, SUM(hc.consumo)"
 							+ "FROM Cliente c "
 							+ "INNER JOIN  c.dispositivos AS d "
 							+ "INNER JOIN d.tipoDispositivo td "
 							+ "INNER JOIN  td.consumosHastaElMomento AS hc "
+							+ "INNER JOIN  c.categoria AS cat "
 							+ (desde != null ? "AND hc.fecha >= :desde " : "")
 							+ (hasta != null ? "AND hc.fecha <= :hasta " : "")
-							+ "GROUP BY c.id"
+							+ "GROUP BY c.id, c.nombre,cat.nombre,c.fechaAlta"
 						);
 		
 	
