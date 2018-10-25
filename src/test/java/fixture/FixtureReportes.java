@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import org.junit.After;
+import org.junit.Before;
 import org.uqbar.geodds.Point;
 import categoria.Categoria;
 import cliente.Cliente;
@@ -16,8 +17,12 @@ import tipoDispositivo.DispositivoInteligente;
 
 public class FixtureReportes extends Fixture{
 
-	@After
-	public void after() {
+	public FixtureReportes() {
+		super();
+	}
+	
+	@Before
+	public void before() {
 		this.init();
 	}
 	
@@ -25,7 +30,7 @@ public class FixtureReportes extends Fixture{
 		EntityManager em = entityManager();
 		
 		Point ubicacionLaMatanza = new Point(-34.762985, -58.631242);
-		Categoria r1 = new Categoria("R1", 0, 150, 18.76, 0.644);
+//		Categoria r1 = new Categoria("R1", 0, 150, 18.76, 0.644);
 				
 		Cliente unCliente = new Cliente("asaez", "1", "Alejandro", "Saez", TipoDocumento.DNI, 3876675, 43543245, "Macos Sastre 324", r1, new ArrayList<>(), ubicacionLaMatanza);
 
@@ -47,7 +52,7 @@ public class FixtureReportes extends Fixture{
 
 		withTransaction(() -> {
 			
-//			em.persist(r1);
+			em.persist(r1);
 			
 			unCliente.agregarDispositivo(teleSmart);
 			unCliente.agregarDispositivo(tvSamsung);
