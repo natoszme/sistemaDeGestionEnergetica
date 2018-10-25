@@ -17,7 +17,7 @@ public abstract class RepoEnDB<Entidad>  implements TransactionalOps, Repo<Entid
 	}
 
 	public void agregarEntidad(Entidad entidad) {
-		em.persist(entidad);
+		em.persist(entidad);	
 	}
 
 	public void agregarEntidades(List<Entidad> entidades) {

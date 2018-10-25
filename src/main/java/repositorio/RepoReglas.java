@@ -49,4 +49,8 @@ public class RepoReglas extends RepoEnDB<Regla>{
 		
 		return (List<Regla>) em.createQuery(string, Regla.class).setParameter("dispositivo", dispositivo).getResultList();
 	}
+
+	public void ejecutarTodas() {
+		obtenerTodas().forEach(Regla::aplicarSiCumpleCriterio);		
+	}
 }

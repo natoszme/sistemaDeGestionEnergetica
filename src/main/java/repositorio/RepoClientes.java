@@ -1,7 +1,6 @@
 package repositorio;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import cliente.Cliente;
 import server.login.RepoAutenticables;
