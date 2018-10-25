@@ -1,34 +1,20 @@
 package server.controller;
 
-import java.awt.Point;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
-import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.Helper;
-import com.github.jknack.handlebars.HumanizeHelper;
-import com.github.jknack.handlebars.Options;
-
-import cliente.Cliente;
-import cliente.TipoDocumento;
 import dispositivo.Dispositivo;
 import json.JSONParser;
-import repositorio.RepoCategorias;
-import repositorio.RepoClientes;
 import repositorio.RepoConsumoEnFecha;
 import server.login.Autenticable;
 import server.login.RepoAdmins;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import tipoDispositivo.ConsumoEnFecha;
 import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 
@@ -79,8 +65,7 @@ public class ControllerAdmin extends ControllerLogin{
 		return new ModelAndView(viewModel, "admin/nuevo-dispositivo-generico.hbs");
 	}
 	
-	public String crearDispositivo(Request req, Response res) {
-		
+	public String crearDispositivo(Request req, Response res) {		
 		String nombre = req.queryParams("nombre");
 		double kwPorHora = Double.parseDouble(req.queryParams("consumo"));
 		String tipoDispositivo = req.queryParams("tipoDispositivo");
