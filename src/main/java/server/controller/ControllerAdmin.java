@@ -37,31 +37,13 @@ public class ControllerAdmin extends ControllerLogin{
 	
 	
 	public ModelAndView home(Request req, Response res) {
-		
-		/*String fechaDesde = req.queryParams("desde");
-		String fechaHasta = req.queryParams("hasta");*/
-		/*if(fechaDesde == null) {
-			fechaDesde = "";
-		}
-		if(fechaHasta == null) {
-			fechaHasta = "";
-		}*/
-		
-		/*LocalDateTime desde = formatearFecha(fechaDesde, LocalTime.of(0, 0, 0, 0));
-		LocalDateTime hasta = formatearFecha(fechaHasta, LocalTime.of(23, 59, 59, 999));*/
-		
 		HashMap<String, Object> viewModel = new HashMap<>();
-	
-	//	List<Cliente> clientes = RepoClientes.getInstance().obtenerTodas();
-	
 		return new ModelAndView(viewModel, "admin/home.hbs");
 		
 	}
 	
 	public String obtenerConsumos(Request req, Response res) {
 		JSONParser<Object> parser = new JSONParser<Object>();		 
-		
-	
 		
 		LocalDateTime desde = formatearFecha(req.queryParams("desde"), LocalTime.of(0, 0, 0, 0));
 		LocalDateTime hasta = formatearFecha(req.queryParams("hasta"), LocalTime.of(23, 59, 59, 999));
