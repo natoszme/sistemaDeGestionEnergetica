@@ -17,6 +17,7 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import server.controller.ControllerAdmin;
 import server.controller.ControllerCliente;
 import server.controller.ControllerTransformador;
+import server.transformer.ConsumosToJsonTransformer;
 
 public class Router implements TransactionalOps, WithGlobalEntityManager{
 
@@ -52,10 +53,7 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 			
 			Spark.get("/home", controllerAdmin::home, transformer);
 			
-			Spark.get("/consumos", (req, res) -> {
-				System.out.println("JSON = " + controllerAdmin.obtenerConsumos(req, res));
-				return controllerAdmin.obtenerConsumos(req, res);
-			});
+			Spark.get("/consumos", controllerAdmin::obtenerConsumos, new ConsumosToJsonTransformer());
 		});
 		
 		Spark.get("/dispositivos/nuevo", controllerAdmin::crearDispositivoView, transformer);
@@ -78,9 +76,7 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 			
 			Spark.post("/optimizadorDiferido", controllerCliente::ejecutarOptimizadorDiferido);
 			
-			Spark.get("/mediciones", (req, res) -> {
-				return controllerCliente.obtenerMediciones(req, res);
-			});
+			Spark.get("/mediciones", controllerCliente::obtenerMediciones, new ConsumosToJsonTransformer());
 		});
 		
 		Spark.get("/transformadores", controllerTransformador::home, transformer);
