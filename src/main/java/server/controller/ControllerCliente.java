@@ -57,18 +57,6 @@ public class ControllerCliente extends ControllerLogin {
 		viewModel.put("esAhorradorAutomatico", cliente.getPermiteAhorroAutomatico());
 		
 		return viewModel;
-	}
-	
-	public ModelAndView ejecutarOptimizadorDiferido(Request req, Response res) {
-		Cliente cliente = obtenerClienteDe(req);
-		
-		JobOptimizador job = JobOptimizador.getInstance();
-		job.ejecutarAUnCliente(cliente);
-		
-		HashMap<String, Object> viewModel = new HashMap<>();				
-		viewModel = obtenerElementosDeCliente(cliente);
-		
-		return new ModelAndView(viewModel, "cliente/home.hbs");
 	} 
 
 	@Override

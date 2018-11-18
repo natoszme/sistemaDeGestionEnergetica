@@ -99,7 +99,6 @@ public class DatosDePrueba implements TransactionalOps, WithGlobalEntityManager{
 
 			em.persist(unCliente);
 
-			RepoReglas.getInstance().agregarEntidad(unaReglaEstricta);
 			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(teleSmart, 90, 360, Actuador.ActuadorQueApaga));
 			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play4, 90, 360, Actuador.ActuadorQueApaga));
 			RepoRestriccionesUsoDispositivo.getInstance().agregarEntidad(new RestriccionUsoDispositivo(play3, 90, 360, Actuador.ActuadorQueApaga));
