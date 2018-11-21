@@ -3,16 +3,12 @@ package fixture;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
-import org.junit.After;
 import org.junit.Before;
 import org.uqbar.geodds.Point;
-import categoria.Categoria;
 import cliente.Cliente;
 import cliente.TipoDocumento;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
-import javafx.util.converter.LocalDateTimeStringConverter;
-import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 
 public class FixtureReportes extends Fixture{
