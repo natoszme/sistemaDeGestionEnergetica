@@ -9,10 +9,7 @@ import cliente.Cliente;
 import cliente.TipoDocumento;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
-<<<<<<< HEAD
 import tipoDispositivo.DispositivoEstandar;
-=======
->>>>>>> 4b242801f7d7f48eedcab00f030d53c411270d4f
 import tipoDispositivo.DispositivoInteligente;
 
 public class FixtureReportes extends Fixture{
