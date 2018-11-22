@@ -9,6 +9,7 @@ import static spark.Spark.path;
 import static spark.Spark.staticFiles;
 
 import javax.persistence.EntityManager;
+import javax.persistence.RollbackException;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
@@ -16,6 +17,7 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import server.controller.ControllerAdmin;
 import server.controller.ControllerCliente;
 import server.controller.ControllerTransformador;
+import server.transformer.ConsumosToJsonTransformer;
 
 public class Router implements TransactionalOps, WithGlobalEntityManager{
 
@@ -51,10 +53,7 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 			
 			Spark.get("/home", controllerAdmin::home, transformer);
 			
-			Spark.get("/consumos", (req, res) -> {
-				System.out.println("JSON = " + controllerAdmin.obtenerConsumos(req, res));
-				return controllerAdmin.obtenerConsumos(req, res);
-			});
+			Spark.get("/consumos", controllerAdmin::obtenerConsumos, new ConsumosToJsonTransformer());
 		});
 		
 		Spark.get("/dispositivos/nuevo", controllerAdmin::crearDispositivoView, transformer);
@@ -73,20 +72,21 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 			Spark.get("/logout", controllerCliente::logout);
 			
 			Spark.get("/home", controllerCliente::home, transformer);
-			Spark.get("/optimizarConsumo", controllerCliente::optimizarUso, transformer);
+			Spark.post("/optimizarConsumo", controllerCliente::optimizarUso, transformer);
 			
-			Spark.post("/optimizadorDiferido", controllerCliente::ejecutarOptimizadorDiferido);
-			
-			Spark.get("/mediciones", (req, res) -> {
-				return controllerCliente.obtenerMediciones(req, res);
-			});
+			Spark.get("/mediciones", controllerCliente::obtenerMediciones, new ConsumosToJsonTransformer());
 		});
 		
 		Spark.get("/transformadores", controllerTransformador::home, transformer);
 		
 		Spark.after("/*", (req, res) -> {
 			if(req.requestMethod() != "GET") {
-				commitTransaction();
+				try {
+					commitTransaction();
+					em.clear();
+				} catch (RollbackException e) {
+					rollbackTransaction();
+				}				
 			}
 		});
 		

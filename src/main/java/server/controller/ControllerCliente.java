@@ -9,7 +9,6 @@ import java.util.List;
 
 import cliente.Cliente;
 import dispositivo.Dispositivo;
-import json.JSONParser;
 import repositorio.RepoClientes;
 import repositorio.RepoConsumoEnFecha;
 import server.login.Autenticable;
@@ -49,7 +48,6 @@ public class ControllerCliente extends ControllerLogin {
 	public HashMap<String, Object> obtenerElementosDeCliente(Cliente cliente){
 		HashMap<String, Object> viewModel = new HashMap<>();
 		
-		//TODO deberiamos crear un helper para mostrar el consumo actual sin hacer esto ni cambiar consumoActual() por getConsumoActual()
 		viewModel.put("cliente", cliente);
 		viewModel.put("consumoActual", cliente.consumoActual());
 		viewModel.put("tieneDispositivos", cliente.cantidadDispositivos() > 0);
@@ -59,18 +57,6 @@ public class ControllerCliente extends ControllerLogin {
 		viewModel.put("esAhorradorAutomatico", cliente.getPermiteAhorroAutomatico());
 		
 		return viewModel;
-	}
-	
-	public ModelAndView ejecutarOptimizadorDiferido(Request req, Response res) {
-		System.out.println("holahola");
-		Cliente cliente = obtenerClienteDe(req);
-		JobOptimizador job = JobOptimizador.getInstance();
-		job.ejecutarAUnCliente(cliente);
-		HashMap<String, Object> viewModel = new HashMap<>();
-				
-		viewModel = obtenerElementosDeCliente(cliente);
-		
-		return new ModelAndView(viewModel, "cliente/home.hbs");
 	} 
 
 	@Override
@@ -90,16 +76,13 @@ public class ControllerCliente extends ControllerLogin {
 		return RepoClientes.getInstance().dameCliente(Long.parseLong(req.cookie(nombreCookieId())));
 	}
 	
-	public String obtenerMediciones(Request req, Response res) {
-		JSONParser<ConsumoEnFecha> parser = new JSONParser<ConsumoEnFecha>();		 
-		
+	public List<ConsumoEnFecha> obtenerMediciones(Request req, Response res) {		
 		Cliente cliente = obtenerClienteDe(req);
 		
 		LocalDateTime desde = formatearFecha(req.queryParams("desde"), LocalTime.of(0, 0, 0, 0));
 		LocalDateTime hasta = formatearFecha(req.queryParams("hasta"), LocalTime.of(23, 59, 59, 999));
 		
-		List<ConsumoEnFecha> mediciones = RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, desde, hasta);
-		return parser.listToJson(mediciones);  
+		return RepoConsumoEnFecha.getInstance().filtrarMedicionesXCliente(cliente, desde, hasta);  
 	}
 	
 	private LocalDateTime formatearFecha(String fecha, LocalTime tiempo) {

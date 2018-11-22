@@ -3,9 +3,7 @@ package cliente;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,6 +29,7 @@ import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
 import dispositivo.gadgets.regla.Regla;
 import repositorio.RepoCategorias;
+import repositorio.RepoReglas;
 import server.login.Autenticable;
 
 @Entity
@@ -236,6 +235,6 @@ public class Cliente extends DatosBasicos implements ConsumidorMasivo, Autentica
 	}
 	
 	public List<Regla> getReglas() {
-		return (List<Regla>) this.getDispositivos().stream().filter(Dispositivo::getEsInteligente).map(dispositivo -> dispositivo.getReglas()).flatMap(Collection::stream).collect(Collectors.toList());
+		return RepoReglas.obtenerXCliente(this);		
 	}
 }
