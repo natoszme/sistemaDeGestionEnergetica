@@ -55,7 +55,7 @@ public class DispositivoEstandar extends TipoDispositivo{
 		return dispositivo.estimacionDeConsumoEn(horas);
 	}
 
-	public double horasPrendidoEnMesActual() {
+	public double horasPrendidoEnMesActual(double kwH) {
 		throw new ElMensajeEnviadoNoPuedeSerRespondidoPorUnEstandarException();
 	}
 

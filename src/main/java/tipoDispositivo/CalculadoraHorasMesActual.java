@@ -16,8 +16,14 @@ public class CalculadoraHorasMesActual {
 	
 	public long horasDeMesActual() {
 		LocalDateTime hoy = LocalDateTime.now();
-		LocalDateTime primerDiaDelMes = LocalDateTime.of(hoy.getYear(), hoy.getMonth(), 1, 0, 0);
+		LocalDateTime primerDiaDelMes = this.primerDiaMesActual();
 
 	    return Duration.between(primerDiaDelMes, hoy).toHours();
+	}
+	
+	public LocalDateTime primerDiaMesActual() {
+		
+		LocalDateTime hoy = LocalDateTime.now();
+		return LocalDateTime.of(hoy.getYear(), hoy.getMonth(), 1, 0, 0);
 	}
 }

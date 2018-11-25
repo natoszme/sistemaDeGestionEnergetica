@@ -104,7 +104,7 @@ public class Dispositivo extends DatosBasicos {
 	}
 
 	public double horasPrendidoEnMesActual() {
-		return tipoDispositivo.horasPrendidoEnMesActual();
+		return tipoDispositivo.horasPrendidoEnMesActual(this.kwPorHora);
 	}
 
 	public double consumoActual() {

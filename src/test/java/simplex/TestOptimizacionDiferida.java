@@ -26,7 +26,7 @@ public class TestOptimizacionDiferida extends FixtureSimplex {
 		JobOptimizador job = JobOptimizador.getInstance();
 		job.ejecutar();
 		
-		verify(mockLavarropas, times(0)).ponerEnAhorroDeEnergia();
+		verify(mockLavarropas, times(2)).ponerEnAhorroDeEnergia();
 	}
 	
 	@Test

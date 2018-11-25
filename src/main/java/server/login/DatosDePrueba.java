@@ -63,7 +63,7 @@ public class DatosDePrueba implements TransactionalOps, WithGlobalEntityManager{
 		
 		em.remove(unCliente);
 		
-		teleSmart.guardarConsumoDeFecha(LocalDateTime.now(), 35);
+		teleSmart.guardarConsumoDeFecha(LocalDateTime.now(), 35000);
 		teleSmart.guardarConsumoDeFecha(LocalDateTime.now(), 28);
 		teleSmart.guardarConsumoDeFecha(LocalDateTime.now(), 17);
 

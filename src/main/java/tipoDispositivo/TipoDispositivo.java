@@ -39,7 +39,7 @@ public abstract class TipoDispositivo extends DatosBasicos {
 	public abstract boolean estaEnAhorroEnergia();
 	public abstract void ponerEnAhorroDeEnergia();
 	public abstract void guardarConsumoDeFecha(LocalDateTime fecha, double consumo);
-	public abstract double horasPrendidoEnMesActual();
+	public abstract double horasPrendidoEnMesActual(double kwH);
 	public abstract double consumoActual();
 	public abstract boolean esElMismoConcretoQue(Dispositivo dispositivo);
 	public abstract DispositivoConcreto getDispositivoConcreto();
