@@ -5,6 +5,8 @@ import javax.persistence.DiscriminatorValue;
 @DiscriminatorValue("Generico")
 public class DispositivoConcretoGenerico extends DispositivoConcreto{
 	
+	public DispositivoConcretoGenerico() {}
+	
 	public void encenderSegunConcreto() {
 		/*Debería cada concreto posta hacer su magia*/
 		this.encender();

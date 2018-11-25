@@ -9,6 +9,7 @@ import cliente.Cliente;
 import cliente.TipoDocumento;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
+import dispositivo.DispositivoConcretoGenerico;
 import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
 
@@ -29,10 +30,14 @@ public class FixtureReportes extends Fixture{
 		Point ubicacionLaMatanza = new Point(-34.762985, -58.631242);
 				
 		Cliente unCliente = new Cliente("asaez", "1", "Alejandro", "Saez", TipoDocumento.DNI, 3876675, 43543245, "Macos Sastre 324", r1, new ArrayList<>(), ubicacionLaMatanza);
-
-		Dispositivo teleSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(DispositivoConcreto.TVINTELIGENTE), 0.9);
-		Dispositivo tvSamsung = new Dispositivo("Samsung 4k FHD", new DispositivoInteligente(DispositivoConcreto.TVINTELIGENTE), 0.35);
-		Dispositivo tvSony = new Dispositivo("Sony UHD curva", new DispositivoInteligente(DispositivoConcreto.TVINTELIGENTE), 0.26);
+		
+		DispositivoConcretoGenerico teleSmartConcreta = new DispositivoConcretoGenerico();
+		DispositivoConcretoGenerico tvSamsungConcreta = new DispositivoConcretoGenerico();
+		DispositivoConcretoGenerico tvSonyConcreta = new DispositivoConcretoGenerico();
+		
+		Dispositivo teleSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(teleSmartConcreta), 0.9);
+		Dispositivo tvSamsung = new Dispositivo("Samsung 4k FHD", new DispositivoInteligente(tvSamsungConcreta), 0.35);
+		Dispositivo tvSony = new Dispositivo("Sony UHD curva", new DispositivoInteligente(tvSonyConcreta), 0.26);
 
 		teleSmart.guardarConsumoDeFecha(LocalDateTime.now(), 20);
 		teleSmart.guardarConsumoDeFecha(LocalDateTime.now(), 60);

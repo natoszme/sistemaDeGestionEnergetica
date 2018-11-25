@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
+import dispositivo.DispositivoConcretoGenerico;
 import dispositivo.DispositivosBaseFactory;
 import dispositivo.gadgets.actuador.Actuador;
 import dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual;
@@ -22,7 +23,9 @@ import fixture.Fixture;
 
 public class TestRepoReglas extends Fixture{
 	
-	Dispositivo tele40DeNico = DispositivosBaseFactory.getInstance().tvLed40Pulgadas(DispositivoConcreto.TVINTELIGENTE);
+	DispositivoConcretoGenerico teleSmartConcreta = new DispositivoConcretoGenerico();
+	
+	Dispositivo tele40DeNico = DispositivosBaseFactory.getInstance().tvLed40Pulgadas(teleSmartConcreta);
 	
 	
 	@Before

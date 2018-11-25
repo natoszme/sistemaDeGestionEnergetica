@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 
@@ -21,7 +22,8 @@ import dispositivo.DispositivoConcreto;
 @Entity
 public class DispositivoInteligente extends TipoDispositivo {
 	
-	@Enumerated(EnumType.STRING)
+	@OneToOne
+	@JoinColumn(name = "IdDispositivoConcreto")
 	private DispositivoConcreto dispositivoConcreto;
 	
 	@JoinTable(name = "HistorialConsumos", joinColumns = @JoinColumn(name = "idDispositivoInteligente"))
@@ -117,7 +119,7 @@ public class DispositivoInteligente extends TipoDispositivo {
 	}
 
 	public double consumoActual() {
-		return dispositivoConcreto.consumoActual();
+		return this.consumosHastaElMomento.stream().mapToDouble(consumo -> consumo.getConsumo()).sum();
 	}
 
 	public boolean esElMismoConcretoQue(Dispositivo dispositivo) {

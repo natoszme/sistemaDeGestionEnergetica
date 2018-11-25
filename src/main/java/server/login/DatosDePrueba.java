@@ -16,6 +16,7 @@ import cliente.Cliente;
 import cliente.TipoDocumento;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
+import dispositivo.DispositivoConcretoGenerico;
 import dispositivo.gadgets.actuador.Actuador;
 import dispositivo.gadgets.regla.CondicionDeConsumoMayorOIgual;
 import dispositivo.gadgets.regla.CondicionSobreSensor;
@@ -48,9 +49,13 @@ public class DatosDePrueba implements TransactionalOps, WithGlobalEntityManager{
 		actuadores.add(actuadorQueApaga);
 		condiciones.add(condicionConsumo);
 		
-		Dispositivo teleSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(DispositivoConcreto.TVINTELIGENTE), 0.9);
-		Dispositivo tvSamsung = new Dispositivo("Samsung 4k FHD", new DispositivoInteligente(DispositivoConcreto.TVINTELIGENTE), 0.35);
-		Dispositivo tvSony = new Dispositivo("Sony UHD curva", new DispositivoInteligente(DispositivoConcreto.TVINTELIGENTE), 0.26);
+		DispositivoConcretoGenerico teleSmartConcreta = new DispositivoConcretoGenerico();
+		DispositivoConcretoGenerico tvSamsungConcreta = new DispositivoConcretoGenerico();
+		DispositivoConcretoGenerico tvSonyConcreta = new DispositivoConcretoGenerico();
+		
+		Dispositivo teleSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(teleSmartConcreta), 0.9);
+		Dispositivo tvSamsung = new Dispositivo("Samsung 4k FHD", new DispositivoInteligente(tvSamsungConcreta), 0.35);
+		Dispositivo tvSony = new Dispositivo("Sony UHD curva", new DispositivoInteligente(tvSonyConcreta), 0.26);
 		
 		Dispositivo play4 = new Dispositivo("Play 4", new DispositivoEstandar(), 0.2);
 		Dispositivo play3 = new Dispositivo("Play 2", new DispositivoEstandar(), 0.3);
@@ -58,8 +63,6 @@ public class DatosDePrueba implements TransactionalOps, WithGlobalEntityManager{
 		Dispositivo play1 = new Dispositivo("Play 1", new DispositivoEstandar(), 0.56);
 		Dispositivo asus = new Dispositivo("Asus ZenBook pro", new DispositivoEstandar(), 990.987);
 		Dispositivo dell = new Dispositivo("Dell XPS 14", new DispositivoEstandar(), 880.99);
-		
-		Regla unaReglaEstricta = new ReglaEstricta(actuadores, condiciones, teleSmart);
 		
 		em.remove(unCliente);
 		
