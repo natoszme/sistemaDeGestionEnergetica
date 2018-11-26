@@ -22,6 +22,8 @@
     	<class>dispositivo.gadgets.regla.ReglaEstricta</class>
     	<class>dispositivo.gadgets.regla.ReglaPermisiva</class>
     	<class>dispositivo.gadgets.actuador.Actuador</class>
+   		<class>dispositivo.DispositivoConcreto</class>
+ 	   	<class>dispositivo.DispositivoConcretoGenerico</class>
     	<class>transformador.Transformador</class>	
     	<class>zona.Zona</class>
     	<class>tipoDispositivo.ConsumoEnFecha</class>
