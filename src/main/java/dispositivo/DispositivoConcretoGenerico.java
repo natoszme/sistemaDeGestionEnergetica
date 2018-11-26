@@ -1,7 +1,9 @@
 package dispositivo;
 
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity
 @DiscriminatorValue("Generico")
 public class DispositivoConcretoGenerico extends DispositivoConcreto{
 	

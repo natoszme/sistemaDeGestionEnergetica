@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import db.DatosBasicos;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-public abstract class DispositivoConcreto {
+public abstract class DispositivoConcreto extends DatosBasicos{
 	
 	public boolean estaEncendido = true;
 	public boolean estaEnAhorroDeEnergia;
