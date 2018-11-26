@@ -6,7 +6,7 @@
     version="2.0">
   
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
-    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     	 
     	<class>cliente.Cliente</class>
     	<class>categoria.Categoria</class>
@@ -31,10 +31,10 @@
         <properties> 
 	    	<property name="hibernate.archive.autodetection" value="class"/>
 
-            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3308/2018-jm-group-06?serverTimezone=UTC" /> 
-            <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="mysql" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" /> 
+            <property name="hibernate.connection.url" value="mysql://us-cdbr-iron-east-01.cleardb.net/heroku_abc8c39ec962efd?reconnect=true" /> 
+            <property name="hibernate.connection.username" value="b6d2fa127a4bbe" /> 
+            <property name="hibernate.connection.password" value="a2ef2658" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
                             
             <property name="hibernate.show_sql" value="true" /> 
