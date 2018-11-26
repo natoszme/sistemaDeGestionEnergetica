@@ -42,8 +42,8 @@ public abstract class DispositivoConcreto {
 	public abstract void apagarSegunConcreto();
 	public abstract void ponerEnAhorroDeEnergiaSegunConcreto();
 	public abstract void sacarDeAhorroDeEnergiaSegunConcreto();
-	/*public abstract double consumoDuranteLasUltimas(int horas);
-	public abstract double horasEncendidoEn(double horasDeMesActual);
 
-	public abstract double consumoActual();*/
+	public abstract double consumoDuranteLasUltimas(int horas);
+	public abstract double horasEncendidoEn(double horasDeMesActual);
+	public abstract double consumoActual();
 }

@@ -114,8 +114,7 @@ public class DispositivoInteligente extends TipoDispositivo {
 	}
 
 	public double horasPrendidoEnMesActual(double kwH) {
-		return this.consumoEntre(CalculadoraHorasMesActual.getInstance().primerDiaMesActual(), LocalDateTime.now()) / kwH;
-//		return dispositivoConcreto.horasEncendidoEn(CalculadoraHorasMesActual.getInstance().primerDiaMesActual(), LocalDateTime.now());
+		return dispositivoConcreto.horasEncendidoEn(CalculadoraHorasMesActual.getInstance().horasDeMesActual());
 	}
 
 	public double consumoActual() {

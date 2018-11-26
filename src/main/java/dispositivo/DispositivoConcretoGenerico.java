@@ -23,5 +23,15 @@ public class DispositivoConcretoGenerico extends DispositivoConcreto{
 		/*Debería cada concreto hacer su magia*/
 		this.sacarDeAhorroDeEnergia();
 	}
+	
+	public double consumoDuranteLasUltimas(int horas) {
+		return 0;
+	}
+	public double horasEncendidoEn(double horasDeMesActual) { 
+		return 0;
+	}
+	public double consumoActual() {
+		return 0;
+	}
 
 }
