@@ -2,6 +2,9 @@ package dispositivo;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDateTime;
@@ -37,7 +40,8 @@ public class TestDispositivo extends Fixture {
 	@Test
 	public void alApagarSmartTVDispositivoConcretoRecibeMensajeApagar() {
 		televisorSmart.apagar();	
-		verify(mockTelevisorSmartConcreto, times(1)).apagar();
+		//verify(mockTelevisorSmartConcreto, times(1)).apagar();
+		assertTrue(televisorSmart.getEstaApagado());
 	}	
 	
 	@Test

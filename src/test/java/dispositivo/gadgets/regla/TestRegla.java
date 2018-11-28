@@ -6,6 +6,7 @@ import fixture.Fixture;
 import dispositivo.gadgets.actuador.Actuador;
 import dispositivo.gadgets.regla.NoSePuedeUsarReglaSobreDispositivoNoInteligenteException;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class TestRegla extends Fixture {
@@ -30,7 +31,8 @@ public class TestRegla extends Fixture {
 		unaReglaEstricta = new ReglaEstricta(actuadores, condicionesSobreSensorQueCumplen, televisorSmart);
     	unaReglaEstricta.aplicarSiCumpleCriterio();
     	
-    	verify(mockTelevisorSmartConcreto, times(1)).apagar();
+    	//verify(mockTelevisorSmartConcreto, times(1)).apagar();
+    	assertTrue(mockTelevisorSmartConcreto.estaApagado());
     }
     
     @Test
@@ -38,16 +40,18 @@ public class TestRegla extends Fixture {
     	actuadores.add(actuadorQueEnciende);
     	unaReglaEstricta = new ReglaEstricta(actuadores, condicionesSobreSensorQueCumplen, televisorSmart);
     	unaReglaEstricta.aplicarSiCumpleCriterio();
-    	
-    	verify(mockTelevisorSmartConcreto, times(1)).encender();
+    	System.out.println("hola " + (mockTelevisorSmartConcreto.estaEncendido()? "prendido" : "apagado"));
+    	//verify(mockTelevisorSmartConcreto, times(1)).encender();
+    	assertTrue(mockTelevisorSmartConcreto.estaEncendido());
     }
     
     @Test
-    public void alEvaluarUnInteligenteQueNoCumpleNoSeEnviaSenialDEncendido() {
+    public void alEvaluarUnInteligenteQueNoCumpleNoSeEnviaSenialDApagado() {
     	actuadores.add(actuadorQueApaga);
 		unaReglaPermisiva = new ReglaEstricta(actuadores, condicionesSobreSensorQueNoCumplen, televisorSmart);
     	unaReglaPermisiva.aplicarSiCumpleCriterio();
     	
-    	verify(mockTelevisorSmartConcreto, times(0)).apagar();
+    	//verify(mockTelevisorSmartConcreto, times(0)).apagar();
+    	assertTrue(mockTelevisorSmartConcreto.estaEncendido());
     }
 }

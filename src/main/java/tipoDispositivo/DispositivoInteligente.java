@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,7 +23,7 @@ import dispositivo.DispositivoConcreto;
 @Entity
 public class DispositivoInteligente extends TipoDispositivo {
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "IdDispositivoConcreto")
 	private DispositivoConcreto dispositivoConcreto;
 	

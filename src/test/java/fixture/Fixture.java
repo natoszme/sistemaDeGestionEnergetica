@@ -15,11 +15,13 @@ import cliente.Cliente;
 import cliente.TipoDocumento;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
+import dispositivo.DispositivoConcretoGenerico;
 import dispositivo.gadgets.actuador.Actuador;
 import dispositivo.gadgets.regla.CondicionSobreSensor;
 import dispositivo.gadgets.regla.Regla;
 import dispositivo.gadgets.regla.ReglaEstricta;
 import dispositivo.gadgets.regla.ReglaPermisiva;
+import javassist.expr.NewArray;
 import repositorio.RepoCategorias;
 import tipoDispositivo.DispositivoEstandar;
 import tipoDispositivo.DispositivoInteligente;
@@ -32,7 +34,7 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	protected Dispositivo candelabro, televisor, microondas, equipoMusica, dvd, play4, televisorSmart, tvNormal, pc, aireAcondicionado;
 	protected List<Dispositivo> dispositivos = new ArrayList<>();
 	protected Cliente alejandro, lio, pepe, nico, ricardo, yanina;
-	protected DispositivoConcreto mockPcConcreta, mockAireConcreto, mockTelevisorSmartConcreto, mockTelevisorNormalConcreto, mockCandelabroConcreto, mockLampara, mockLavarropas, mockMicroondas, mockPlancha, mockVentilador,mockTv40;
+	protected DispositivoConcretoGenerico mockPcConcreta, mockAireConcreto, mockTelevisorSmartConcreto, mockTelevisorNormalConcreto, mockCandelabroConcreto, mockLampara, mockLavarropas, mockMicroondas, mockPlancha, mockVentilador,mockTv40;
 	protected Regla unaReglaEstricta, unaReglaPermisiva;
 	protected Actuador actuadorQueApaga, actuadorQueEnciende;
 	protected CondicionSobreSensor mockCondicionSobreSensorQueCumple, mockCondicionSobreSensorQueNoCumple;
@@ -58,20 +60,20 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  r8 = new Categoria("R8", 700, 1400, 545.19, 0.851);				
 		  r9 = new Categoria("R9", 1400, 99999999, 545.19, 0.851); 
 		  
-		  mockPcConcreta = Mockito.mock(DispositivoConcreto.class);
-		  mockAireConcreto = Mockito.mock(DispositivoConcreto.class);
-		  mockTelevisorSmartConcreto = Mockito.mock(DispositivoConcreto.class);
-		  mockTelevisorNormalConcreto = Mockito.mock(DispositivoConcreto.class);
+		  mockPcConcreta = new DispositivoConcretoGenerico();
+		  mockAireConcreto = new DispositivoConcretoGenerico();
+		  mockTelevisorSmartConcreto = new DispositivoConcretoGenerico();
+		  mockTelevisorNormalConcreto = new DispositivoConcretoGenerico();
 		  
-		  mockCandelabroConcreto = Mockito.mock(DispositivoConcreto.class);
+		  mockCandelabroConcreto = new DispositivoConcretoGenerico();
 		  
-		  mockLampara = Mockito.mock(DispositivoConcreto.class);
-		  mockLavarropas = Mockito.mock(DispositivoConcreto.class);
-		  mockMicroondas = Mockito.mock(DispositivoConcreto.class);
-		  mockPlancha = Mockito.mock(DispositivoConcreto.class);
-		  mockVentilador = Mockito.mock(DispositivoConcreto.class);		  
+		  mockLampara = new DispositivoConcretoGenerico();
+		  mockLavarropas = new DispositivoConcretoGenerico();
+		  mockMicroondas = new DispositivoConcretoGenerico();
+		  mockPlancha = new DispositivoConcretoGenerico();
+		  mockVentilador = new DispositivoConcretoGenerico();		  
 		  
-		  mockTv40 = Mockito.mock(DispositivoConcreto.class);
+		  mockTv40 = new DispositivoConcretoGenerico();
 				
 		  candelabro = new Dispositivo("Candelabro", new DispositivoEstandar(), 9);
 		  televisor = new Dispositivo("Televisor", new DispositivoEstandar(), 67.5);	  

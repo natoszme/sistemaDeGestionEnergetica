@@ -18,7 +18,8 @@ public class TestOptimizacionDiferida extends FixtureSimplex {
 		JobOptimizador job = JobOptimizador.getInstance();
 		job.ejecutar();
 		
-		verify(mockTelevisorNormalConcreto, times(0)).apagar();
+		//verify(mockTelevisorNormalConcreto, times(0)).apagar();
+		assertTrue(mockTelevisorNormalConcreto.estaEncendido());
     }
 	 
 	@Test
@@ -26,13 +27,14 @@ public class TestOptimizacionDiferida extends FixtureSimplex {
 		JobOptimizador job = JobOptimizador.getInstance();
 		job.ejecutar();
 		
-		verify(mockLavarropas, times(2)).ponerEnAhorroDeEnergia();
+		//verify(mockLavarropas, times(2)).ponerEnAhorroDeEnergia();
+		assertTrue(!mockLavarropas.estaEnAhorroEnergia());
 	}
 	
 	@Test
     public void elSimplexDiferidoAgregaLaReglaParaApagarElTelevisor() {	    
 		JobOptimizador job = JobOptimizador.getInstance();
-		when(mockTv40.horasEncendidoEn(CalculadoraHorasMesActual.getInstance().horasDeMesActual())).thenReturn(80000.0);
+		//when(mockTv40.horasEncendidoEn(CalculadoraHorasMesActual.getInstance().horasDeMesActual())).thenReturn(80000.0);
 		job.ejecutar(); 
 	
 		assertTrue(RepoReglas.getInstance().tieneReglaDe(tv40));
