@@ -5,15 +5,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 
+import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
@@ -24,8 +28,11 @@ public class DispositivoInteligente extends TipoDispositivo {
 	@Enumerated(EnumType.STRING)
 	private DispositivoConcreto dispositivoConcreto;
 	
-	@JoinTable(name = "HistorialConsumos", joinColumns = @JoinColumn(name = "idDispositivoInteligente"))
-	@ElementCollection(fetch = FetchType.LAZY)
+	// @JoinTable(name = "HistorialConsumos", joinColumns = @JoinColumn(name = "idDispositivoInteligente"))
+	// @ElementCollection(fetch = FetchType.LAZY)
+	// @Convert(converter = LocalDateTimeConverter.class, attributeName = "fecha")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idDispositivoInteligente")
 	private List<ConsumoEnFecha> consumosHastaElMomento = new ArrayList<>();
 	
 	//TODO deberia ser una variable de entorno?

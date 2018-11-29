@@ -5,26 +5,23 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embeddable;
-
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.ParamDef;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import db.DatosBasicos;
 
-@Embeddable
-@FilterDef(
-	name = "filtroDeFecha", 
-	parameters = { @ParamDef(name = "desde", type = "datetime"), @ParamDef(name = "hasta", type = "datetime") }
-)
-public class ConsumoEnFecha {
+
+// @Embeddable
+@Entity
+@Table(name = "HistorialConsumos")
+public class ConsumoEnFecha extends DatosBasicos {
 	
 	@Column(nullable = false)
 	@Convert(converter = LocalDateTimeConverter.class)
-    @Filter(name = "filtroDeFecha", condition = "fecha BETWEEN :desde AND :hasta")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime fecha;
 	
