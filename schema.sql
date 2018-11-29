@@ -53,9 +53,11 @@
     )
 
     create table HistorialConsumos (
-        idDispositivoInteligente bigint not null,
+        id bigint not null auto_increment,
         consumo double precision not null,
-        fecha tinyblob not null
+        fecha datetime not null,
+        idDispositivoInteligente bigint,
+        primary key (id)
     )
 
     create table Regla (

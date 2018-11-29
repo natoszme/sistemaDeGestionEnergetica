@@ -32,9 +32,9 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 						.createQuery(
 							"SELECT hc.fecha AS fecha, hc.consumo AS consumo "
 							+ "FROM Cliente c "
-							+ "INNER JOIN  c.dispositivos AS d "
+							+ "INNER JOIN c.dispositivos AS d "
 							+ "INNER JOIN d.tipoDispositivo td "
-							+ "INNER JOIN  td.consumosHastaElMomento AS hc "
+							+ "INNER JOIN td.consumosHastaElMomento AS hc "
 							+ "WHERE c = :cliente "
 							+ (desde != null ? "AND hc.fecha >= :desde " : "")
 							+ (hasta != null ? "AND hc.fecha <= :hasta " : "")
@@ -49,24 +49,24 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 		if (hasta != null) {			
 			query.setParameter("hasta", hasta);
 		}
+		
 		return convertirAMediciones(query.getResultList());
 	}
 	
 	public List<Object> obtenerConsumoDeClientesEnFecha(LocalDateTime desde, LocalDateTime hasta) {		
 		Query query = entityManager()
 						.createQuery(
-							"SELECT cat.nombre, c.nombre, c.fechaAlta, SUM(hc.consumo)"
+							"SELECT cat.nombre, c.nombre, c.fechaAlta, SUM(hc.consumo) "
 							+ "FROM Cliente c "
-							+ "INNER JOIN  c.dispositivos AS d "
+							+ "INNER JOIN c.dispositivos AS d "
 							+ "INNER JOIN d.tipoDispositivo td "
-							+ "INNER JOIN  td.consumosHastaElMomento AS hc "
-							+ "INNER JOIN  c.categoria AS cat "			
-							+ (desde != null ? "WHERE hc.fecha >= :desde " : "")
+							+ "INNER JOIN td.consumosHastaElMomento AS hc "
+							+ "INNER JOIN c.categoria AS cat "
+							+ "WHERE hc.fecha IS NOT NULL "			
+							+ (desde != null ? "AND hc.fecha >= :desde " : "")
 							+ (hasta != null ? "AND hc.fecha <= :hasta " : "")
-							+ "GROUP BY c.id, c.nombre,cat.nombre,c.fechaAlta"
-						);
-		
-	
+							+ "GROUP BY c.id, c.nombre, cat.nombre, c.fechaAlta"
+						);	
 		
 		if (desde != null) {			
 			query.setParameter("desde", desde);
@@ -75,6 +75,7 @@ public class RepoConsumoEnFecha extends RepoEnDB<ConsumoEnFecha> {
 		if (hasta != null) {			
 			query.setParameter("hasta", hasta);
 		}
+		
 		return query.getResultList();
 	}
 	
