@@ -35,7 +35,7 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	protected List<Dispositivo> dispositivos = new ArrayList<>();
 	protected Cliente alejandro, lio, pepe, nico, ricardo, yanina;
 	protected DispositivoConcretoGenerico mockPcConcreta, mockAireConcreto, mockTelevisorSmartConcreto, mockTelevisorNormalConcreto, mockCandelabroConcreto, mockLampara, mockLavarropas, mockMicroondas, mockPlancha, mockVentilador,mockTv40;
-	protected Regla unaReglaEstricta, unaReglaPermisiva;
+	protected Regla unaReglaEstricta, unaReglaPermisiva, otraReglaEstricta;
 	protected Actuador actuadorQueApaga, actuadorQueEnciende;
 	protected CondicionSobreSensor mockCondicionSobreSensorQueCumple, mockCondicionSobreSensorQueNoCumple;
 	protected Set<CondicionSobreSensor> condicionesSobreSensorQueNoCumplen = new HashSet<>(), condicionesSobreSensorQueCumplen = new HashSet<>();
@@ -94,7 +94,6 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  actuadorQueEnciende = Actuador.ActuadorQueEnciende;
 		  actuadores.add(actuadorQueApaga);
 		  actuadores.add(actuadorQueEnciende);
-		  
 		  unaReglaEstricta = new ReglaEstricta(actuadores, new HashSet<>(), pc);
 		  unaReglaPermisiva = new ReglaPermisiva(actuadores, new HashSet<>(), aireAcondicionado);
 		  

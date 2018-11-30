@@ -28,12 +28,12 @@ public class FixtureConsumoMasivo extends Fixture{
 		RepoTransformadores.getInstance().agregarEntidad(transformadorCaballito);
 		
 		//alejandro es de la matanza
-		when(mockAireConcreto.consumoActual()).thenReturn(180.0);
+		//when(mockAireConcreto.consumoActual()).thenReturn(180.0);
 		alejandro.agregarDispositivo(aireAcondicionado);
 		RepoClientes.getInstance().agregarEntidad(alejandro);
 		
 		//nico es de palermo
-		when(mockTelevisorSmartConcreto.consumoActual()).thenReturn(50.0);
+		//when(mockTelevisorSmartConcreto.consumoActual()).thenReturn(50.0);
 		nico.agregarDispositivo(televisorSmart);
 		RepoClientes.getInstance().agregarEntidad(nico);
 		
