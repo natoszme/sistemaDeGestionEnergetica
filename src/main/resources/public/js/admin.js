@@ -5,7 +5,7 @@ $(document).ready(function() {
 		language: "es",
 		orientation: "bottom auto"
 	});
-
+	    
 	obtenerConsumos();
 });
 
