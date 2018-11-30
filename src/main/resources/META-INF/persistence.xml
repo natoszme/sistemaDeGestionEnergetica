@@ -31,14 +31,15 @@
         <properties> 
 	    	<property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" /> 
-            <property name="hibernate.connection.url" value="jdbc:mysql://b6d2fa127a4bbe:a2ef2658@us-cdbr-iron-east-01.cleardb.net/heroku_abc8c39ec962efd?reconnect=true" /> 
-            <property name="hibernate.connection.username" value="b6d2fa127a4bbe" /> 
-            <property name="hibernate.connection.password" value="a2ef2658" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://ev7k8wm25r7cg98y:vsgib9crrqau139u@v02yrnuhptcod7dk.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/bku8dzsb3njq231a" /> 
+            <property name="hibernate.connection.username" value="ev7k8wm25r7cg98y" /> 
+            <property name="hibernate.connection.password" value="vsgib9crrqau139u" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
                             
             <property name="hibernate.show_sql" value="true" /> 
             <property name="hibernate.format_sql" value="true" /> 
             <property name="use_sql_comments" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
         </properties>          
     </persistence-unit>  
 </persistence> 
