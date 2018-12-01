@@ -34,9 +34,9 @@ public class DispositivoConcretoGenerico extends DispositivoConcreto{
 	
 	public double consumoDuranteLasUltimas(long horas) {
 		/*Este método debería medir, dependiendo de cada implementación de dispositivo concreto 
-		 * el tiempo que estuvo prendido actualmente, menor al tiempo de medición del cron.
+		 * el consumo que tuvo posta, menor al tiempo de medición del cron.
 		 * */
-		return 0;
+		return 20;
 	}
 //	public double horasEncendidoEn(double horasDeMesActual, TipoDispositivo dispositivo, double consumoPorHora) { 
 //		return dispositivo.consumoEntre(CalculadoraHorasMesActual.getInstance().primerDiaMesActual(), LocalDateTime.now()) / consumoPorHora;

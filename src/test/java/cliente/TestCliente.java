@@ -4,6 +4,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import org.junit.Test;
 
@@ -12,6 +15,7 @@ import tipoDispositivo.DispositivoInteligente;
 import categoria.Categoria;
 import dispositivo.Dispositivo;
 import dispositivo.DispositivoConcreto;
+import dispositivo.DispositivoConcretoGenerico;
 
 public class TestCliente extends Fixture {	
 	
@@ -73,12 +77,13 @@ public class TestCliente extends Fixture {
 	}
 	
 	@Test
-	public void seAgregaTVSmartAAlejandroConDispositivoConcretoQueRetorna180DeConsumoPorHoraYAlRecategorizarEsR2() {
-		DispositivoConcreto mockDispositivoeRetorna180 = mock(DispositivoConcreto.class);
-		televisorSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(mockDispositivoeRetorna180), 90);
+	public void seAgregaTVSmartAAlejandroConDispositivoConcretoQueRetorna20yUnConsumoGuardadoDe160YAlRecategorizarEsR2() {
+		DispositivoConcretoGenerico DispositivoConcretoGenerico= new DispositivoConcretoGenerico();
+		televisorSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(DispositivoConcretoGenerico), 90);
+		televisorSmart.guardarConsumoDeFecha(LocalDateTime.now(), 160);
 		//when(televisorSmart.consumoDuranteLasUltimas(2)).thenReturn(180.0);
 		alejandro.agregarDispositivo(televisorSmart);
-		alejandro.recategorizarSegunUso(2);
+		alejandro.recategorizarSegunUso(7);
 		assertEquals("R2", alejandro.categoria().getNombre());
 	}
 	@Test
