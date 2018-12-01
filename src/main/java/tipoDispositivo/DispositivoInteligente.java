@@ -91,15 +91,15 @@ public class DispositivoInteligente extends TipoDispositivo {
 	
 	
 	public void apagar() {
-		dispositivoConcreto.apagar();
+		dispositivoConcreto.apagarSegunConcreto();
 	}
 	
 	public void encender() {
-		dispositivoConcreto.encender();
+		dispositivoConcreto.encenderSegunConcreto();
 	}
 
 	public void ponerEnAhorroDeEnergia() {
-		dispositivoConcreto.ponerEnAhorroDeEnergia();
+		dispositivoConcreto.ponerEnAhorroDeEnergiaSegunConcreto();
 	}
 	
 	public boolean estaEncendido() {

@@ -3,11 +3,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fixture.Fixture;
+import tipoDispositivo.DispositivoInteligente;
+import dispositivo.Dispositivo;
 import dispositivo.gadgets.actuador.Actuador;
 import dispositivo.gadgets.regla.NoSePuedeUsarReglaSobreDispositivoNoInteligenteException;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class TestRegla extends Fixture {
 	
@@ -18,6 +23,8 @@ public class TestRegla extends Fixture {
     	
     	when(mockCondicionSobreSensorQueCumple.seCumpleCondicion()).thenReturn(true);
     	when(mockCondicionSobreSensorQueNoCumple.seCumpleCondicion()).thenReturn(false);
+    	
+    	televisorSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(mockTelevisorSmartConcretoSpy), 90);
 	}
 
     @Test(expected = NoSePuedeUsarReglaSobreDispositivoNoInteligenteException.class)
@@ -30,10 +37,8 @@ public class TestRegla extends Fixture {
     	actuadores.add(actuadorQueApaga);
 		otraReglaEstricta = new ReglaEstricta(actuadores, condicionesSobreSensorQueCumplen, televisorSmart);
     	otraReglaEstricta.aplicarSiCumpleCriterio();
-    	System.out.println(mockTelevisorSmartConcreto.estaEncendido());
-    	System.out.println(mockCondicionSobreSensorQueCumple.seCumpleCondicion());
-    	//verify(mockTelevisorSmartConcreto, times(1)).apagar();
-    	assertTrue(mockTelevisorSmartConcreto.estaApagado());
+
+    	verify(mockTelevisorSmartConcretoSpy, times(1)).apagar();
     }
     
     @Test
@@ -41,8 +46,8 @@ public class TestRegla extends Fixture {
     	actuadores.add(actuadorQueEnciende);
     	unaReglaEstricta = new ReglaEstricta(actuadores, condicionesSobreSensorQueCumplen, televisorSmart);
     	unaReglaEstricta.aplicarSiCumpleCriterio();
-    	//verify(mockTelevisorSmartConcreto, times(1)).encender();
-    	assertTrue(mockTelevisorSmartConcreto.estaEncendido());
+    	
+    	verify(mockTelevisorSmartConcretoSpy, times(1)).encender();
     }
     
     @Test
@@ -51,7 +56,6 @@ public class TestRegla extends Fixture {
 		unaReglaPermisiva = new ReglaEstricta(actuadores, condicionesSobreSensorQueNoCumplen, televisorSmart);
     	unaReglaPermisiva.aplicarSiCumpleCriterio();
     	
-    	//verify(mockTelevisorSmartConcreto, times(0)).apagar();
-    	assertTrue(mockTelevisorSmartConcreto.estaEncendido());
+    	verify(mockTelevisorSmartConcretoSpy, times(0)).apagar();
     }
 }

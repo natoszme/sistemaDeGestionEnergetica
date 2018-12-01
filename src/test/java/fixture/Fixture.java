@@ -34,7 +34,7 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 	protected Dispositivo candelabro, televisor, microondas, equipoMusica, dvd, play4, televisorSmart, tvNormal, pc, aireAcondicionado;
 	protected List<Dispositivo> dispositivos = new ArrayList<>();
 	protected Cliente alejandro, lio, pepe, nico, ricardo, yanina;
-	protected DispositivoConcretoGenerico mockPcConcreta, mockAireConcreto, mockTelevisorSmartConcreto, mockTelevisorNormalConcreto, mockCandelabroConcreto, mockLampara, mockLavarropas, mockMicroondas, mockPlancha, mockVentilador,mockTv40;
+	protected DispositivoConcretoGenerico mockPcConcreta, mockAireConcreto, mockTelevisorSmartConcreto, mockTelevisorNormalConcreto, mockCandelabroConcreto, mockLampara, mockLavarropas, mockMicroondas, mockPlancha, mockVentilador,mockTv40, mockTelevisorSmartConcretoSpy;
 	protected Regla unaReglaEstricta, unaReglaPermisiva, otraReglaEstricta;
 	protected Actuador actuadorQueApaga, actuadorQueEnciende;
 	protected CondicionSobreSensor mockCondicionSobreSensorQueCumple, mockCondicionSobreSensorQueNoCumple;
@@ -63,6 +63,7 @@ public class Fixture extends AbstractPersistenceTest implements WithGlobalEntity
 		  mockPcConcreta = new DispositivoConcretoGenerico();
 		  mockAireConcreto = new DispositivoConcretoGenerico();
 		  mockTelevisorSmartConcreto = new DispositivoConcretoGenerico();
+		  mockTelevisorSmartConcretoSpy = Mockito.spy(new DispositivoConcretoGenerico());
 		  mockTelevisorNormalConcreto = new DispositivoConcretoGenerico();
 		  
 		  mockCandelabroConcreto = new DispositivoConcretoGenerico();
