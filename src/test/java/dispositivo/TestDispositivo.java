@@ -57,7 +57,7 @@ public class TestDispositivo extends Fixture {
 	@Test
 	public void consumoDeSmartTVEn1HoraSegunConcretoQueRetorna20DeConsumoEnLaUltimaHoraEs20EnEseLapso() {
 		DispositivoConcreto mockDispositivoConcretoRetorna20 = mock(DispositivoConcreto.class);
-		when(mockDispositivoConcretoRetorna20.consumoDuranteLasUltimas(1)).thenReturn(20.0);
+		//when(mockDispositivoConcretoRetorna20.consumoDuranteLasUltimas(1)).thenReturn(20.0);
 		televisorSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(mockDispositivoConcretoRetorna20), 90);
 		Assert.assertEquals(20.0, televisorSmart.consumoEnLasUltimas(1, null), 0);
 	}
@@ -73,7 +73,7 @@ public class TestDispositivo extends Fixture {
 	@Test
 	public void elConsumoDesdeLasUltimas12HorasAbarcaAlDelConcretoYElGuardado() {
 		DispositivoConcreto mockDispositivoConcretoRetorna20 = mock(DispositivoConcreto.class);
-		when(mockDispositivoConcretoRetorna20.consumoDuranteLasUltimas(6)).thenReturn(20.0);
+		//when(mockDispositivoConcretoRetorna20.consumoDuranteLasUltimas(6)).thenReturn(20.0);
 		televisorSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(mockDispositivoConcretoRetorna20), 90);
 		televisorSmart.guardarConsumoDeFecha(LocalDateTime.now().minusHours(6), 30);
 		Assert.assertEquals(50.0, televisorSmart.consumoEnLasUltimas(12, null), 0);

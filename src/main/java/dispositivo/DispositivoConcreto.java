@@ -6,6 +6,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 import db.DatosBasicos;
+import tipoDispositivo.TipoDispositivo;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -45,7 +46,7 @@ public abstract class DispositivoConcreto extends DatosBasicos{
 	public abstract void ponerEnAhorroDeEnergiaSegunConcreto();
 	public abstract void sacarDeAhorroDeEnergiaSegunConcreto();
 
-	public abstract double consumoDuranteLasUltimas(int horas);
-	public abstract double horasEncendidoEn(double horasDeMesActual);
-	public abstract double consumoActual();
+	public abstract double consumoDuranteLasUltimas(long horas);
+//	public abstract double horasEncendidoEn(double horasDeMesActual, TipoDispositivo dispostivo);
+//	public abstract double consumoActual(TipoDispositivo dispostivo);
 }

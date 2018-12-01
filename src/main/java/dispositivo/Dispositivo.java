@@ -71,11 +71,11 @@ public class Dispositivo extends DatosBasicos {
 		return tipoDispositivo.estaApagado();
 	}
 	
-	public double consumoEnLasUltimas(int horas, Dispositivo dispositivo) {
+	public double consumoEnLasUltimas(long horas, Dispositivo dispositivo) {
 		return tipoDispositivo.consumoEnLasUltimas(horas, dispositivo);
 	}
 
-	public double estimacionDeConsumoEn(int horas) {
+	public double estimacionDeConsumoEn(long horas) {
 		return horas * kwPorHora;
 	}
 

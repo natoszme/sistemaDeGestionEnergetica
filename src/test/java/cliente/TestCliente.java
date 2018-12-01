@@ -76,7 +76,7 @@ public class TestCliente extends Fixture {
 	public void seAgregaTVSmartAAlejandroConDispositivoConcretoQueRetorna180DeConsumoPorHoraYAlRecategorizarEsR2() {
 		DispositivoConcreto mockDispositivoeRetorna180 = mock(DispositivoConcreto.class);
 		televisorSmart = new Dispositivo("Televisor Smart", new DispositivoInteligente(mockDispositivoeRetorna180), 90);
-		when(mockDispositivoeRetorna180.consumoDuranteLasUltimas(2)).thenReturn(180.0);
+		//when(televisorSmart.consumoDuranteLasUltimas(2)).thenReturn(180.0);
 		alejandro.agregarDispositivo(televisorSmart);
 		alejandro.recategorizarSegunUso(2);
 		assertEquals("R2", alejandro.categoria().getNombre());

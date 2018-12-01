@@ -49,15 +49,19 @@ public class DispositivoInteligente extends TipoDispositivo {
 		return 15;
 	}
 	
-	public double consumoEnLasUltimas(int horas, Dispositivo dispositivo) {		
+	public double consumoEnLasUltimas(long horas, Dispositivo dispositivo) {		
+		return this.consumoEnLasUltimasHoras(horas);
+	}
+	
+	private double consumoEnLasUltimasHoras(long horas) {
 		if (horas <= duracionPlazoCronConsumo) {
 			return dispositivoConcreto.consumoDuranteLasUltimas(horas);
 		}
 		//solo permite horas divisibles por duracionPlazoCronConsumo
-		return dispositivoConcreto.consumoDuranteLasUltimas(duracionPlazoCronConsumo) + consumoAlmacenadoEn(horas);
+		return dispositivoConcreto.consumoDuranteLasUltimas(horas % duracionPlazoCronConsumo) + consumoAlmacenadoEn(horas);
 	}
-
-	public double consumoAlmacenadoEn(int horas) {
+	
+	public double consumoAlmacenadoEn(long horas) {
 		return consumosHastaElMomento.stream().
 				filter(consumoFechado -> correspondeAPlazo(consumoFechado.getFecha(), horas - duracionPlazoCronConsumo)).
 				mapToDouble(consumoFechado -> consumoFechado.getConsumo()).
@@ -65,7 +69,7 @@ public class DispositivoInteligente extends TipoDispositivo {
 	}
 
 	// ojo que podria calcular demas!
-	private boolean correspondeAPlazo(LocalDateTime dateTimeAEvaluar, int horasABuscar) {
+	private boolean correspondeAPlazo(LocalDateTime dateTimeAEvaluar, long horasABuscar) {
 		return Duration.between(dateTimeAEvaluar, LocalDateTime.now()).toHours() <= horasABuscar;
 	}
 
@@ -115,7 +119,7 @@ public class DispositivoInteligente extends TipoDispositivo {
 	}
 
 	public double horasPrendidoEnMesActual(double kwH) {
-		return dispositivoConcreto.horasEncendidoEn(CalculadoraHorasMesActual.getInstance().horasDeMesActual());
+		return this.consumoEnLasUltimasHoras(CalculadoraHorasMesActual.getInstance().horasDeMesActual()) / kwH;
 	}
 
 	public double consumoActual() {

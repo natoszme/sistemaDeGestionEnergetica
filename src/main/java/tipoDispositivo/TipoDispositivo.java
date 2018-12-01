@@ -30,7 +30,7 @@ public abstract class TipoDispositivo extends DatosBasicos {
 	
 	public abstract double puntosPorRegistrar();
 	public abstract boolean esInteligente();
-	public abstract double consumoEnLasUltimas(int horas, Dispositivo dispositivo);
+	public abstract double consumoEnLasUltimas(long horas, Dispositivo dispositivo);
 	public abstract void apagar();
 	public abstract void encender();
 	public abstract boolean estaEncendido();

@@ -51,7 +51,7 @@ public class DispositivoEstandar extends TipoDispositivo{
 		//no hace nada
 	}
 
-	public double consumoEnLasUltimas(int horas, Dispositivo dispositivo) {
+	public double consumoEnLasUltimas(long horas, Dispositivo dispositivo) {
 		return dispositivo.estimacionDeConsumoEn(horas);
 	}
 

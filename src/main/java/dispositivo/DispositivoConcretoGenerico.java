@@ -1,7 +1,13 @@
 package dispositivo;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.print.attribute.standard.DateTimeAtCompleted;
+
+import tipoDispositivo.CalculadoraHorasMesActual;
+import tipoDispositivo.TipoDispositivo;
 
 @Entity
 @DiscriminatorValue("Generico")
@@ -26,14 +32,17 @@ public class DispositivoConcretoGenerico extends DispositivoConcreto{
 		this.sacarDeAhorroDeEnergia();
 	}
 	
-	public double consumoDuranteLasUltimas(int horas) {
+	public double consumoDuranteLasUltimas(long horas) {
+		/*Este método debería medir, dependiendo de cada implementación de dispositivo concreto 
+		 * el tiempo que estuvo prendido actualmente, menor al tiempo de medición del cron.
+		 * */
 		return 0;
 	}
-	public double horasEncendidoEn(double horasDeMesActual) { 
-		return 0;
-	}
-	public double consumoActual() {
-		return 0;
-	}
+//	public double horasEncendidoEn(double horasDeMesActual, TipoDispositivo dispositivo, double consumoPorHora) { 
+//		return dispositivo.consumoEntre(CalculadoraHorasMesActual.getInstance().primerDiaMesActual(), LocalDateTime.now()) / consumoPorHora;
+//	}
+//	public double consumoActual(TipoDispositivo dispositivo) {
+//		return 0;
+//	}
 
 }
