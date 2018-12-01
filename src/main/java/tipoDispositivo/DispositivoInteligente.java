@@ -123,7 +123,7 @@ public class DispositivoInteligente extends TipoDispositivo {
 	}
 
 	public double consumoActual() {
-		return this.consumosHastaElMomento.stream().mapToDouble(consumo -> consumo.getConsumo()).sum();
+		return this.consumosHastaElMomento.stream().mapToDouble(consumo -> consumo.getConsumo()).sum() + this.dispositivoConcreto.consumoDuranteLasUltimas(duracionPlazoCronConsumo);
 	}
 
 	public boolean esElMismoConcretoQue(Dispositivo dispositivo) {

@@ -2,6 +2,8 @@ package fixture;
 
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDateTime;
+
 import org.junit.After;
 import org.junit.Before;
 
@@ -29,11 +31,13 @@ public class FixtureConsumoMasivo extends Fixture{
 		
 		//alejandro es de la matanza
 		//when(mockAireConcreto.consumoActual()).thenReturn(180.0);
+		aireAcondicionado.guardarConsumoDeFecha(LocalDateTime.now(), 160);
 		alejandro.agregarDispositivo(aireAcondicionado);
 		RepoClientes.getInstance().agregarEntidad(alejandro);
 		
 		//nico es de palermo
 		//when(mockTelevisorSmartConcreto.consumoActual()).thenReturn(50.0);
+		televisorSmart.guardarConsumoDeFecha(LocalDateTime.now(), 30);
 		nico.agregarDispositivo(televisorSmart);
 		RepoClientes.getInstance().agregarEntidad(nico);
 		
