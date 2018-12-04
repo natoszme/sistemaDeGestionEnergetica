@@ -46,7 +46,7 @@ public class FixtureSimplex extends Fixture{
 		
 		aire2200Frigorias.guardarConsumoDeFecha(LocalDateTime.now(), 325);
 		
-		lavarropas.guardarConsumoDeFecha(LocalDateTime.now(), 100);
+		lavarropas.guardarConsumoDeFecha(LocalDateTime.now(), 50);
 		
 		microondas.guardarConsumoDeFecha(LocalDateTime.now(), 100);
 		

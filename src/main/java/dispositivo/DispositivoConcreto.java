@@ -14,7 +14,7 @@ import tipoDispositivo.TipoDispositivo;
 public abstract class DispositivoConcreto extends DatosBasicos{
 	
 	public boolean estaEncendido = true;
-	public boolean estaEnAhorroDeEnergia;
+	public boolean estaEnAhorroDeEnergia = false;
 	
 	public void encender() {
 		this.estaEncendido = true;
