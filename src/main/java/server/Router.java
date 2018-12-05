@@ -6,7 +6,6 @@ import spark.utils.HandlebarsTemplateEngineBuilder;
 
 import static spark.Spark.before;
 import static spark.Spark.path;
-import static spark.Spark.staticFiles;
 
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
@@ -30,7 +29,8 @@ public class Router implements TransactionalOps, WithGlobalEntityManager{
 	public void configure() {
 		HandlebarsTemplateEngine transformer = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
 
-		staticFiles.location("/public");
+		//Spark.staticFiles.location("/public");
+		Spark.staticFileLocation("/public");
 		
 		Spark.before("/*", (req, res) -> {
 			if(req.requestMethod() != "GET") {

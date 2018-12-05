@@ -6,7 +6,7 @@
     version="2.0">
   
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
-    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     	 
     	<class>cliente.Cliente</class>
     	<class>categoria.Categoria</class>
@@ -25,16 +25,16 @@
     	<class>transformador.Transformador</class>	
     	<class>zona.Zona</class>
     	<class>tipoDispositivo.ConsumoEnFecha</class>
-    	<class>usuario.Usuario</class>
+    	<class>server.login.Admin</class>
+    	<class>simplex.RestriccionUsoDispositivo</class>
     	 
         <properties> 
 	    	<property name="hibernate.archive.autodetection" value="class"/>
-	    	
-           	<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
-            <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db" /> 
-            <property name="hibernate.connection.username" value="sa" /> 
-            <property name="hibernate.connection.password" value="" /> 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" /> 
+            <property name="hibernate.connection.url" value="jdbc:mysql://ev7k8wm25r7cg98y:vsgib9crrqau139u@v02yrnuhptcod7dk.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/bku8dzsb3njq231a" /> 
+            <property name="hibernate.connection.username" value="ev7k8wm25r7cg98y" /> 
+            <property name="hibernate.connection.password" value="vsgib9crrqau139u" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
                             
             <property name="hibernate.show_sql" value="true" /> 
             <property name="hibernate.format_sql" value="true" /> 
