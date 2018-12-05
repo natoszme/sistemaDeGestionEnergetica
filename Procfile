@@ -1,1 +1,0 @@
-web: java -jar target/TPAnual-1-jar-with-dependencies.jar

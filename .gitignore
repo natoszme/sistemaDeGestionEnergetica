@@ -94,8 +94,3 @@ hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,eclipse
 /target/
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
