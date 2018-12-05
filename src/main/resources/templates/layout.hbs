@@ -25,7 +25,7 @@
 			  	</ul>
 			    <ul class="navbar-nav ml-auto">
 			      <li class="nav-item text-right">
-			        <a class="nav-link" href="logout">Cerrar sesi&oacute;n</a>
+			        <a class="nav-link" href="{{#block "logoutPath"}}{{/block}}logout">Cerrar sesi&oacute;n</a>
 			      </li>
 			    </ul>
 			  </div>
@@ -37,6 +37,7 @@
 			{{/block}}
 		</main>
 					
+		<script type="text/javascript" src="/js/generic.js"></script>
 		{{#block "scripts"}}
 		{{/block}}		
 	</body>

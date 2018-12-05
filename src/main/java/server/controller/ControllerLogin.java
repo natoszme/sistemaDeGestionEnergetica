@@ -50,7 +50,8 @@ public abstract class ControllerLogin {
 	protected abstract Autenticable obtenerAutenticable(String username, String password);
 
 	protected Response setearCookies(Response res, long id) {
-		res.cookie(nombreCookieId(), String.valueOf(id));
+		//Por default las cookies se setean en el recurso actual. Esto impediria ver si esta logueado desde /dispositivo/* por ejemplo
+		res.cookie("/", nombreCookieId(), String.valueOf(id), 3600, false, true);
 		return res;
 	}
 
@@ -67,7 +68,7 @@ public abstract class ControllerLogin {
 	}
 	
 	public String logout(Request req, Response res) {
-		res.removeCookie(nombreCookieId());
+		res.removeCookie("/", nombreCookieId());
 		redirigirAHome(res);
 		return null;
 	}
