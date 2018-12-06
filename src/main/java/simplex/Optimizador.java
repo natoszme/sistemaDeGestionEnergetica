@@ -29,7 +29,7 @@ public class Optimizador {
 	
 	public void ejecutar() {
 		RepoClientes.getInstance().obtenerAhorradores().forEach(cliente -> this.obtenerMaximosYGenerarReglas(cliente));
-		RepoReglas.getInstance().ejecutarTodas();
+	
 	}
 
 	public void obtenerMaximosYGenerarReglas(Cliente cliente) {

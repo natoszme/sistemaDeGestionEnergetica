@@ -7,6 +7,9 @@ import org.quartz.JobExecutionException;
 import org.quartz.Scheduler;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
+
+import repositorio.RepoReglas;
+
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.repeatSecondlyForever;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -32,7 +35,7 @@ public class SchedulerJob {
 
 	        @Override
 	        public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-	            System.out.println("HelloJob executed");
+	        	RepoReglas.getInstance().ejecutarTodas();
 	        }
 	    }
 }
