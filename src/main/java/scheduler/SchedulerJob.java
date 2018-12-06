@@ -21,7 +21,7 @@ public class SchedulerJob {
 
 	        scheduler.start();
 
-	        JobDetail jobDetail = newJob(HelloJob.class).build();
+	        JobDetail jobDetail = newJob(JobEjecutadorDeReglas.class).build();
 
 	        Trigger trigger = newTrigger()
 	                .startNow()
@@ -31,7 +31,7 @@ public class SchedulerJob {
 	        scheduler.scheduleJob(jobDetail, trigger);
 	    }
 	 
-	 public static class HelloJob implements Job {
+	 public static class JobEjecutadorDeReglas implements Job {
 
 	        @Override
 	        public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
