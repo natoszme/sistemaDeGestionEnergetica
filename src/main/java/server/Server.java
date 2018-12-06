@@ -6,6 +6,9 @@ import server.login.DatosDePrueba;
 
 public class Server {
 	public static void main(String[] args) {
+		if(args[0] == "run-job") {
+			System.out.print("Hello");
+		}
 		Spark.port(getHerokuAssignedPort());
 		DebugScreen.enableDebugScreen();
 		new Router().configure();
