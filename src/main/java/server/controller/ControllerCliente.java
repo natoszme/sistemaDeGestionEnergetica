@@ -12,7 +12,7 @@ import dispositivo.Dispositivo;
 import repositorio.RepoClientes;
 import repositorio.RepoConsumoEnFecha;
 import server.login.Autenticable;
-import simplex.JobOptimizador;
+import simplex.Optimizador;
 import simplex.OptimizadorUsoDispositivos;
 import spark.ModelAndView;
 import spark.Request;

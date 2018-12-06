@@ -17,12 +17,12 @@ import repositorio.RepoClientes;
 import repositorio.RepoReglas;
 import repositorio.RepoRestriccionesUsoDispositivo;
 
-public class JobOptimizador {
+public class Optimizador {
 	
-	public static JobOptimizador instancia;
-	public static JobOptimizador getInstance() {
+	public static Optimizador instancia;
+	public static Optimizador getInstance() {
 		if (instancia == null) {
-			instancia = new JobOptimizador();
+			instancia = new Optimizador();
 		}
 		return instancia;
 	}

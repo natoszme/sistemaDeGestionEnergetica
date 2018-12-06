@@ -15,7 +15,7 @@ public class TestOptimizacionDiferida extends FixtureSimplex {
 	
 	@Test
     public void elSimplexDiferidoNoApagaUnNoInteligente() {	
-		JobOptimizador job = JobOptimizador.getInstance();
+		Optimizador job = Optimizador.getInstance();
 		job.ejecutar();
 		
 		verify(mockTelevisorNormalConcreto, times(0)).apagar();
@@ -23,7 +23,7 @@ public class TestOptimizacionDiferida extends FixtureSimplex {
 	 
 	@Test
 	public void alOptimizarNoSePoneEnAhorroDeEnergiaElLavarropasEstandar() {
-		JobOptimizador job = JobOptimizador.getInstance();
+		Optimizador job = Optimizador.getInstance();
 		job.ejecutar();
 		
 		verify(mockLavarropas, times(0)).ponerEnAhorroDeEnergia();
@@ -31,7 +31,7 @@ public class TestOptimizacionDiferida extends FixtureSimplex {
 	
 	@Test
     public void elSimplexDiferidoAgregaLaReglaParaApagarElTelevisor() {	    
-		JobOptimizador job = JobOptimizador.getInstance();
+		Optimizador job = Optimizador.getInstance();
 		when(mockTv40.horasEncendidoEn(CalculadoraHorasMesActual.getInstance().horasDeMesActual())).thenReturn(80000.0);
 		job.ejecutar(); 
 	
